@@ -1,0 +1,76 @@
+// M_1_5_03_TOOL.pde
+// Agent.pde, GUI.pde
+
+class Agent {
+  PVector p, pOld, pOriginal;
+  float noiseZ = 0.01;
+  float stepSize, angle;
+  color agentColor;
+  float minSpeed = 1;
+  float maxSpeed = 5;
+  int startMillis;
+
+  Agent() {
+    p = new PVector(random(width), random(height));
+    pOriginal = new PVector(p.x, p.y);
+    pOld = new PVector(p.x, p.y);
+    stepSize = random(minSpeed, maxSpeed);
+    startMillis = millis();
+
+    //procedural color
+    //colorMode(HSB, 1);
+    //agentColor = color(map(stepSize,minSpeed,maxSpeed,0.6,.8),1,1,map(agentsAlpha,0,255,0,1));
+
+    //color from underlying picture
+    int x = (int)(p.x/width*imagePalette.width);
+    int y = (int)(p.y/height*imagePalette.height);
+    color c = imagePalette.get(x, y);
+    agentColor = color(red(c), green(c), blue(c), agentsAlpha);
+
+    setNoiseZRange(intraAgentNoiseRange);
+  }
+
+  void update1() {
+    float noiseVal = noise(p.x/noiseScale + randomSeed, p.y/noiseScale  + randomSeed, noiseZ  + randomSeed);
+    angle = map(noiseVal, 0, 1, -1, 1);
+    angle = angle * radians(maxAngleSpan);
+
+    //these two lines show how much I'll add to the x + y axis
+    p.x += cos(angle) * stepSize; //stepSize is the speed
+    p.y += sin(angle) * stepSize;
+
+    // offscreen simple wrap
+    //if (p.x<-10) p.x=pOld.x=width+10;
+    //if (p.x>width+10) p.x=pOld.x=-10;
+    //if (p.y<-10) p.y=pOld.y=height+10;
+    //if (p.y>height+10) p.y=pOld.y=-10;
+
+    // offscreen wrap - send to original position + restart
+    //if (p.x<-10 || p.x>width+10 || p.y<-10 || p.y>height+10) {
+    //  p.x=pOld.x=pOriginal.x; 
+    //  p.y=pOld.y=pOriginal.y;
+    //  noiseZ += intraGenNoiseStep;
+    //}
+
+    if (((millis()-startMillis) / 1000) % agentTTL == 0) {
+      resetAgent();
+    }
+
+    //strokeWeight(strokeWidth*stepSize);
+    stroke(agentColor);
+    strokeWeight(strokeWidth);
+    line(pOld.x, pOld.y, p.x, p.y);
+
+    pOld.set(p);
+  }
+
+  void resetAgent() {
+    p.x=pOld.x=pOriginal.x+random(-randomStepOnReset,randomStepOnReset); 
+    p.y=pOld.y=pOriginal.y+random(-randomStepOnReset,randomStepOnReset);
+    noiseZ += intraGenNoiseStep;
+  }
+  void setNoiseZRange(float theNoiseZRange) {
+    // small values will increase grouping of the agents
+    noiseZ = random(theNoiseZRange);
+  }
+}
