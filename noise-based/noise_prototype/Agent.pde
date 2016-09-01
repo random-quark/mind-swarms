@@ -5,9 +5,8 @@ class Agent {
   PVector p, pOld, pOriginal;
   float noiseZ = 0.01;
   float stepSize, angle;
+  float alpha;
   color agentColor;
-  float minSpeed = 1;
-  float maxSpeed = 5;
   int startMillis;
 
   Agent() {
@@ -25,12 +24,14 @@ class Agent {
     int x = (int)(p.x/width*imagePalette.width);
     int y = (int)(p.y/height*imagePalette.height);
     color c = imagePalette.get(x, y);
-    agentColor = color(red(c), green(c), blue(c), agentsAlpha);
+    alpha = agentsAlpha;
+    agentColor = color(red(c), green(c), blue(c), alpha);
 
     setNoiseZ(noiseZMax);
   }
 
   void update1() {
+    alpha -= agentAlphaDecrement;
     float noiseVal = noise(p.x/noiseScale + randomSeed, p.y/noiseScale  + randomSeed, noiseZ  + randomSeed);
     angle = map(noiseVal, 0, 1, -1, 1);
     angle = angle * radians(maxAngleSpan);
@@ -65,6 +66,7 @@ class Agent {
   }
 
   void resetAgent() {
+    alpha = agentsAlpha;
     p.x=pOld.x=pOriginal.x+random(-randomStepOnReset,randomStepOnReset); 
     p.y=pOld.y=pOriginal.y+random(-randomStepOnReset,randomStepOnReset);
     noiseZ += noiseZStep;
