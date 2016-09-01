@@ -17,8 +17,8 @@ import java.util.Calendar;
 Agent[] agents;
 int agentsCount = 30000;
 int maxAgents = 40000;
-float noiseScale = 50, noiseZMax = 0.5, noiseZStep=1.0;
-float overlayAlpha = 0, agentsAlpha = 10, agentAlphaDecrement = 1, strokeWidth = 1, maxAngleSpan = 150;
+float noiseScale = 100, noiseZMax = 0.5, noiseZStep=1.0;
+float overlayAlpha = 0, agentsAlpha = 10, agentAlphaDecrement = 1, strokeWidth = 1, maxAngleSpan = 250;
 float randomSeed; //every time program starts it looks different
 float randomStepOnReset=0; // when agent is reborn is gets moved slightly - this says how much
 int agentTTL=7; // agent TTL to live in seconds
