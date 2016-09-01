@@ -37,8 +37,8 @@ void setupGUI(){
   sliders[si++] = controlP5.addSlider("strokeWidth",0,10,left,top+posY+0,len,15);
   posY += 30;
 
-  sliders[si++] = controlP5.addSlider("intraAgentNoiseRange",0,1,left,top+posY+0,len,15);
-  sliders[si++] = controlP5.addSlider("intraGenNoiseStep",0,0.4,left,top+posY+20,len,15);
+  sliders[si++] = controlP5.addSlider("noiseZMax",0,1,left,top+posY+0,len,15);
+  sliders[si++] = controlP5.addSlider("noiseZStep",0,0.4,left,top+posY+20,len,15);
   posY += 50;
 
   sliders[si++] = controlP5.addSlider("agentsAlpha",0,255,left,top+posY+0,len,15);
@@ -68,7 +68,7 @@ void controlEvent(ControlEvent theEvent) {
   // noiseSticking changed -> set new values
   if(theEvent.isController()) {
     if (theEvent.getController().getId() == 3) {
-      for(int i=0; i<agentsCount; i++) agents[i].setNoiseZRange(intraAgentNoiseRange);  
+      for(int i=0; i<agentsCount; i++) agents[i].setNoiseZ(noiseZMax);  
     }
   }
 }

@@ -17,7 +17,7 @@ import java.util.Calendar;
 Agent[] agents;
 int agentsCount = 30000;
 int maxAgents = 40000;
-float noiseScale = 200, noiseStrength = 10, intraAgentNoiseRange = .03, intraGenNoiseStep=0.0;
+float noiseScale = 200, noiseZMax = 0.5, noiseZStep=1.0;
 float overlayAlpha = 0, agentsAlpha = 10, strokeWidth = 1, maxAngleSpan = 150;
 float randomSeed; //every time program starts it looks different
 float randomStepOnReset=0; // when agent is reborn is gets moved slightly - this says how much
@@ -31,9 +31,9 @@ Slider[] sliders;
 
 void setup() {
   frameRate(20);
-  size(1500, 800, P2D);
+  size(800, 500, P2D);
   background(255);
-  imagePalette = loadImage("sky9.jpg");
+  imagePalette = loadImage("swarm.jpg");
   initSwarm();
   setupGUI();
 }
@@ -68,6 +68,9 @@ void keyReleased() {
   if (key=='R' || key=='r') {
     background(255);
     initSwarm();
+  }
+  if (key == 't' || key == 't') {
+    for (int i=0; i<agents.length; i++) agents[i].resetAgent();
   }
   if (showGUI) controlP5.getGroup("menu").open();
   else controlP5.getGroup("menu").close();

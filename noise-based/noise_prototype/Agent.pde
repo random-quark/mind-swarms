@@ -27,7 +27,7 @@ class Agent {
     color c = imagePalette.get(x, y);
     agentColor = color(red(c), green(c), blue(c), agentsAlpha);
 
-    setNoiseZRange(intraAgentNoiseRange);
+    setNoiseZ(noiseZMax);
   }
 
   void update1() {
@@ -49,7 +49,7 @@ class Agent {
     //if (p.x<-10 || p.x>width+10 || p.y<-10 || p.y>height+10) {
     //  p.x=pOld.x=pOriginal.x; 
     //  p.y=pOld.y=pOriginal.y;
-    //  noiseZ += intraGenNoiseStep;
+    //  noiseZ += noiseZStep;
     //}
 
     if (((millis()-startMillis) / 1000) % agentTTL == 0) {
@@ -67,10 +67,10 @@ class Agent {
   void resetAgent() {
     p.x=pOld.x=pOriginal.x+random(-randomStepOnReset,randomStepOnReset); 
     p.y=pOld.y=pOriginal.y+random(-randomStepOnReset,randomStepOnReset);
-    noiseZ += intraGenNoiseStep;
+    noiseZ += noiseZStep;
   }
-  void setNoiseZRange(float theNoiseZRange) {
+  void setNoiseZ(float noiseZMax) {
     // small values will increase grouping of the agents
-    noiseZ = random(theNoiseZRange);
+    noiseZ = random(noiseZMax);
   }
 }
