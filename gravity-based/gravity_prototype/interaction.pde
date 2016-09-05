@@ -13,7 +13,7 @@ void keyReleased() {
   if (keyCode == 32) {  //spacebar
     background(255);
     initializeSwarm(); //initializes particles around canvas
-    beginRecord(PDF, "line.pdf"); 
+    //beginRecord(PDF, "line.pdf"); 
     for (int i = 0; i < circArray.size(); i++) { // stop all circles growing
       Circ c = (Circ) circArray.get(i);
       Circ cp = (Circ) proxyArray.get(i);
@@ -26,7 +26,7 @@ void keyReleased() {
   if (keyCode == 83) {
     saveFrame("sketch##.png");
     //endRecord();
-    exit();
+    //exit();
   }
   //"shift" key
   if (keyCode == 16) {

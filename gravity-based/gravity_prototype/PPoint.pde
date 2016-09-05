@@ -31,9 +31,9 @@ class PPoint {
   void update() {
     
     // color scheme, looks like most of his works - theo
-    float r = abs(vel.x * 10) + abs(vel.y * 12);
-    float g = abs(vel.x * vel.y) * 2;
-    float b = abs(vel.x * 9 + vel.y * 9);
+    float b = abs(vel.x * 10) + abs(vel.y * 12);
+    float r = abs(vel.x * vel.y) * 2;
+    float g = abs(vel.x * 9 + vel.y * 9);
 
     //float r = abs(vel.x * 2 + vel.y * 2);
     //float g = abs(vel.x * vel.y) * .4;

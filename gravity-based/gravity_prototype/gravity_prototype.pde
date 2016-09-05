@@ -11,8 +11,8 @@ ArrayList pArray;
 ArrayList sourceArray;
 ArrayList allPoints;
 
-float canvasWidth = 1200;
-float canvasHeight = 800;
+float canvasWidth = 1920;
+float canvasHeight = 1080;
 float proxyWidth;
 float proxyHeight;
 float maxProxy = 600;
@@ -20,9 +20,9 @@ float proxyScale;
 float aspect;
 
 int numSources = 0;
-int sourceSize = 200;
+//int sourceSize = 200;
 int count = 10000;
-float maxDist = 500;
+float maxDist = 700; // was 500
 
 
 boolean holdShift = false;
@@ -30,7 +30,8 @@ boolean holdShift = false;
 void setup() {
 
   //size(2000, 1300, P2D);
-  size(1200, 800, P2D);
+  fullScreen(P2D);
+  //size(1000, 2000, P2D);
   
   frameRate(30);
   proxyArray = new ArrayList();
@@ -203,7 +204,15 @@ void draw() {
   //}
 
   calcGrav();
-
+  
+  //pushStyle();
+  //for (int i=0; i<ancArray.size(); i++){
+  //  PPoint a = (PPoint) ancArray.get(i);
+  //  fill(0);
+  //  ellipse(a.getLoc().x, a.getLoc().y, 10, 10); 
+  //}
+  //popStyle();
+  
   // disable depth test
   //gl.glDisable(GL.GL_DEPTH_TEST);
 }
