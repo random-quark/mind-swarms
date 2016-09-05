@@ -48,17 +48,17 @@ class Agent {
     p.y += sin(angle) * stepSize;
 
     // offscreen simple wrap
-    //if (p.x<-10) p.x=pOld.x=width+10;
-    //if (p.x>width+10) p.x=pOld.x=-10;
-    //if (p.y<-10) p.y=pOld.y=height+10;
-    //if (p.y>height+10) p.y=pOld.y=-10;
+    if (p.x<-10) p.x=pOld.x=width+10;
+    if (p.x>width+10) p.x=pOld.x=-10;
+    if (p.y<-10) p.y=pOld.y=height+10;
+    if (p.y>height+10) p.y=pOld.y=-10;
 
-    // offscreen wrap - send to original position + restart
-    //if (p.x<-10 || p.x>width+10 || p.y<-10 || p.y>height+10) {
-    //  p.x=pOld.x=pOriginal.x; 
-    //  p.y=pOld.y=pOriginal.y;
-    //  noiseZ += noiseZStep;
-    //}
+     //offscreen wrap - send to original position + restart
+    if (p.x<-10 || p.x>width+10 || p.y<-10 || p.y>height+10) {
+      p.x=pOld.x=pOriginal.x; 
+      p.y=pOld.y=pOriginal.y;
+      noiseZ += noiseZStep;
+    }
 
     if (((millis()-startMillis) / 1000) % agentTTL == 0) {
       resetAgent();

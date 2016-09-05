@@ -17,14 +17,14 @@ import java.util.Calendar;
 Agent[] agents;
 int agentsCount = 40000;
 int maxAgents = 40000;
-float noiseScale = 100, noiseZMax = 0.03, noiseZStep = 0;
+float noiseScale = 150, noiseZMax = 0.03, noiseZStep = 0;
 float overlayAlpha = 0, agentsAlpha = 10, agentAlphaDecrement = 1, strokeWidth = 1, maxAngleSpan = 150;
 float randomSeed; //every time program starts it looks different
 float randomStepOnReset=0; // when agent is reborn is gets moved slightly - this says how much
 int agentTTL=7; // agent TTL to live in seconds
 PImage imagePalette;
 float minSpeed = 1, maxSpeed = 5;
-float separationPercentage = 0.35;
+float separationPercentage = 0.;
 
 // ------ ControlP5 ------
 ControlP5 controlP5;
@@ -33,10 +33,10 @@ Slider[] sliders;
 
 void setup() {
   frameRate(20);
-  fullScreen(P2D);
-  //size(800, 500, P2D);
+  //fullScreen(P2D);
+  size(1500, 800, P2D);
   background(255);
-  imagePalette = loadImage("sky10.jpg");
+  imagePalette = loadImage("sky4.jpg");
   initSwarm();
   setupGUI();
 }
