@@ -28,7 +28,7 @@ void setupGUI(){
   posY += 30;
 
   sliders[si++] = controlP5.addSlider("noiseScale",1,1000,left,top+posY+0,len,15);
-  //sliders[si++] = controlP5.addSlider("noiseStrength",0,100,left,top+posY+20,len,15);
+  sliders[si++] = controlP5.addSlider("noiseDet",1,15,left,top+posY+20,len,15);
   sliders[si++] = controlP5.addSlider("maxAngleSpan",0,360,left,top+posY+40,len,15);
   sliders[si++] = controlP5.addSlider("agentTTL",2,60,left,top+posY+60,len,15);
   sliders[si++] = controlP5.addSlider("randomStepOnReset",0,40,left,top+posY+80,len,15);

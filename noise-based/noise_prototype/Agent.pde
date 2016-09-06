@@ -35,8 +35,9 @@ class Agent {
     
     float modifiedNoiseScale = noiseScale;
     float remainderTTL = agentTTL - ((millis() - startMillis) / 1000 % agentTTL);
+ 
     if ((remainderTTL / agentTTL) < separationPercentage) {
-      modifiedNoiseScale = noiseScale * (remainderTTL / agentTTL);
+      modifiedNoiseScale = noiseScale * (remainderTTL*4 / agentTTL);
     }
     
     float noiseVal = noise(p.x/modifiedNoiseScale + randomSeed, p.y/modifiedNoiseScale  + randomSeed, noiseZ  + randomSeed);
@@ -47,18 +48,18 @@ class Agent {
     p.x += cos(angle) * stepSize; //stepSize is the speed
     p.y += sin(angle) * stepSize;
 
-    // offscreen simple wrap
-    if (p.x<-10) p.x=pOld.x=width+10;
-    if (p.x>width+10) p.x=pOld.x=-10;
-    if (p.y<-10) p.y=pOld.y=height+10;
-    if (p.y>height+10) p.y=pOld.y=-10;
+    //// offscreen simple wrap
+    //if (p.x<-10) p.x=pOld.x=width+10;
+    //if (p.x>width+10) p.x=pOld.x=-10;
+    //if (p.y<-10) p.y=pOld.y=height+10;
+    //if (p.y>height+10) p.y=pOld.y=-10;
 
-     //offscreen wrap - send to original position + restart
-    if (p.x<-10 || p.x>width+10 || p.y<-10 || p.y>height+10) {
-      p.x=pOld.x=pOriginal.x; 
-      p.y=pOld.y=pOriginal.y;
-      noiseZ += noiseZStep;
-    }
+    // //offscreen wrap - send to original position + restart
+    //if (p.x<-10 || p.x>width+10 || p.y<-10 || p.y>height+10) {
+    //  p.x=pOld.x=pOriginal.x; 
+    //  p.y=pOld.y=pOriginal.y;
+    //  noiseZ += noiseZStep;
+    //}
 
     if (((millis()-startMillis) / 1000) % agentTTL == 0) {
       resetAgent();

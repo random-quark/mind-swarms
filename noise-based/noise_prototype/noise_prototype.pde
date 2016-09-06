@@ -15,9 +15,10 @@ import java.util.Calendar;
 
 // ------ agents ------
 Agent[] agents;
-int agentsCount = 40000;
-int maxAgents = 40000;
+int agentsCount = 30000;
+int maxAgents = 30000;
 float noiseScale = 150, noiseZMax = 0.03, noiseZStep = 0;
+int noiseDet = 4;
 float overlayAlpha = 0, agentsAlpha = 10, agentAlphaDecrement = 1, strokeWidth = 1, maxAngleSpan = 150;
 float randomSeed; //every time program starts it looks different
 float randomStepOnReset=0; // when agent is reborn is gets moved slightly - this says how much
@@ -50,9 +51,15 @@ void draw() {
   //draw agents
   for (int i=0; i<agentsCount; i++) agents[i].update1();
   popStyle();
-  
+  noiseDetail(noiseDet);
   //println(frameRate);
   drawGUI();
+  
+  // prints and exits at spec frame - good for comparing algorithms
+  //if (frameCount==400) {
+  //  saveFrame(timestamp()+".png");
+  //  exit();
+  //}
 }
 
 void initSwarm() {
