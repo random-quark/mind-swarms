@@ -14,6 +14,7 @@ import controlP5.*;
 import java.util.Calendar;
 
 // ------ agents ------
+Palette palette;
 Agent[] agents;
 int agentsCount = 40000;
 int maxAgents = 40000;
@@ -37,6 +38,7 @@ void setup() {
   size(1500, 800, P2D);
   background(255);
   imagePalette = loadImage("sky4.jpg");
+  palette = new Palette(250);
   initSwarm();
   setupGUI();
 }
@@ -53,6 +55,8 @@ void draw() {
   
   //println(frameRate);
   drawGUI();
+  
+  //palette.draw();
 }
 
 void initSwarm() {
@@ -70,6 +74,7 @@ void keyReleased() {
   }
   if (key=='R' || key=='r') {
     background(255);
+    palette = new Palette(250);
     initSwarm();
   }
   if (key == 't' || key == 't') {
