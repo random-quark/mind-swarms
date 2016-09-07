@@ -40,8 +40,8 @@ class Palette {
     int x = int(constrain(location.x/resolution,0,cols-1));
     int y = int(constrain(location.y/resolution,0,rows-1));
     color c = palette[x][y];
-    colorMode(HSB);
-    color output = color(hue(c), random(150,255), random(150,255));
+    colorMode(HSB, 100);
+    color output = color(hue(c), 100, 100);
     return output;
   }
   

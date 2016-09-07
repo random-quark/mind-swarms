@@ -38,9 +38,10 @@ class Agent {
     
     float modifiedNoiseScale = noiseScale;
     float remainderTTL = agentTTL - ((millis() - startMillis) / 1000 % agentTTL);
- 
-    if ((remainderTTL / agentTTL) < separationPercentage) {
-      modifiedNoiseScale = noiseScale * (remainderTTL*4 / agentTTL);
+    float remainderPercent = remainderTTL / agentTTL;
+    
+    if (remainderPercent < separationPercentage) {
+      modifiedNoiseScale = noiseScale * remainderPercent;
     }
     
     float noiseVal = noise(p.x/modifiedNoiseScale + randomSeed, p.y/modifiedNoiseScale  + randomSeed, noiseZ  + randomSeed);
@@ -70,7 +71,11 @@ class Agent {
 
     //strokeWeight(strokeWidth*stepSize);
     stroke(agentColor);
-    strokeWeight(strokeWidth);
+    if (diminishStroke) {
+      strokeWeight(strokeWidth * remainderPercent);
+    } else {
+      strokeWeight(strokeWidth);
+    }
     line(pOld.x, pOld.y, p.x, p.y);
 
     pOld.set(p);

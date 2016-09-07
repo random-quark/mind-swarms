@@ -28,6 +28,8 @@ PImage imagePalette;
 float minSpeed = 1, maxSpeed = 5;
 float separationPercentage = 0.;
 
+boolean showPalette, diminishStroke;
+
 // ------ ControlP5 ------
 ControlP5 controlP5;
 boolean showGUI = false;
@@ -62,7 +64,10 @@ void draw() {
   //  saveFrame(timestamp()+".png");
   //  exit();
   //}
-  //palette.draw();
+  
+  if (showPalette) {
+    palette.draw();
+  }
 }
 
 void initSwarm() {
