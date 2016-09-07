@@ -1,7 +1,7 @@
 // M_1_5_03_TOOL.pde, Agent.pde, GUI.pde
 /**
  * noise values (noise 3d) are used to animate a bunch of agents.
- * 
+ *
  * KEYS
  * m                   : toogle menu open/close
  * 1-2                 : switch noise mode
@@ -14,6 +14,7 @@ import controlP5.*;
 import java.util.Calendar;
 
 // ------ agents ------
+Palette palette;
 Agent[] agents;
 int agentsCount = 30000;
 int maxAgents = 30000;
@@ -38,6 +39,7 @@ void setup() {
   size(1500, 800, P2D);
   background(255);
   imagePalette = loadImage("sky4.jpg");
+  palette = new Palette(250);
   initSwarm();
   setupGUI();
 }
@@ -54,12 +56,13 @@ void draw() {
   noiseDetail(noiseDet);
   //println(frameRate);
   drawGUI();
-  
+
   // prints and exits at spec frame - good for comparing algorithms
   //if (frameCount==400) {
   //  saveFrame(timestamp()+".png");
   //  exit();
   //}
+  //palette.draw();
 }
 
 void initSwarm() {
@@ -77,6 +80,7 @@ void keyReleased() {
   }
   if (key=='R' || key=='r') {
     background(255);
+    palette = new Palette(250);
     initSwarm();
   }
   if (key == 't' || key == 't') {
