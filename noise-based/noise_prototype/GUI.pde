@@ -48,7 +48,23 @@ void setupGUI(){
   sliders[si++] = controlP5.addSlider("maxSpeed",0,100,left,top+posY+60,len,15);
   
   sliders[si++] = controlP5.addSlider("separationPercentage",0,1,left,top+posY+80,len,15);
-
+  
+  Toggle stroke = controlP5.addToggle("diminishStroke")
+     .setPosition(0,top+posY+100)
+     .setSize(50,20)
+     .setValue(false)
+     .setMode(ControlP5.SWITCH)
+     ;
+  stroke.setGroup(ctrl);
+  
+  Toggle palette = controlP5.addToggle("showPalette")
+     .setPosition(0,top+posY+140)
+     .setSize(50,20)
+     .setValue(false)
+     .setMode(ControlP5.SWITCH)
+     ;
+  palette.setGroup(ctrl);  
+  
   for (int i = 0; i < si; i++) {
     sliders[i].setGroup(ctrl);
     sliders[i].setId(i);
