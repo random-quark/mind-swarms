@@ -7,7 +7,9 @@ void draw() {
   background(255);
 
   float zoom=40;//map(mouseX, 0, width, 0, 200);
-  //noiseDetail((int)map(mouseY, 0, height, 1, 20));
+  int a = (int)map(mouseY, 0, height, 1, 20);
+  float b = map(mouseX, 0, width, 0.1, 1.);
+  noiseDetail(a, b);
   
   for (int x=0; x<width; x++) {
     for (int y=0; y<height; y++) {

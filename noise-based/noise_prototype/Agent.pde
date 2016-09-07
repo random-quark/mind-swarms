@@ -25,11 +25,8 @@ class Agent {
     int y = (int)(p.y/height*imagePalette.height);
     color c = imagePalette.get(x, y);
     alpha = agentsAlpha;
-    //agentColor = color(red(c), green(c), blue(c), alpha);
-    
-    c = palette.getColor(p);
     agentColor = color(red(c), green(c), blue(c), alpha);
-
+    
     setNoiseZ(noiseZMax);
   }
 
