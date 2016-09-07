@@ -27,6 +27,7 @@ int agentTTL=7; // agent TTL to live in seconds
 PImage imagePalette;
 float minSpeed = 1, maxSpeed = 5;
 float separationPercentage = 0.;
+int resolution = 1;
 
 boolean showPalette, diminishStroke;
 
@@ -41,7 +42,7 @@ void setup() {
   size(1500, 800, P2D);
   background(255);
   imagePalette = loadImage("sky4.jpg");
-  palette = new Palette(250);
+  palette = new Palette(resolution);
   initSwarm();
   setupGUI();
 }
