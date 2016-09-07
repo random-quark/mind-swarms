@@ -27,9 +27,7 @@ int agentTTL=7; // agent TTL to live in seconds
 PImage imagePalette;
 float minSpeed = 1, maxSpeed = 5;
 float separationPercentage = 0.;
-int resolution = 1;
-
-boolean showPalette, diminishStroke;
+boolean usePalette = false, showPalette, diminishStroke;
 
 // ------ ControlP5 ------
 ControlP5 controlP5;
@@ -41,8 +39,8 @@ void setup() {
   //fullScreen(P2D);
   size(1500, 800, P2D);
   background(255);
-  imagePalette = loadImage("sky4.jpg");
-  palette = new Palette(resolution);
+  imagePalette = loadImage("marble.jpg");
+  palette = new Palette();
   initSwarm();
   setupGUI();
 }
@@ -86,7 +84,7 @@ void keyReleased() {
   }
   if (key=='R' || key=='r') {
     background(255);
-    palette = new Palette(250);
+    palette = new Palette();
     initSwarm();
   }
   if (key == 't' || key == 't') {
@@ -97,6 +95,10 @@ void keyReleased() {
 
   if (key=='s' || key=='S') saveFrame(timestamp()+".png");
   if (key == DELETE || key == BACKSPACE) background(255);
+}
+
+void mousePressed() {
+  palette.draw();
 }
 
 String timestamp() {

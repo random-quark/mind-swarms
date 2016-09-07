@@ -27,6 +27,12 @@ class Agent {
     alpha = agentsAlpha;
     agentColor = color(red(c), green(c), blue(c), alpha);
     
+    //if (usePalette) {
+    //  c = palette.getColor(p);
+    //}
+    
+    agentColor = color(red(c), green(c), blue(c), alpha);
+    
     setNoiseZ(noiseZMax);
   }
 
