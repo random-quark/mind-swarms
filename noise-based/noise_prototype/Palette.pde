@@ -50,7 +50,7 @@ class Palette {
         color c = squares[_x][_y];
         pushStyle();
         colorMode(HSB, 100);
-        palette[x][y] = color(hue(c), 100, noise(x/noiseScale, y/noiseScale) *100);
+        palette[x][y] = color(hue(c), 100, noise(x/noiseScale, y/noiseScale) * 100);
         palette[x][y] = color(hue(c), 100, 100);
         popStyle();
       }

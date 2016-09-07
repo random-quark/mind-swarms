@@ -39,7 +39,7 @@ void setup() {
   //fullScreen(P2D);
   size(1500, 800, P2D);
   background(255);
-  imagePalette = loadImage("marble.jpg");
+  imagePalette = loadImage("gradientbands2.jpg");
   palette = new Palette();
   initSwarm();
   setupGUI();
@@ -95,10 +95,6 @@ void keyReleased() {
 
   if (key=='s' || key=='S') saveFrame(timestamp()+".png");
   if (key == DELETE || key == BACKSPACE) background(255);
-}
-
-void mousePressed() {
-  palette.draw();
 }
 
 String timestamp() {
