@@ -12,6 +12,11 @@
 
 import controlP5.*;
 import java.util.Calendar;
+import toxi.math.*;
+import toxi.color.*;
+import toxi.color.theory.*;
+import toxi.util.datatypes.*;
+import java.util.Iterator;
 
 // ------ agents ------
 Palette palette;
@@ -27,7 +32,7 @@ int agentTTL=7; // agent TTL to live in seconds
 PImage imagePalette;
 float minSpeed = 1, maxSpeed = 5;
 float separationPercentage = 0.;
-boolean usePalette = false, showPalette, diminishStroke;
+boolean usePalette = true, showPalette, diminishStroke;
 
 // ------ ControlP5 ------
 ControlP5 controlP5;
@@ -87,6 +92,11 @@ void keyReleased() {
     palette = new Palette();
     initSwarm();
   }
+  
+  if (key=='P' || key=='p') {
+    palette.draw();
+  }
+  
   if (key == 't' || key == 't') {
     for (int i=0; i<agents.length; i++) agents[i].resetAgent();
   }

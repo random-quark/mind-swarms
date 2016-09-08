@@ -8,6 +8,12 @@ class Palette {
   color surprise = #824f93;
   color love = #e8686b;
   
+  float SWATCH_HEIGHT = 40;
+  float SWATCH_WIDTH = 5;
+  int SWATCH_GAP = 1;
+  float MAX_SIZE = 150;
+  int NUM_DISCS = 300;
+  
   color[] colors = { anger, joy, calm, disgust, sadness, fear, surprise, love };
   color[][] palette;
   color[][] squares;
@@ -15,6 +21,8 @@ class Palette {
   int resolution;
   
   float  noiseScale = 40;
+  
+  ColorList colorlist;
   
   color[] generateRestrictedColors(int number) {
     color[] restrictedColors = new color[number];
@@ -38,29 +46,51 @@ class Palette {
       }
     }
   }
-  
+    
   Palette() {
-    noiseDetail(4);
-    generateSquares(250);
     palette = new color[width][height];
-    for (int x=0; x<width; x++) {
+    ColorGradient gradient = new ColorGradient();
+    
+    generateColorList();
+    int pos = 0;
+    for (Iterator i = colorlist.iterator(); i.hasNext();) {
+      TColor c = (TColor) i.next();
+      float position = map(pos, 0, colorlist.size(), 0, width);
+      gradient.addColorAt(position,c);
+      pos++;
+    }
+    println("pos",pos);
+        
+    ColorList list = gradient.calcGradient(0, width);
+    int x = 0;
+    for (Iterator i=list.iterator(); i.hasNext();) {
+      TColor c = (TColor)i.next();
+      color crgb = c.toARGB();
       for (int y=0; y<height; y++) {
-        int _x = int(constrain(x/resolution,0,cols-1));
-        int _y = int(constrain(y/resolution,0,rows-1));
-        color c = squares[_x][_y];
         pushStyle();
         colorMode(HSB, 100);
-        palette[x][y] = color(hue(c), 100, noise(x/noiseScale, y/noiseScale) * 100);
-        palette[x][y] = color(hue(c), 100, 100);
-        popStyle();
+        float n = noise(x/noiseScale, y/noiseScale);
+        int sat = (int) (crgb * n);
+        color chsb = color(hue(crgb), saturation(sat), brightness((int) (crgb * n)));
+        palette[x][y] = crgb;
+        popStyle();        
       }
-    }
+      x++;
+    }    
   }
   
+  void generateColorList() {
+    TColor c = ColorRange.DARK.getColor();
+    ColorTheoryStrategy s = ColorTheoryRegistry.COMPOUND;
+    colorlist = ColorList.createUsingStrategy(s, c);
+    colorlist = new ColorRange(colorlist).addBrightnessRange(0,1).getColors(null,10000,30);
+    colorlist.sortByDistance(false);
+  }
+    
   color getColor(PVector location) {
     return palette[(int) location.x][(int) location.y];
   }
-  
+    
   void draw() {
      for (int x=0; x<width; x++) {
       for (int y=0; y<height; y++) {
