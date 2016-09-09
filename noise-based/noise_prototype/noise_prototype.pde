@@ -12,13 +12,18 @@
 
 import controlP5.*;
 import java.util.Calendar;
+import toxi.math.*;
+import toxi.color.*;
+import toxi.color.theory.*;
+import toxi.util.datatypes.*;
+import java.util.Iterator;
 
 // ------ agents ------
 Palette palette;
 Agent[] agents;
 int agentsCount = 30000;
 int maxAgents = 50000;
-float noiseScale = 150, interAgentNoiseZRange = 0.0, noiseZStep = 0.003;
+float noiseScale = 150, interAgentNoiseZRange = 0.0, noiseZStep = 0.001;
 int noiseDet = 4;
 float overlayAlpha = 0, agentsAlpha = 20, strokeWidth = 1, maxAngleSpan = 150;
 float randomSeed; //every time program starts it looks different
@@ -27,7 +32,7 @@ int agentTTL=0; // agent TTL to live in seconds
 PImage imagePalette;
 float minSpeed = 3, maxSpeed = 3;
 float separationPercentage = 0.;
-
+boolean usePalette = false;
 boolean showPalette, diminishStroke;
 
 // ------ ControlP5 ------
@@ -40,8 +45,8 @@ void setup() {
   //fullScreen(P2D);
   size(1500, 800, P2D);
   background(255);
-  imagePalette = loadImage("giant-cloud.jpg");
-  palette = new Palette(250);
+  imagePalette = loadImage("gradientbands2.jpg");
+  palette = new Palette();
   initSwarm();
   setupGUI();
 }
@@ -79,9 +84,14 @@ void keyReleased() {
   }
   if (key=='R' || key=='r') {
     background(255);
-    palette = new Palette(250);
+    palette = new Palette();
     initSwarm();
   }
+  
+  if (key=='P' || key=='p') {
+    palette.draw();
+  }
+  
   if (key == 't' || key == 't') {
     for (int i=0; i<agents.length; i++) agents[i].resetAgent();
   }

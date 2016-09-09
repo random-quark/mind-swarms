@@ -16,15 +16,15 @@ class Agent {
     pOld = new PVector(p.x, p.y);
     stepSize = random(minSpeed, maxSpeed);
     startMillis = millis();
+    noiseZ = random(interAgentNoiseZRange);
 
     //procedural color
     //colorMode(HSB, 1);
     //agentColor = color(map(stepSize,minSpeed,maxSpeed,0.6,.8),1,1,map(agentsAlpha,0,255,0,1));
 
     //color from underlying picture
-    setColor();
 
-    noiseZ = random(interAgentNoiseZRange);
+    setColor();
   }
 
   void update1() {
@@ -78,10 +78,15 @@ class Agent {
   }
 
   void setColor() {
-    int x = (int)(p.x/width*imagePalette.width);
-    int y = (int)(p.y/height*imagePalette.height);
-    color c = imagePalette.get(x, y);
-    alpha = agentsAlpha;
+    color c;
+    if (usePalette) {
+      c = palette.getColor(p);
+    } else {
+      int x = (int)(p.x/width*imagePalette.width);
+      int y = (int)(p.y/height*imagePalette.height);
+      c = imagePalette.get(x, y);
+      alpha = agentsAlpha;
+    }
     agentColor = color(red(c), green(c), blue(c), alpha);
   }
 }
