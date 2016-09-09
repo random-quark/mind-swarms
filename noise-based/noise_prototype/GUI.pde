@@ -58,7 +58,7 @@ void setupGUI(){
   
   posY += 80;
   posY +=15;
-  sliders[si++] = controlP5.addSlider("maxCircles",0,100,left,top+posY,len,15);
+  sliders[si++] = controlP5.addSlider("numCircles",0,100,left,top+posY,len,15);
   posY+=15;
 
 

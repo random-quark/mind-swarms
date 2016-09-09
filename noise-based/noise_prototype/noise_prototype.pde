@@ -36,7 +36,7 @@ boolean usePalette = false;
 boolean showPalette;
 boolean diminishingAlpha = false;
 float alphaDecrement = 0.01;
-int maxCircles = 50;
+int numCircles = 50;
 
 // ------ ControlP5 ------
 ControlP5 controlP5;
@@ -48,8 +48,8 @@ void setup() {
   //fullScreen(P2D);
   size(1500, 800, P2D);
   background(255);
-  imagePalette = loadImage("sky5.jpg");
-  //palette = new Palette();
+  imagePalette = loadImage("giant-cloud.jpg");
+  palette = new Palette();
   initSwarm();
   setupGUI();
 }
@@ -67,7 +67,7 @@ void draw() {
   
   //println(agents[0].tempAlpha);
   if (showPalette) {
-//    palette.draw();
+    palette.draw();
   }
 
 }
@@ -87,7 +87,7 @@ void keyReleased() {
   }
   if (key=='R' || key=='r') {
     background(255);
-    //palette = new Palette();
+    palette = new Palette();
     initSwarm();
   }
   

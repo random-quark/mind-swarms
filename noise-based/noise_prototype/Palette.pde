@@ -50,7 +50,7 @@ class Palette {
   }
   
   void addCircles(color c) {
-    int numCircles = (int) random(maxCircles);
+    //int numCircles = numCircles;
     for (int i=0; i<numCircles; i++) {
       PVector center = new PVector(random(width),random(height));
       drawCircle(center, (int) random(100), c);
@@ -97,7 +97,7 @@ class Palette {
       x++;
     }    
     
-    addCircles(c.toARGB());
+    addCircles(color(255));
   }
   
   void generateColorList() {

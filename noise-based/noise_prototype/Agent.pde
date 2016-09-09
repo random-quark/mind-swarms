@@ -68,12 +68,10 @@ class Agent {
   }
   //
   void resetAgent() {
-    if (false /*resetWithError*/) {
-    
-    } else {
-      p.x = pOld.x = (int)random(width);
-      p.y = pOld.y = (int)random(height);
-    }
+
+    p.x = pOld.x = (int)random(width);
+    p.y = pOld.y = (int)random(height);
+
     setColor();
   }
 
@@ -88,6 +86,8 @@ class Agent {
       int y = (int)constrain(p.y/height*imagePalette.height, 0, imagePalette.height);
       c = imagePalette.get(x, y);
     }
-    agentColor = color(red(c), green(c), blue(c), tempAlpha);
+    colorMode(HSB, 1);
+    agentColor = color(234./360., saturation(c)*1.5, brightness(c)*1.4, tempAlpha/255.);
+    //agentColor = color(red(c), green(c), blue(c), tempAlpha);
   }
 }
