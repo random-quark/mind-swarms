@@ -56,8 +56,25 @@ void setupGUI(){
      ;
   stroke.setGroup(ctrl);
   
+  posY += 80;
+  posY +=15;
+  sliders[si++] = controlP5.addSlider("maxCircles",0,100,left,top+posY,len,15);
+  posY+=15;
+
+
+  
+  posY+=40;
+  Toggle usePalette = controlP5.addToggle("usePalette")
+     .setPosition(0,top+posY)
+     .setSize(50,20)
+     .setValue(true)
+     .setMode(ControlP5.SWITCH)
+     ;
+  usePalette.setGroup(ctrl);  
+  
+  posY+=40;
   Toggle palette = controlP5.addToggle("showPalette")
-     .setPosition(0,top+posY+140)
+     .setPosition(0,top+posY)
      .setSize(50,20)
      .setValue(false)
      .setMode(ControlP5.SWITCH)
