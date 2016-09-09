@@ -21,6 +21,7 @@ class Palette {
   int resolution;
   
   float  noiseScale = 40;
+  float circleResolution = 2000;
   
   String blend = "burn";
   
@@ -33,12 +34,34 @@ class Palette {
     }
     return restrictedColors;
   }
+  
+  void drawCircle(PVector center, int radius, color c) {
+      for (int j=1; j<=circleResolution; j++) {
+        float angle = 360 * (j / circleResolution);
+        float x = constrain(center.x + radius * cos(radians(angle)), 0, width-1);
+        float y = constrain(center.x + radius * sin(radians(angle)), 0, height-1);
+        PVector loc = new PVector(x,y);
+        palette[(int) loc.x][(int) loc.y] = c;
+      }
+      if (radius > 1) {
+        drawCircle(center, radius-1, c);
+      }
+  }
+  
+  void addCircles(color c) {
+    int numCircles = (int) random(10);
+    for (int i=0; i<numCircles; i++) {
+      PVector center = new PVector(random(width),random(height));
+      drawCircle(center, (int) random(100), c);
+    }
+  }
     
   Palette() {
     palette = new color[width][height];
     ColorGradient gradient = new ColorGradient();
     
     generateColorList();
+    
     int pos = 0;
     for (Iterator i = colorlist.iterator(); i.hasNext();) {
       TColor c = (TColor) i.next();
@@ -72,6 +95,8 @@ class Palette {
       }
       x++;
     }    
+    
+    addCircles(color(255,50,0));
   }
   
   void generateColorList() {
