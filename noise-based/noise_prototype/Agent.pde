@@ -18,12 +18,6 @@ class Agent {
     startMillis = millis();
     noiseZ = random(interAgentNoiseZRange);
 
-    //procedural color
-    //colorMode(HSB, 1);
-    //agentColor = color(map(stepSize,minSpeed,maxSpeed,0.6,.8),1,1,map(agentsAlpha,0,255,0,1));
-
-    //color from underlying picture
-
     setColor();
   }
 
@@ -71,10 +65,6 @@ class Agent {
     p.x = pOld.x = random(width);
     p.y = pOld.y = random(height);
     setColor();
-    //alpha = agentsAlpha;
-    //p.x=pOld.x=pOriginal.x+random(-randomStepOnReset,randomStepOnReset); 
-    //p.y=pOld.y=pOriginal.y+random(-randomStepOnReset,randomStepOnReset);
-    //noiseZ += noiseZStep;
   }
 
   void setColor() {

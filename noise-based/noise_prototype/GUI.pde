@@ -31,7 +31,6 @@ void setupGUI(){
   sliders[si++] = controlP5.addSlider("noiseDet",1,15,left,top+posY+20,len,15);
   sliders[si++] = controlP5.addSlider("maxAngleSpan",0,360,left,top+posY+40,len,15);
   sliders[si++] = controlP5.addSlider("agentTTL",0,120,left,top+posY+60,len,15);
-  sliders[si++] = controlP5.addSlider("randomStepOnReset",0,40,left,top+posY+80,len,15);
   posY += 110;
 
   sliders[si++] = controlP5.addSlider("strokeWidth",0,10,left,top+posY+0,len,15);

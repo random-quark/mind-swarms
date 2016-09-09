@@ -25,7 +25,7 @@ int agentsCount = 30000;
 int maxAgents = 50000;
 float noiseScale = 150, interAgentNoiseZRange = 0.0, noiseZStep = 0.001;
 int noiseDet = 4;
-float overlayAlpha = 0, agentsAlpha = 20, strokeWidth = 1, maxAngleSpan = 150;
+float overlayAlpha = 0, agentsAlpha = 20, strokeWidth = 1, maxAngleSpan = 220;
 float randomSeed; //every time program starts it looks different
 float randomStepOnReset=0; // when agent is reborn is gets moved slightly - this says how much
 int agentTTL=0; // agent TTL to live in seconds
