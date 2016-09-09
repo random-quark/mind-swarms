@@ -33,6 +33,10 @@ class Palette {
     }
     return restrictedColors;
   }
+  
+  void addCircles() {
+    
+  }
     
   Palette() {
     palette = new color[width][height];
@@ -72,6 +76,8 @@ class Palette {
       }
       x++;
     }    
+    
+    addCircles();
   }
   
   void generateColorList() {
