@@ -37,15 +37,15 @@ void setupGUI(){
   sliders[si++] = controlP5.addSlider("strokeWidth",0,10,left,top+posY+0,len,15);
   posY += 30;
 
-  sliders[si++] = controlP5.addSlider("noiseZMax",0,1,left,top+posY+0,len,15);
-  sliders[si++] = controlP5.addSlider("noiseZStep",0,0.4,left,top+posY+20,len,15);
+  sliders[si++] = controlP5.addSlider("interAgentNoiseZRange",0,1,left,top+posY+0,len,15);
+  sliders[si++] = controlP5.addSlider("noiseZStep",0,0.01,left,top+posY+20,len,15);
   posY += 50;
 
   sliders[si++] = controlP5.addSlider("agentsAlpha",0,255,left,top+posY+0,len,15);
   sliders[si++] = controlP5.addSlider("overlayAlpha",0,255,left,top+posY+20,len,15);
   
-  sliders[si++] = controlP5.addSlider("minSpeed",0,30,left,top+posY+40,len,15);
-  sliders[si++] = controlP5.addSlider("maxSpeed",0,100,left,top+posY+60,len,15);
+  sliders[si++] = controlP5.addSlider("minSpeed",0,20,left,top+posY+40,len,15);
+  sliders[si++] = controlP5.addSlider("maxSpeed",0,20,left,top+posY+60,len,15);
   
   sliders[si++] = controlP5.addSlider("separationPercentage",0,1,left,top+posY+80,len,15);
   
@@ -89,7 +89,7 @@ void controlEvent(ControlEvent theEvent) {
   // noiseSticking changed -> set new values
   if(theEvent.isController()) {
     if (theEvent.getController().getId() == 3) {
-      for(int i=0; i<agentsCount; i++) agents[i].setNoiseZ(noiseZMax);  
+  
     }
   }
 }

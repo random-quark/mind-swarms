@@ -24,11 +24,10 @@ class Agent {
     //color from underlying picture
     setColor();
 
-    setNoiseZ(noiseZMax);
+    noiseZ = random(interAgentNoiseZRange);
   }
 
   void update1() {
-    alpha -= agentAlphaDecrement;
 
     float modifiedNoiseScale = noiseScale;
 
@@ -36,7 +35,6 @@ class Agent {
     if (agentTTL>0) {
       float remainderTTL = agentTTL - ((millis() - startMillis) / 1000 % agentTTL);
       remainderPercent = remainderTTL / agentTTL;
-
       if (remainderPercent < separationPercentage) {
         modifiedNoiseScale = noiseScale * remainderPercent;
       }
@@ -55,19 +53,6 @@ class Agent {
     p.y += sin(angle) * stepSize;
 
     if (p.x<0 || p.x>width || p.y<0 || p.y>height) resetAgent();
-    //// offscreen simple wrap
-    //if (p.x<-10) p.x=pOld.x=width+10;
-    //if (p.x>width+10) p.x=pOld.x=-10;
-    //if (p.y<-10) p.y=pOld.y=height+10;
-    //if (p.y>height+10) p.y=pOld.y=-10;
-
-    // //offscreen wrap - send to original position + restart
-    //if (p.x<-10 || p.x>width+10 || p.y<-10 || p.y>height+10) {
-    //  p.x=pOld.x=pOriginal.x; 
-    //  p.y=pOld.y=pOriginal.y;
-    //  noiseZ += noiseZStep;
-    //}
-
 
     //strokeWeight(strokeWidth*stepSize);
     stroke(agentColor);
@@ -79,6 +64,7 @@ class Agent {
     line(pOld.x, pOld.y, p.x, p.y);
 
     pOld.set(p);
+    noiseZ += noiseZStep;
   }
 
   void resetAgent() {
@@ -97,9 +83,5 @@ class Agent {
     color c = imagePalette.get(x, y);
     alpha = agentsAlpha;
     agentColor = color(red(c), green(c), blue(c), alpha);
-  }
-  void setNoiseZ(float noiseZMax) {
-    // small values will increase grouping of the agents
-    noiseZ = random(noiseZMax);
   }
 }

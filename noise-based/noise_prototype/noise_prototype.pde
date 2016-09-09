@@ -17,15 +17,15 @@ import java.util.Calendar;
 Palette palette;
 Agent[] agents;
 int agentsCount = 30000;
-int maxAgents = 30000;
-float noiseScale = 150, noiseZMax = 0.03, noiseZStep = 0;
+int maxAgents = 50000;
+float noiseScale = 150, interAgentNoiseZRange = 0.0, noiseZStep = 0.003;
 int noiseDet = 4;
-float overlayAlpha = 0, agentsAlpha = 20, agentAlphaDecrement = 1, strokeWidth = 1, maxAngleSpan = 150;
+float overlayAlpha = 0, agentsAlpha = 20, strokeWidth = 1, maxAngleSpan = 150;
 float randomSeed; //every time program starts it looks different
 float randomStepOnReset=0; // when agent is reborn is gets moved slightly - this says how much
 int agentTTL=0; // agent TTL to live in seconds
 PImage imagePalette;
-float minSpeed = 1, maxSpeed = 5;
+float minSpeed = 3, maxSpeed = 3;
 float separationPercentage = 0.;
 
 boolean showPalette, diminishStroke;
@@ -40,7 +40,7 @@ void setup() {
   //fullScreen(P2D);
   size(1500, 800, P2D);
   background(255);
-  imagePalette = loadImage("sky4.jpg");
+  imagePalette = loadImage("giant-cloud.jpg");
   palette = new Palette(250);
   initSwarm();
   setupGUI();
@@ -58,12 +58,6 @@ void draw() {
   noiseDetail(noiseDet);
   //println(frameRate);
   drawGUI();
-
-  // prints and exits at spec frame - good for comparing algorithms
-  //if (frameCount==400) {
-  //  saveFrame(timestamp()+".png");
-  //  exit();
-  //}
   
   if (showPalette) {
     palette.draw();
@@ -72,7 +66,7 @@ void draw() {
 
 void initSwarm() {
   pushStyle();
-  randomSeed = random(10000);
+  randomSeed = random(1000);
   agents = new Agent[maxAgents]; // create more ... to fit max slider agentsCount
   for (int i=0; i<agents.length; i++) agents[i] = new Agent();
   popStyle();
