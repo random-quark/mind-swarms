@@ -43,8 +43,8 @@ Slider[] sliders;
 
 void setup() {
   frameRate(20);
-  //fullScreen(P2D);
-  size(1500, 800, P2D);
+  fullScreen(P2D);
+  //size(1500, 800, P2D);
   background(255);
   imagePalette = loadImage("gradientbands2.jpg");
   palette = new Palette();

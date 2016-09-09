@@ -106,7 +106,7 @@ class Palette {
     pushStyle();
     colorMode(HSB);
     c = TColor.newHSV(hue(cp) / 360, saturation(cp) / 100, brightness(cp) / 100);
-    colorlist = ColorList.createUsingStrategy(ColorTheoryRegistry.SPLIT_COMPLEMENTARY, c);
+    colorlist = ColorList.createUsingStrategy(ColorTheoryRegistry.ANALOGOUS, c);
     colorlist = new ColorRange(colorlist).addBrightnessRange(0,1).getColors(null,100,1);
     colorlist.sortByDistance(false);
     popStyle();
