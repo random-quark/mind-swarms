@@ -12,7 +12,7 @@ int[] prevFrame;
 int[] tempFrame;
 
 void setup() {
-  size(512, 512);
+  size(1512, 512);
   frameRate(30);
   colorMode(HSB, 255);
 

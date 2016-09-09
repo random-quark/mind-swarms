@@ -20,10 +20,10 @@ int agentsCount = 30000;
 int maxAgents = 30000;
 float noiseScale = 150, noiseZMax = 0.03, noiseZStep = 0;
 int noiseDet = 4;
-float overlayAlpha = 0, agentsAlpha = 10, agentAlphaDecrement = 1, strokeWidth = 1, maxAngleSpan = 150;
+float overlayAlpha = 0, agentsAlpha = 20, agentAlphaDecrement = 1, strokeWidth = 1, maxAngleSpan = 150;
 float randomSeed; //every time program starts it looks different
 float randomStepOnReset=0; // when agent is reborn is gets moved slightly - this says how much
-int agentTTL=7; // agent TTL to live in seconds
+int agentTTL=0; // agent TTL to live in seconds
 PImage imagePalette;
 float minSpeed = 1, maxSpeed = 5;
 float separationPercentage = 0.;
