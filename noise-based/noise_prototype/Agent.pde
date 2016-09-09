@@ -69,13 +69,13 @@ class Agent {
 
   void setColor() {
     color c;
+    alpha = agentsAlpha;
     if (usePalette) {
       c = palette.getColor(p);
     } else {
       int x = (int)(p.x/width*imagePalette.width);
       int y = (int)(p.y/height*imagePalette.height);
       c = imagePalette.get(x, y);
-      alpha = agentsAlpha;
     }
     agentColor = color(red(c), green(c), blue(c), alpha);
   }

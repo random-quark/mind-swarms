@@ -32,8 +32,9 @@ int agentTTL=0; // agent TTL to live in seconds
 PImage imagePalette;
 float minSpeed = 3, maxSpeed = 3;
 float separationPercentage = 0.;
-boolean usePalette = false;
+boolean usePalette = true;
 boolean showPalette, diminishStroke;
+int maxCircles = 50;
 
 // ------ ControlP5 ------
 ControlP5 controlP5;
@@ -55,18 +56,13 @@ void draw() {
   fill(255, overlayAlpha);
   noStroke();
   rect(0, 0, width, height);
-
   pushStyle();
   //draw agents
   for (int i=0; i<agentsCount; i++) agents[i].update1();
   popStyle();
   noiseDetail(noiseDet);
-  //println(frameRate);
   drawGUI();
-  
-  if (showPalette) {
-    palette.draw();
-  }
+  if (showPalette) palette.draw();
 }
 
 void initSwarm() {
@@ -88,9 +84,7 @@ void keyReleased() {
     initSwarm();
   }
   
-  if (key=='P' || key=='p') {
-    palette.draw();
-  }
+  if (key=='P' || key=='p') palette.draw();
   
   if (key == 't' || key == 't') {
     for (int i=0; i<agents.length; i++) agents[i].resetAgent();
