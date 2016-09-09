@@ -46,12 +46,12 @@ void setupGUI(){
   sliders[si++] = controlP5.addSlider("minSpeed",0,20,left,top+posY+40,len,15);
   sliders[si++] = controlP5.addSlider("maxSpeed",0,20,left,top+posY+60,len,15);
   
-  sliders[si++] = controlP5.addSlider("separationPercentage",0,1,left,top+posY+80,len,15);
+  //sliders[si++] = controlP5.addSlider("separationPercentage",0,1,left,top+posY+80,len,15);
   
   Toggle stroke = controlP5.addToggle("diminishingAlpha")
      .setPosition(0,top+posY+100)
      .setSize(50,20)
-     .setValue(true)
+     .setValue(false)
      .setMode(ControlP5.SWITCH)
      ;
   stroke.setGroup(ctrl);
@@ -67,7 +67,7 @@ void setupGUI(){
   Toggle usePalette = controlP5.addToggle("usePalette")
      .setPosition(0,top+posY)
      .setSize(50,20)
-     .setValue(true)
+     .setValue(false)
      .setMode(ControlP5.SWITCH)
      ;
   usePalette.setGroup(ctrl);  

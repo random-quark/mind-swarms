@@ -34,7 +34,7 @@ float minSpeed = 3, maxSpeed = 3;
 float separationPercentage = 0.;
 boolean usePalette = false;
 boolean showPalette;
-boolean diminishingAlpha = true;
+boolean diminishingAlpha = false;
 float alphaDecrement = 0.01;
 int maxCircles = 50;
 
@@ -45,11 +45,11 @@ Slider[] sliders;
 
 void setup() {
   frameRate(20);
-  fullScreen(P2D);
-  //size(1500, 800, P2D);
+  //fullScreen(P2D);
+  size(1500, 800, P2D);
   background(255);
-  imagePalette = loadImage("marble.jpg");
-  palette = new Palette();
+  imagePalette = loadImage("sky5.jpg");
+  //palette = new Palette();
   initSwarm();
   setupGUI();
 }
@@ -65,9 +65,9 @@ void draw() {
   noiseDetail(noiseDet);
   drawGUI();
   
-  println(alpha(agents[0].agentColor));
+  //println(agents[0].tempAlpha);
   if (showPalette) {
-    palette.draw();
+//    palette.draw();
   }
 
 }
@@ -87,7 +87,7 @@ void keyReleased() {
   }
   if (key=='R' || key=='r') {
     background(255);
-    palette = new Palette();
+    //palette = new Palette();
     initSwarm();
   }
   

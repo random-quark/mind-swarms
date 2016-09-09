@@ -9,6 +9,7 @@ class Agent {
   color agentColor;
   int startMillis;
   float remainderPercent;
+  float tempAlpha=20;
 
   Agent() {
     p = new PVector(random(width), random(height));
@@ -47,7 +48,6 @@ class Agent {
 
     if (p.x<0 || p.x>width || p.y<0 || p.y>height) resetAgent();
 
-    ////strokeWeight(strokeWidth*stepSize);
     stroke(agentColor);
     strokeWeight(strokeWidth);
 
@@ -56,28 +56,38 @@ class Agent {
     pOld.set(p);
     noiseZ += noiseZStep;
 
-    //if (diminishingAlpha) { 
-    //  float tempAlpha = alpha(agentColor)-0.01;
-    //  agentColor = color(red(agentColor), green(agentColor), blue(agentColor), max(0, tempAlpha));
-    //}
+    if (diminishingAlpha) { 
+      tempAlpha -= .1;
+      if (tempAlpha<1) {
+        resetAgent();
+      } else {
+        colorMode(RGB);
+        agentColor = color(red(agentColor), green(agentColor), blue(agentColor), tempAlpha);
+      }
+    }
   }
   //
   void resetAgent() {
-    p.x = pOld.x = random(width);
-    p.y = pOld.y = random(height);
+    if (false /*resetWithError*/) {
+    
+    } else {
+      p.x = pOld.x = (int)random(width);
+      p.y = pOld.y = (int)random(height);
+    }
     setColor();
   }
 
   void setColor() {
     color c;
+    tempAlpha = agentsAlpha;
     alpha = agentsAlpha;
     if (usePalette) {
       c = palette.getColor(p);
     } else {
-      int x = (int)(p.x/width*imagePalette.width);
-      int y = (int)(p.y/height*imagePalette.height);
+      int x = (int)constrain(p.x/width*imagePalette.width, 0, imagePalette.width);
+      int y = (int)constrain(p.y/height*imagePalette.height, 0, imagePalette.height);
       c = imagePalette.get(x, y);
     }
-    agentColor = color(red(c), green(c), blue(c), agentsAlpha);
+    agentColor = color(red(c), green(c), blue(c), tempAlpha);
   }
 }
