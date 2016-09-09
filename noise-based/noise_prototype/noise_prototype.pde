@@ -49,7 +49,7 @@ void setup() {
   //size(1500, 800, P2D);
   background(255);
   imagePalette = loadImage("marble.jpg");
-  //palette = new Palette();
+  palette = new Palette();
   initSwarm();
   setupGUI();
 }
@@ -90,17 +90,9 @@ void keyReleased() {
     palette = new Palette();
     initSwarm();
   }
-<<<<<<< HEAD
-
-  if (key=='P' || key=='p') {
-    palette.draw();
-  }
-
-=======
   
   if (key=='P' || key=='p') palette.draw();
   
->>>>>>> 26d78cd95278e417e36c5c006296c361cddebac1
   if (key == 't' || key == 't') {
     for (int i=0; i<agents.length; i++) agents[i].resetAgent();
   }
