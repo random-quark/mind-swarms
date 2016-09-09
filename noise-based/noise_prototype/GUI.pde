@@ -48,10 +48,10 @@ void setupGUI(){
   
   sliders[si++] = controlP5.addSlider("separationPercentage",0,1,left,top+posY+80,len,15);
   
-  Toggle stroke = controlP5.addToggle("diminishStroke")
+  Toggle stroke = controlP5.addToggle("diminishingAlpha")
      .setPosition(0,top+posY+100)
      .setSize(50,20)
-     .setValue(false)
+     .setValue(true)
      .setMode(ControlP5.SWITCH)
      ;
   stroke.setGroup(ctrl);

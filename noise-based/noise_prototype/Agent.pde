@@ -37,7 +37,6 @@ class Agent {
       }
     }
 
-
     float noiseVal = noise(p.x/modifiedNoiseScale + randomSeed, p.y/modifiedNoiseScale  + randomSeed, noiseZ  + randomSeed);
     angle = map(noiseVal, 0, 1, -1, 1);
     angle = angle * radians(maxAngleSpan);
@@ -48,19 +47,21 @@ class Agent {
 
     if (p.x<0 || p.x>width || p.y<0 || p.y>height) resetAgent();
 
-    //strokeWeight(strokeWidth*stepSize);
+    ////strokeWeight(strokeWidth*stepSize);
     stroke(agentColor);
-    if (diminishStroke) {
-      strokeWeight(strokeWidth * remainderPercent);
-    } else {
-      strokeWeight(strokeWidth);
-    }
+    strokeWeight(strokeWidth);
+
     line(pOld.x, pOld.y, p.x, p.y);
 
     pOld.set(p);
     noiseZ += noiseZStep;
-  }
 
+    //if (diminishingAlpha) { 
+    //  float tempAlpha = alpha(agentColor)-0.01;
+    //  agentColor = color(red(agentColor), green(agentColor), blue(agentColor), max(0, tempAlpha));
+    //}
+  }
+  //
   void resetAgent() {
     p.x = pOld.x = random(width);
     p.y = pOld.y = random(height);
@@ -77,6 +78,6 @@ class Agent {
       c = imagePalette.get(x, y);
       alpha = agentsAlpha;
     }
-    agentColor = color(red(c), green(c), blue(c), alpha);
+    agentColor = color(red(c), green(c), blue(c), agentsAlpha);
   }
 }

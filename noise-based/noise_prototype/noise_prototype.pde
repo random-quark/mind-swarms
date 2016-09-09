@@ -33,7 +33,9 @@ PImage imagePalette;
 float minSpeed = 3, maxSpeed = 3;
 float separationPercentage = 0.;
 boolean usePalette = false;
-boolean showPalette, diminishStroke;
+boolean showPalette;
+boolean diminishingAlpha = true;
+float alphaDecrement = 0.01;
 
 // ------ ControlP5 ------
 ControlP5 controlP5;
@@ -45,8 +47,8 @@ void setup() {
   //fullScreen(P2D);
   size(1500, 800, P2D);
   background(255);
-  imagePalette = loadImage("gradientbands2.jpg");
-  palette = new Palette();
+  imagePalette = loadImage("marble.jpg");
+  //palette = new Palette();
   initSwarm();
   setupGUI();
 }
@@ -63,7 +65,8 @@ void draw() {
   noiseDetail(noiseDet);
   //println(frameRate);
   drawGUI();
-  
+
+  println(alpha(agents[200].agentColor));
   if (showPalette) {
     palette.draw();
   }
@@ -87,11 +90,11 @@ void keyReleased() {
     palette = new Palette();
     initSwarm();
   }
-  
+
   if (key=='P' || key=='p') {
     palette.draw();
   }
-  
+
   if (key == 't' || key == 't') {
     for (int i=0; i<agents.length; i++) agents[i].resetAgent();
   }
