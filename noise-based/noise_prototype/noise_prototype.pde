@@ -48,7 +48,7 @@ void setup() {
   //fullScreen(P2D);
   size(1500, 800, P2D);
   background(255);
-  imagePalette = loadImage("giant-cloud.jpg");
+  imagePalette = loadImage("sky4.jpg");
   palette = new Palette();
   initSwarm();
   setupGUI();
