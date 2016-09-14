@@ -36,6 +36,7 @@ boolean usePalette = false, showPalette, resetWithError;
 boolean diminishingAlpha = false;
 float alphaDecrement = 0.01;
 int numCircles = 50;
+PGraphics bg;
 
 // ------ ControlP5 ------
 ControlP5 controlP5;
@@ -51,24 +52,30 @@ void setup() {
   palette = new Palette();
   initSwarm();
   setupGUI();
+  bg = createGraphics(width,height);
 }
 
 void draw() {
-  fill(255, overlayAlpha);
+  bg.beginDraw();
+  bg.fill(255, overlayAlpha);
   noStroke();
   rect(0, 0, width, height);
   pushStyle();
   //draw agents
-  for (int i=0; i<agentsCount; i++) agents[i].update1();
+  for (int i=0; i<agentsCount; i++) agents[i].update();
   popStyle();
   noiseDetail(noiseDet);
+  bg.endDraw();
+  
   drawGUI();
   
   //println(agents[0].tempAlpha);
   if (showPalette) {
     palette.draw();
   }
-
+  
+  background(255);
+  image(bg, 0, 0);
 }
 
 void initSwarm() {
@@ -85,9 +92,15 @@ void keyReleased() {
     showGUI = !showGUI;
   }
   if (key=='R' || key=='r') {
-    background(255);
-    palette = new Palette();
+    bg.beginDraw();
+    bg.background(255);
+    bg.endDraw();
+     palette = new Palette();
     initSwarm();
+  }
+  
+  if (key=='f' || key=='F') {
+    image(bg, 0, 0);
   }
   
   if (key=='P' || key=='p') palette.draw();

@@ -18,15 +18,12 @@ class Agent {
     stepSize = random(minSpeed, maxSpeed);
     startMillis = millis();
     noiseZ = random(interAgentNoiseZRange);
-
     setColor();
   }
 
-  void update1() {
-
+  void update() {
     float modifiedNoiseScale = noiseScale;
 
-    //TTL related (not used by default)
     if (agentTTL>0) {
       float remainderTTL = agentTTL - ((millis() - startMillis) % agentTTL);
       remainderPercent = remainderTTL / agentTTL;
@@ -42,16 +39,14 @@ class Agent {
     angle = map(noiseVal, 0, 1, -1, 1);
     angle = angle * radians(maxAngleSpan);
 
-    //these two lines show how much I'll add to the x + y axis
     p.x += cos(angle) * stepSize; //stepSize is the speed
     p.y += sin(angle) * stepSize;
 
     if (p.x<0 || p.x>width || p.y<0 || p.y>height) resetAgent();
 
-    stroke(agentColor);
-    strokeWeight(strokeWidth);
-
-    line(pOld.x, pOld.y, p.x, p.y);
+    bg.stroke(agentColor);
+    bg.strokeWeight(strokeWidth);
+    bg.line(pOld.x, pOld.y, p.x, p.y);
 
     pOld.set(p);
     noiseZ += noiseZStep;
@@ -66,10 +61,9 @@ class Agent {
       }
     }
   }
-  //
+
   void resetAgent() {
     startMillis = millis();
-    
     if (resetWithError) {
       p.x = pOld.x = pOriginal.x + (int)random(10)-5;
       p.y = pOld.y = pOriginal.y + (int)random(10)-5;      
@@ -92,7 +86,8 @@ class Agent {
       c = imagePalette.get(x, y);
     }
     colorMode(HSB, 1);
-    agentColor = color(234./360., saturation(c)*1.5, brightness(c)*1.4, tempAlpha/255.);
+    //agentColor = color(234./360., saturation(c)*1.5, brightness(c)*1.4, tempAlpha/255.);
     //agentColor = color(red(c), green(c), blue(c), tempAlpha);
+    agentColor = color(255,0,0,255);
   }
 }
