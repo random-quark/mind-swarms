@@ -10,6 +10,9 @@ class Agent {
   int startMillis;
   float remainderPercent;
   float tempAlpha=20;
+  
+  int width = bg.width;
+  int height = bg.height;
 
   Agent() {
     p = new PVector(random(width), random(height));
@@ -86,8 +89,7 @@ class Agent {
       c = imagePalette.get(x, y);
     }
     colorMode(HSB, 1);
-    //agentColor = color(234./360., saturation(c)*1.5, brightness(c)*1.4, tempAlpha/255.);
+    agentColor = color(234./360., saturation(c)*1.5, brightness(c)*1.4, tempAlpha/255.);
     //agentColor = color(red(c), green(c), blue(c), tempAlpha);
-    agentColor = color(255,0,0,255);
   }
 }

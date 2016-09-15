@@ -21,8 +21,8 @@ import java.util.Iterator;
 // ------ agents ------
 Palette palette;
 Agent[] agents;
-int agentsCount = 30000;
-int maxAgents = 50000;
+int agentsCount = 100000;
+int maxAgents = 100000;
 float noiseScale = 150, interAgentNoiseZRange = 0.0, noiseZStep = 0.001;
 int noiseDet = 4;
 float overlayAlpha = 0, agentsAlpha = 20, strokeWidth = 1, maxAngleSpan = 220;
@@ -37,6 +37,8 @@ boolean diminishingAlpha = false;
 float alphaDecrement = 0.01;
 int numCircles = 50;
 PGraphics bg;
+int sizeX = 7500;
+int sizeY = 10000;
 
 // ------ ControlP5 ------
 ControlP5 controlP5;
@@ -44,6 +46,7 @@ boolean showGUI = false;
 Slider[] sliders;
 
 void setup() {
+  bg = createGraphics(sizeX,sizeY,P2D);
   frameRate(20);
   //fullScreen(P2D);
   size(1500, 800, P2D);
@@ -52,14 +55,13 @@ void setup() {
   palette = new Palette();
   initSwarm();
   setupGUI();
-  bg = createGraphics(width,height);
 }
 
 void draw() {
   bg.beginDraw();
   bg.fill(255, overlayAlpha);
-  noStroke();
-  rect(0, 0, width, height);
+  bg.noStroke();
+  bg.rect(0, 0, width, height);
   pushStyle();
   //draw agents
   for (int i=0; i<agentsCount; i++) agents[i].update();
@@ -73,9 +75,6 @@ void draw() {
   if (showPalette) {
     palette.draw();
   }
-  
-  background(255);
-  image(bg, 0, 0);
 }
 
 void initSwarm() {
@@ -100,6 +99,7 @@ void keyReleased() {
   }
   
   if (key=='f' || key=='F') {
+    background(255);
     image(bg, 0, 0);
   }
   
@@ -111,7 +111,7 @@ void keyReleased() {
   if (showGUI) controlP5.getGroup("menu").open();
   else controlP5.getGroup("menu").close();
 
-  if (key=='s' || key=='S') saveFrame(timestamp()+".png");
+  if (key=='s' || key=='S') bg.save(timestamp()+".png");
   if (key == DELETE || key == BACKSPACE) background(255);
 }
 
