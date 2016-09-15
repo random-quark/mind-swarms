@@ -40,7 +40,7 @@ class Agent {
 
     float noiseVal = noise(p.x/modifiedNoiseScale + randomSeed, p.y/modifiedNoiseScale  + randomSeed, noiseZ  + randomSeed);
     angle = map(noiseVal, 0, 1, -1, 1);
-    angle = angle * radians(maxAngleSpan);
+    angle = angle * radians(maxAngleSpan) * noiseStrength;
 
     p.x += cos(angle) * stepSize; //stepSize is the speed
     p.y += sin(angle) * stepSize;

@@ -43,8 +43,13 @@ void setupGUI(){
   sliders[si++] = controlP5.addSlider("agentsAlpha",0,255,left,top+posY+0,len,15);
   sliders[si++] = controlP5.addSlider("overlayAlpha",0,255,left,top+posY+20,len,15);
   
-  sliders[si++] = controlP5.addSlider("minSpeed",0,20,left,top+posY+40,len,15);
-  sliders[si++] = controlP5.addSlider("maxSpeed",0,20,left,top+posY+60,len,15);
+  posY += 20;
+  sliders[si++] = controlP5.addSlider("minSpeed",0,20,left,top+posY+20,len,15);
+  posY += 20;
+  sliders[si++] = controlP5.addSlider("maxSpeed",0,20,left,top+posY+20,len,15);
+  
+  posY += 20;
+  sliders[si++] = controlP5.addSlider("noiseStrength",1,5,left,top+posY+60,len,15);
   
   //sliders[si++] = controlP5.addSlider("separationPercentage",0,1,left,top+posY+80,len,15);
   
