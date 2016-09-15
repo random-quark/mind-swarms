@@ -32,8 +32,7 @@ int agentTTL=0; // agent TTL to live in seconds
 PImage imagePalette;
 float minSpeed = 3, maxSpeed = 3;
 float separationPercentage = 0.;
-boolean usePalette = false;
-boolean showPalette;
+boolean usePalette = false, showPalette, resetWithError;
 boolean diminishingAlpha = false;
 float alphaDecrement = 0.01;
 int numCircles = 50;
@@ -48,7 +47,7 @@ void setup() {
   //fullScreen(P2D);
   size(1500, 800, P2D);
   background(255);
-  imagePalette = loadImage("giant-cloud.jpg");
+  imagePalette = loadImage("sky4.jpg");
   palette = new Palette();
   initSwarm();
   setupGUI();

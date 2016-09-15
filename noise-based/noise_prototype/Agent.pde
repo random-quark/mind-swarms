@@ -28,12 +28,12 @@ class Agent {
 
     //TTL related (not used by default)
     if (agentTTL>0) {
-      float remainderTTL = agentTTL - ((millis() - startMillis) / 1000 % agentTTL);
+      float remainderTTL = agentTTL - ((millis() - startMillis) % agentTTL);
       remainderPercent = remainderTTL / agentTTL;
       if (remainderPercent < separationPercentage) {
         modifiedNoiseScale = noiseScale * remainderPercent;
       }
-      if (((millis()-startMillis) / 1000) % agentTTL == 0) {
+      if (((millis()-startMillis)) > agentTTL) {
         resetAgent();
       }
     }
@@ -68,10 +68,15 @@ class Agent {
   }
   //
   void resetAgent() {
-
-    p.x = pOld.x = (int)random(width);
-    p.y = pOld.y = (int)random(height);
-
+    startMillis = millis();
+    
+    if (resetWithError) {
+      p.x = pOld.x = pOriginal.x + (int)random(10)-5;
+      p.y = pOld.y = pOriginal.y + (int)random(10)-5;      
+    } else {
+      p.x = pOld.x = (int)random(width);
+      p.y = pOld.y = (int)random(height);
+    }
     setColor();
   }
 

@@ -30,7 +30,7 @@ void setupGUI(){
   sliders[si++] = controlP5.addSlider("noiseScale",1,1000,left,top+posY+0,len,15);
   sliders[si++] = controlP5.addSlider("noiseDet",1,15,left,top+posY+20,len,15);
   sliders[si++] = controlP5.addSlider("maxAngleSpan",0,360,left,top+posY+40,len,15);
-  sliders[si++] = controlP5.addSlider("agentTTL",0,120,left,top+posY+60,len,15);
+  sliders[si++] = controlP5.addSlider("agentTTL",0,50000,left,top+posY+60,len,15);
   posY += 110;
 
   sliders[si++] = controlP5.addSlider("strokeWidth",0,10,left,top+posY+0,len,15);
@@ -80,6 +80,15 @@ void setupGUI(){
      .setMode(ControlP5.SWITCH)
      ;
   palette.setGroup(ctrl);  
+  
+  posY+=40;
+  Toggle reseterror = controlP5.addToggle("resetWithError")
+     .setPosition(0,top+posY)
+     .setSize(50,20)
+     .setValue(false)
+     .setMode(ControlP5.SWITCH)
+     ;
+  reseterror.setGroup(ctrl);    
   
   for (int i = 0; i < si; i++) {
     sliders[i].setGroup(ctrl);
