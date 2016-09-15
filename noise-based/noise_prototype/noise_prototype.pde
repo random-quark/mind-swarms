@@ -31,7 +31,6 @@ float randomStepOnReset=0; // when agent is reborn is gets moved slightly - this
 int agentTTL=0; // agent TTL to live in seconds
 PImage imagePalette;
 float minSpeed = 3, maxSpeed = 3;
-float separationPercentage = 0.;
 boolean usePalette = false, showPalette, resetWithError, showLive = true;
 boolean diminishingAlpha = false;
 float alphaDecrement = 0.01;

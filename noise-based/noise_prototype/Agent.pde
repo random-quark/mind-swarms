@@ -25,20 +25,13 @@ class Agent {
   }
 
   void update() {
-    float modifiedNoiseScale = noiseScale;
-
     if (agentTTL>0) {
-      float remainderTTL = agentTTL - ((millis() - startMillis) % agentTTL);
-      remainderPercent = remainderTTL / agentTTL;
-      if (remainderPercent < separationPercentage) {
-        modifiedNoiseScale = noiseScale * remainderPercent;
-      }
       if (((millis()-startMillis)) > agentTTL) {
         resetAgent();
       }
     }
 
-    float noiseVal = noise(p.x/modifiedNoiseScale + randomSeed, p.y/modifiedNoiseScale  + randomSeed, noiseZ  + randomSeed);
+    float noiseVal = noise(p.x/noiseScale + randomSeed, p.y/noiseScale  + randomSeed, noiseZ  + randomSeed);
     angle = map(noiseVal, 0, 1, -1, 1);
     angle = angle * radians(maxAngleSpan) * noiseStrength;
 
