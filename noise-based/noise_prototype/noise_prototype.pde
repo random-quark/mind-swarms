@@ -18,40 +18,45 @@ import toxi.color.theory.*;
 import toxi.util.datatypes.*;
 import java.util.Iterator;
 
-// ------ agents ------
 Palette palette;
-Agent[] agents;
-int agentsCount = 10000;
-int maxAgents = 10000;
-float noiseScale = 150, interAgentNoiseZRange = 0.0, noiseZStep = 0.001;
-int noiseDet = 4;
-float overlayAlpha = 0, agentsAlpha = 5, strokeWidth = 1, maxAngleSpan = 220, noiseStrength = 1;
-float randomSeed; //every time program starts it looks different
-float randomStepOnReset=0; // when agent is reborn is gets moved slightly - this says how much
-int agentTTL=0; // agent TTL to live in seconds
 PImage imagePalette;
-float minSpeed = 3, maxSpeed = 3;
-boolean usePalette = false, showPalette, resetWithError, showLive = true;
-boolean diminishingAlpha = false;
-float alphaDecrement = 0.01;
-int numCircles = 50;
+int numCircles = 0;
+boolean usePalette, showPalette;
+
 PGraphics bg;
 int sizeX = 1200;
 int sizeY = 800;
+boolean showLive = true;
 
-// ------ ControlP5 ------
+Agent[] agents;
+int agentsCount = 10000;
+int maxAgents = 100000;
+float noiseScale = 150, interAgentNoiseZRange = 0.0, noiseZStep = 0.001;
+int noiseDet = 4;
+float overlayAlpha = 0, agentsAlpha = 5, strokeWidth = 1, maxAngleSpan = 220, noiseStrength = 1;
+float resetStep = 15;
+float randomSeed;
+int agentTTL=0;
+float minSpeed = 3, maxSpeed = 3;
+boolean resetWithError = false;
+boolean diminishingAlpha = false;
+float alphaDecrement = 0.01;
+
 ControlP5 controlP5;
 boolean showGUI = false;
 Slider[] sliders;
 
 void setup() {
   bg = createGraphics(sizeX,sizeY,P2D);
+  bg.beginDraw();
+  bg.background(255);
+  bg.endDraw();
   frameRate(20);
   //fullScreen(P2D);
-  size(1500, 800, P2D);
+  size(1200, 840, P2D);
   background(255);
   imagePalette = loadImage("sky4.jpg");
-  palette = new Palette();
+  palette = new Palette(sizeX, sizeY);
   initSwarm();
   setupGUI();
 }
@@ -62,7 +67,6 @@ void draw() {
   bg.noStroke();
   bg.rect(0, 0, width, height);
   pushStyle();
-  //draw agents
   for (int i=0; i<agentsCount; i++) agents[i].update();
   popStyle();
   noiseDetail(noiseDet);
@@ -70,14 +74,8 @@ void draw() {
   
   drawGUI();
   
-  if (showLive) {
-    image(bg, 0, 0);
-  }
-  
-  //println(agents[0].tempAlpha);
-  if (showPalette) {
-    palette.draw();
-  }
+  if (showLive) image(bg, 0, 0);
+  if (showPalette) palette.draw();
 }
 
 void initSwarm() {
@@ -97,7 +95,7 @@ void keyReleased() {
     bg.beginDraw();
     bg.background(255);
     bg.endDraw();
-     palette = new Palette();
+     palette = new Palette(sizeX, sizeY);
     initSwarm();
   }
   
@@ -114,7 +112,10 @@ void keyReleased() {
   if (showGUI) controlP5.getGroup("menu").open();
   else controlP5.getGroup("menu").close();
 
-  if (key=='s' || key=='S') bg.save(timestamp()+".png");
+  if (key=='s' || key=='S') {
+    bg.save(timestamp()+".png");
+    saveFrame(timestamp()+"-settings.png");
+  }
   if (key == DELETE || key == BACKSPACE) background(255);
 }
 

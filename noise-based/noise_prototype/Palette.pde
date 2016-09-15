@@ -57,7 +57,7 @@ class Palette {
     }
   }
     
-  Palette() {
+  Palette(int width, int height) {
     palette = new color[width][height];
     ColorGradient gradient = new ColorGradient();
     

@@ -61,8 +61,8 @@ class Agent {
   void resetAgent() {
     startMillis = millis();
     if (resetWithError) {
-      p.x = pOld.x = pOriginal.x + (int)random(10)-5;
-      p.y = pOld.y = pOriginal.y + (int)random(10)-5;      
+      p.x = pOld.x = constrain(pOriginal.x + (int)random(resetStep*2)-resetStep, 0, width);
+      p.y = pOld.y = constrain(pOriginal.y + (int)random(resetStep*2)-resetStep, 0, height);      
     } else {
       p.x = pOld.x = (int)random(width);
       p.y = pOld.y = (int)random(height);
@@ -81,8 +81,8 @@ class Agent {
       int y = (int)constrain(p.y/height*imagePalette.height, 0, imagePalette.height);
       c = imagePalette.get(x, y);
     }
-    colorMode(HSB, 1);
-    agentColor = color(234./360., saturation(c)*1.5, brightness(c)*1.4, tempAlpha/255.);
-    //agentColor = color(red(c), green(c), blue(c), tempAlpha);
+    //colorMode(HSB, 1);
+    //agentColor = color(358./360., saturation(c)*1.5, brightness(c)*1.4, tempAlpha/255.);
+    agentColor = color(red(c), green(c), blue(c), alpha);
   }
 }

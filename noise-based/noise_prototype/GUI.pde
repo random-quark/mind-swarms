@@ -42,7 +42,7 @@ void setupGUI(){
   posY+=20;
   sliders[si++] = controlP5.addSlider("noiseZStep",0,0.01,left,posY,len,15);
   posY += 20;
-  sliders[si++] = controlP5.addSlider("noiseStrength",1,5,left,posY,len,15);
+  sliders[si++] = controlP5.addSlider("noiseStrength",0,1,left,posY,len,15);
   
   posY += 30;
   sliders[si++] = controlP5.addSlider("agentsAlpha",0,255,left,posY,len,15);
@@ -70,7 +70,7 @@ void setupGUI(){
   Toggle usePalette = controlP5.addToggle("usePalette")
      .setPosition(0,posY)
      .setSize(50,20)
-     .setValue(false)
+     .setValue(true)
      .setMode(ControlP5.SWITCH)
      ;
   usePalette.setGroup(ctrl);  
