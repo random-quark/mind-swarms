@@ -88,7 +88,16 @@ void setupGUI(){
      .setValue(false)
      .setMode(ControlP5.SWITCH)
      ;
-  reseterror.setGroup(ctrl);    
+  reseterror.setGroup(ctrl);   
+  
+  posY+=40;
+  Toggle showLive = controlP5.addToggle("showLive")
+     .setPosition(0,top+posY)
+     .setSize(50,20)
+     .setValue(true)
+     .setMode(ControlP5.SWITCH)
+     ;
+  showLive.setGroup(ctrl);     
   
   for (int i = 0; i < si; i++) {
     sliders[i].setGroup(ctrl);

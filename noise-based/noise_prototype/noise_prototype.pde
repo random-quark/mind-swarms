@@ -25,20 +25,20 @@ int agentsCount = 100000;
 int maxAgents = 100000;
 float noiseScale = 150, interAgentNoiseZRange = 0.0, noiseZStep = 0.001;
 int noiseDet = 4;
-float overlayAlpha = 0, agentsAlpha = 20, strokeWidth = 1, maxAngleSpan = 220;
+float overlayAlpha = 0, agentsAlpha = 5, strokeWidth = 1, maxAngleSpan = 220;
 float randomSeed; //every time program starts it looks different
 float randomStepOnReset=0; // when agent is reborn is gets moved slightly - this says how much
 int agentTTL=0; // agent TTL to live in seconds
 PImage imagePalette;
 float minSpeed = 3, maxSpeed = 3;
 float separationPercentage = 0.;
-boolean usePalette = false, showPalette, resetWithError;
+boolean usePalette = false, showPalette, resetWithError, showLive = true;
 boolean diminishingAlpha = false;
 float alphaDecrement = 0.01;
 int numCircles = 50;
 PGraphics bg;
-int sizeX = 7500;
-int sizeY = 10000;
+int sizeX = 1200;
+int sizeY = 800;
 
 // ------ ControlP5 ------
 ControlP5 controlP5;
@@ -70,6 +70,10 @@ void draw() {
   bg.endDraw();
   
   drawGUI();
+  
+  if (showLive) {
+    image(bg, 0, 0);
+  }
   
   //println(agents[0].tempAlpha);
   if (showPalette) {
