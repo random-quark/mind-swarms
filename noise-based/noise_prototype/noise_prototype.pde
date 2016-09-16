@@ -20,13 +20,13 @@ import java.util.Iterator;
 
 Palette palette;
 PImage imagePalette;
-int numCircles = 0;
+int numCircles = 1;
 boolean usePalette, showPalette;
 
 PGraphics bg;
-int sizeX = 1200;
+int sizeX = 1000;
 int sizeY = 800;
-boolean showLive = true;
+boolean showLive;
 
 Agent[] agents;
 int agentsCount = 10000;
@@ -38,12 +38,12 @@ float resetStep = 15;
 float randomSeed;
 int agentTTL=0;
 float minSpeed = 3, maxSpeed = 3;
-boolean resetWithError = false;
-boolean diminishingAlpha = false;
+boolean resetWithError;
+boolean diminishingAlpha;
 float alphaDecrement = 0.01;
 
 ControlP5 controlP5;
-boolean showGUI = false;
+boolean showGUI;
 Slider[] sliders;
 
 void setup() {
@@ -75,7 +75,12 @@ void draw() {
   drawGUI();
   
   if (showLive) image(bg, 0, 0);
-  if (showPalette) palette.draw();
+  if (showPalette) {
+    pushMatrix();
+    translate(sizeX, 0);
+    palette.draw();
+    popMatrix();
+  }
 }
 
 void initSwarm() {

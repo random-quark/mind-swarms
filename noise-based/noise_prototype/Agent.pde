@@ -81,8 +81,7 @@ class Agent {
       int y = (int)constrain(p.y/height*imagePalette.height, 0, imagePalette.height);
       c = imagePalette.get(x, y);
     }
-    //colorMode(HSB, 1);
-    //agentColor = color(358./360., saturation(c)*1.5, brightness(c)*1.4, tempAlpha/255.);
+    colorMode(RGB);
     agentColor = color(red(c), green(c), blue(c), alpha);
   }
 }

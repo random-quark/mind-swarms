@@ -7,10 +7,11 @@ import toxi.util.datatypes.*;
 import java.util.Iterator;
 
 Palette p;
+int numCircles = 0;
 
 void setup() {
   size(500,500);
-  p = new Palette();
+  p = new Palette(500,500);
   p.draw();
 }
 
@@ -18,6 +19,7 @@ void draw() {
 }
 
 void keyPressed() {
-  p = new Palette();
+  background(255);
+  p = new Palette(500,500);
   p.draw();
 }
