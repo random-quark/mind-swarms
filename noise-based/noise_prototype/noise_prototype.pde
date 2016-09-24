@@ -24,16 +24,16 @@ int numCircles = 1;
 boolean usePalette, showPalette;
 
 PGraphics bg;
-int sizeX = 1000;
+int sizeX = 1300;
 int sizeY = 800;
 boolean showLive;
 
 Agent[] agents;
-int agentsCount = 10000;
+int agentsCount = 30000;
 int maxAgents = 100000;
 float noiseScale = 150, interAgentNoiseZRange = 0.0, noiseZStep = 0.001;
 int noiseDet = 4;
-float overlayAlpha = 0, agentsAlpha = 5, strokeWidth = 1, maxAngleSpan = 220, noiseStrength = 1;
+float overlayAlpha = 0, agentsAlpha = 20, strokeWidth = 1, maxAngleSpan = 220, noiseStrength = 1;
 float resetStep = 15;
 float randomSeed;
 int agentTTL=0;
@@ -41,6 +41,7 @@ float minSpeed = 3, maxSpeed = 3;
 boolean resetWithError;
 boolean diminishingAlpha;
 float alphaDecrement = 0.01;
+float randomInitialDirection = 0;//random(0);
 
 ControlP5 controlP5;
 boolean showGUI;
@@ -53,9 +54,9 @@ void setup() {
   bg.endDraw();
   frameRate(20);
   //fullScreen(P2D);
-  size(1200, 840, P2D);
+  size(1300, 800, P2D);
   background(255);
-  imagePalette = loadImage("sky4.jpg");
+  imagePalette = loadImage("xPeriod_1.0_yPeriod_1.0_turbPower_2.0_turbSize_133.0_w_500_h_500.png");
   palette = new Palette(sizeX, sizeY);
   initSwarm();
   setupGUI();
