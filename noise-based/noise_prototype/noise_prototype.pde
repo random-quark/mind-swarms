@@ -17,6 +17,8 @@ import toxi.color.*;
 import toxi.color.theory.*;
 import toxi.util.datatypes.*;
 import java.util.Iterator;
+import java.util.Map;
+import oscP5.*;
 
 Palette palette;
 PImage imagePalette;
@@ -42,11 +44,15 @@ boolean resetWithError;
 boolean diminishingAlpha;
 float alphaDecrement = 0.01;
 
+HashMap<String, Float> emotions = new HashMap<String, Float>();
+Emotions emotionReceiver; 
+
 ControlP5 controlP5;
 boolean showGUI;
 Slider[] sliders;
 
 void setup() {
+  emotionReceiver = new Emotions();
   bg = createGraphics(sizeX,sizeY,P2D);
   bg.beginDraw();
   bg.background(255);
