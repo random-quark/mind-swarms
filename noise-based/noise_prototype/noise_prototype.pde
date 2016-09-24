@@ -21,10 +21,10 @@ import java.util.Iterator;
 Palette palette;
 PImage imagePalette;
 int numCircles = 1;
-boolean usePalette, showPalette;
+boolean usePalette = true, showPalette = true;
 
 PGraphics bg;
-int sizeX = 1000;
+int sizeX = 800;
 int sizeY = 800;
 boolean showLive;
 
@@ -108,8 +108,6 @@ void keyReleased() {
     background(255);
     image(bg, 0, 0);
   }
-  
-  if (key=='P' || key=='p') palette.draw();
   
   if (key == 't' || key == 't') {
     for (int i=0; i<agents.length; i++) agents[i].resetAgent();

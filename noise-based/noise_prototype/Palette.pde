@@ -17,7 +17,6 @@ class Palette {
   color[] colors = { anger, joy, calm, disgust, sadness, fear, surprise, love };
   color[][] palette;
   float[][] paletteBri;
-  float[][] paletteSat;
   color[][] squares;
   int cols, rows;
   int resolution;
@@ -30,7 +29,6 @@ class Palette {
   int width, height;
 
   float briRand = random(1000);
-  float satRand = random(1000);
 
   TColor c;
   ColorList colorlist;
@@ -68,7 +66,6 @@ class Palette {
     width = _width;
     height = _height;
     palette = new color[width][height];
-    paletteSat = new float[width][height];
     paletteBri = new float[width][height];
     ColorGradient gradient = new ColorGradient();
 
@@ -90,25 +87,24 @@ class Palette {
       for (int y=0; y<height; y++) {
         pushStyle();
         colorMode(HSB);
-        float noise = noise(x/noiseScale, y/noiseScale);
-        float satNoise = noise(x/noiseScale, y/noiseScale, satRand);
+        //float noise = noise(x/noiseScale, y/noiseScale);
         float briNoise = noise(x/noiseScale, y/noiseScale, briRand);
 
-        float brightness = brightness(crgb);
-        if (blend == "burn") {
-          noise *= 1.5;
-          noise = constrain(noise, 0, 1);
-          brightness = 1 - (1 - noise) / brightness(crgb);
-        } else if (blend == "lighten") {
-          brightness = max(noise, brightness(crgb));
-        } else if (blend == "add") {
-          brightness = min(255, (noise + brightness(crgb)));
-        }
-        color chsb = color(hue(crgb), saturation(crgb), brightness);
+        //float brightness = brightness(crgb);
+        //if (blend == "burn") {
+        //  noise *= 1.5;
+        //  noise = constrain(noise, 0, 1);
+        //  brightness = 1 - (1 - noise) / brightness(crgb);
+        //} else if (blend == "lighten") {
+        //  brightness = max(noise, brightness(crgb));
+        //} else if (blend == "add") {
+        //  brightness = min(255, (noise + brightness(crgb)));
+        //}
+        //color chsb = color(hue(crgb), saturation(crgb), brightness);
 
-        colorMode(RGB);
-        palette[x][y] = lerpColor(color(255), crgb, noise);
-        paletteSat[x][y] = noise(x/noiseScale, y/noiseScale, satNoise);
+        
+        //palette[x][y] = lerpColor(color(255), crgb, noise);
+        palette[x][y] = color(hue(crgb),brightness(crgb),saturation(crgb));
         paletteBri[x][y] = noise(x/noiseScale, y/noiseScale, briNoise);
 
         popStyle();
@@ -122,9 +118,9 @@ class Palette {
   void generateColorList() {
     color[] restrictedPalette = generateRestrictedColors(1);
     color cp = restrictedPalette[0];
-    c = TColor.newHSV(random(360), 100, 100);
+    c = TColor.newHSV(hue(cp)/360., saturation(cp)/100., brightness(cp)/100.);
     colorlist = ColorList.createUsingStrategy(ColorTheoryRegistry.ANALOGOUS, c);
-    colorlist = new ColorRange(colorlist).addBrightnessRange(0, 1).getColors(null, 10, 1);
+    colorlist = new ColorRange(colorlist).addBrightnessRange(0, 1).getColors(null, 1000, 1);
     colorlist.sortByDistance(false);
   }
 
@@ -132,7 +128,7 @@ class Palette {
     color c = palette[(int) location.x][(int) location.y];
     float h = hue(c);
     colorMode(HSB);
-    return color(h, paletteSat[(int) location.x][(int) location.y]*360, paletteBri[(int) location.x][(int) location.y]*360);
+    return color(h, saturation(c), paletteBri[(int) location.x][(int) location.y]*360);
   }
 
   void draw() {
