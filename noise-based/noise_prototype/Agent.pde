@@ -71,11 +71,11 @@ class Agent {
   }
 
   void setColor() {
-    color c;
+    color c=color(0); //remove 0 when done;
     tempAlpha = agentsAlpha;
     alpha = agentsAlpha;
     if (usePalette) {
-      c = palette.getColor(p);
+      //c = palette.getColor(p);
     } else {
       int x = (int)constrain(p.x/width*imagePalette.width, 0, imagePalette.width);
       int y = (int)constrain(p.y/height*imagePalette.height, 0, imagePalette.height);

@@ -79,7 +79,7 @@ void draw() {
   if (showPalette) {
     pushMatrix();
     translate(sizeX, 0);
-    palette.draw();
+    //palette.draw();
     popMatrix();
   }
 }
@@ -110,7 +110,7 @@ void keyReleased() {
     image(bg, 0, 0);
   }
   
-  if (key=='P' || key=='p') palette.draw();
+  //if (key=='P' || key=='p') palette.draw();
   
   if (key == 't' || key == 't') {
     for (int i=0; i<agents.length; i++) agents[i].resetAgent();
