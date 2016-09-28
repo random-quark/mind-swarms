@@ -75,7 +75,7 @@ class Agent {
     tempAlpha = agentsAlpha;
     alpha = agentsAlpha;
     if (usePalette) {
-      c = colorMixer.getColor(p.x, p.y);
+      c = colorMixer.getColor((int) p.x, (int) p.y);
     } else {
       int x = (int)constrain(p.x/width*imagePalette.width, 0, imagePalette.width);
       int y = (int)constrain(p.y/height*imagePalette.height, 0, imagePalette.height);
