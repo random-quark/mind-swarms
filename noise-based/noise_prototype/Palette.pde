@@ -15,7 +15,7 @@ class Palette {
   Palette(int _width, int _height, color _c) {
     pushStyle();
     c = _c;
-    println(c);
+    println("color hue: " + hue(c));
     palWidth= _width;
     palHeight = _height;
     createMarble();
