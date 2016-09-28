@@ -17,9 +17,8 @@ class Palette {
 
   PGraphics[] palette = new PGraphics[2];
   color[] mylist = new color[2];
-  int f=0;
+  mylist[1] = color(255,0,0);
   
-  mylist[0] = color(100,255,35);
   //colors[1] = sadness;
 
   Palette(int _width, int _height) {

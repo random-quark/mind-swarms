@@ -17,11 +17,14 @@ import toxi.color.*;
 import toxi.color.theory.*;
 import toxi.util.datatypes.*;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Map;
+import oscP5.*;
 
 Palette palette;
 PImage imagePalette;
 int numCircles = 1;
-boolean usePalette, showPalette;
+boolean usePalette = true, showPalette = true;
 
 PGraphics bg;
 int sizeX = 1300;
@@ -43,11 +46,22 @@ boolean diminishingAlpha;
 float alphaDecrement = 0.01;
 float randomInitialDirection = 0;//random(0);
 
+HashMap<String, Float> emotions = new HashMap<String, Float>();
+Emotions emotionReceiver; 
+
+Data data;
+LinkedList<String> emotionslist = new LinkedList<String>();
+float activationAverage;
+
 ControlP5 controlP5;
 boolean showGUI;
 Slider[] sliders;
 
 void setup() {
+  data = new Data();
+  data.load();
+  emotionReceiver = new Emotions();
+  
   bg = createGraphics(sizeX,sizeY,P2D);
   bg.beginDraw();
   bg.background(255);
@@ -111,7 +125,7 @@ void keyReleased() {
   }
   
   //if (key=='P' || key=='p') palette.draw();
-  
+
   if (key == 't' || key == 't') {
     for (int i=0; i<agents.length; i++) agents[i].resetAgent();
   }
