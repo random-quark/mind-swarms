@@ -14,7 +14,7 @@ class ColorMixer {
   ColorMixer() {
     palettes = new Palette[2];
     palettes[0] = new Palette(sizeX, sizeY, anger);
-    palettes[1] = new Palette(sizeX, sizeY, sadness);
+    palettes[1] = new Palette(sizeX, sizeY, surprise);
 
     palettes[0].marbleVbo.save("marble01.png");
     palettes[1].marbleVbo.save("marble02.png");

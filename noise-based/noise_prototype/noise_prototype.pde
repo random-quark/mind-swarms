@@ -12,10 +12,6 @@
 
 import controlP5.*;
 import java.util.Calendar;
-import toxi.math.*;
-import toxi.color.*;
-import toxi.color.theory.*;
-import toxi.util.datatypes.*;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;

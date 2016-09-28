@@ -7,7 +7,6 @@ class Palette {
   float turbSize = 133;  // noise zoom in factor
   color c;
   PGraphics marbleVbo, huesVbo;
-  ColorList colorlist;
   float hueOffset = random(10000);
   float hueRange = 0.1;
   float noiseStep = 0.005;
@@ -58,7 +57,7 @@ class Palette {
       for (int y=0; y<palHeight; y++) {
         float xyValue = x * xPeriod / palWidth + y * yPeriod / palHeight + turbPower * noise(x/turbSize, y/turbSize);
         float sineValue = abs(sin(xyValue * 3.14159));
-        color tempColor = color(0, 1-sineValue, map(sineValue, 0, 1, .5, 1));
+        color tempColor = color(0, 1-sineValue, map(sineValue, 0, 1, .8, 1));
         marbleVbo.stroke(tempColor);
         marbleVbo.point(x, y);
       }
