@@ -70,7 +70,7 @@ void setupGUI() {
   Toggle usePalette = controlP5.addToggle("usePalette")
     .setPosition(0, posY)
     .setSize(50, 20)
-    .setValue(false)
+    .setValue(true)
     .setMode(ControlP5.SWITCH)
     ;
   usePalette.setGroup(ctrl);  

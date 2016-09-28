@@ -21,7 +21,8 @@ import java.util.LinkedList;
 import java.util.Map;
 import oscP5.*;
 
-Palette palette;
+
+ColorMixer colorMixer;
 PImage imagePalette;
 int numCircles = 1;
 boolean usePalette = true, showPalette = true;
@@ -62,7 +63,9 @@ void setup() {
   data.load();
   emotionReceiver = new Emotions();
   
-  bg = createGraphics(sizeX,sizeY,P2D);
+  colorMixer = new ColorMixer();
+
+  bg = createGraphics(sizeX, sizeY, P2D);
   bg.beginDraw();
   bg.background(255);
   bg.endDraw();
@@ -71,7 +74,7 @@ void setup() {
   size(1300, 800, P2D);
   background(255);
   imagePalette = loadImage("xPeriod_1.0_yPeriod_1.0_turbPower_2.0_turbSize_133.0_w_500_h_500.png");
-  palette = new Palette(sizeX, sizeY);
+
   initSwarm();
   setupGUI();
 }
@@ -86,9 +89,9 @@ void draw() {
   popStyle();
   noiseDetail(noiseDet);
   bg.endDraw();
-  
+
   drawGUI();
-  
+
   if (showLive) image(bg, 0, 0);
   if (showPalette) {
     pushMatrix();
@@ -115,16 +118,22 @@ void keyReleased() {
     bg.beginDraw();
     bg.background(255);
     bg.endDraw();
-     palette = new Palette(sizeX, sizeY);
+    //palettes[0] = new Palette(sizeX, sizeY, fear);
+    //palettes[1] = new Palette(sizeX, sizeY, joy);
     initSwarm();
   }
-  
+
   if (key=='f' || key=='F') {
     background(255);
     image(bg, 0, 0);
   }
-  
-  //if (key=='P' || key=='p') palette.draw();
+
+  if (key=='P' || key=='p') {
+    colorMixer.palettes[0].marbleVbo.save("marble01.png");
+    colorMixer.palettes[1].marbleVbo.save("marble02.png");
+    colorMixer.palettes[0].huesVbo.save("hues01.png");
+    colorMixer.palettes[1].huesVbo.save("hues02.png");
+  }
 
   if (key == 't' || key == 't') {
     for (int i=0; i<agents.length; i++) agents[i].resetAgent();

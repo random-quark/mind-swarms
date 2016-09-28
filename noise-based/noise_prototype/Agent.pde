@@ -75,13 +75,15 @@ class Agent {
     tempAlpha = agentsAlpha;
     alpha = agentsAlpha;
     if (usePalette) {
-      //c = palette.getColor(p);
+      int x = (int)constrain(p.x/width*imagePalette.width, 0, imagePalette.width);
+      int y = (int)constrain(p.y/height*imagePalette.height, 0, imagePalette.height);
+      c = colorMixer.getColor(x, y);
     } else {
       int x = (int)constrain(p.x/width*imagePalette.width, 0, imagePalette.width);
       int y = (int)constrain(p.y/height*imagePalette.height, 0, imagePalette.height);
       c = imagePalette.get(x, y);
     }
-    colorMode(RGB);
+    colorMode(RGB,255);
     agentColor = color(red(c), green(c), blue(c), alpha);
   }
 }
