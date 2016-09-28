@@ -13,6 +13,7 @@ class Palette {
   float noiseStep = 0.005;
 
   Palette(int _width, int _height, color _c) {
+    noiseSeed((int)random(1000));
     pushStyle();
     c = _c;
     println("color hue: " + hue(c));
@@ -37,7 +38,7 @@ class Palette {
     huesVbo.beginDraw();
     huesVbo.colorMode(HSB, 1);
     for (int x=0; x<palWidth; x++) {
-      float hue = hue(c) + map(noise(hueOffset), 0, 1, -hueRange, hueRange);
+      float hue = huesVbo.hue(c) + map(noise(hueOffset), 0, 1, -hueRange, hueRange);
       if (hue<0) hue+=1;
       huesVbo.stroke(hue, 1, 1);
       huesVbo.line(x, 0, x, palHeight);
@@ -47,57 +48,18 @@ class Palette {
     huesVbo.loadPixels();
   }
 
-  void createToxiHues() {
-    generateColorList();
-    ColorGradient gradient = new ColorGradient();
-    huesVbo = createGraphics(palWidth, 200, P2D);
-    huesVbo.beginDraw();
-
-    huesVbo.colorMode(RGB, 255);
-
-    int pos = 0;
-    for (Iterator i = colorlist.iterator(); i.hasNext(); ) {
-      TColor c = (TColor) i.next();
-      float position = map(pos, 0, colorlist.size()-1, 0, palWidth);
-      gradient.addColorAt(position, c);
-      pos++;
-    }
-
-    ColorList list = gradient.calcGradient(0, palWidth);
-    println(list.size());
-    int counter = 0;
-    for (Iterator i=list.iterator(); i.hasNext(); ) {
-      TColor c = (TColor)i.next();
-      color crgb = c.toARGB();
-      huesVbo.stroke(crgb);
-      for (int h=0; h<100; h++) {
-        huesVbo.point(counter, h);
-      }
-      counter++;
-    }
-    huesVbo.endDraw();
-    huesVbo.loadPixels();
-  }
-
-  void generateColorList() {    
-    TColor cp = TColor.newHSV(hue(c), saturation(c), brightness(c));
-    colorlist = ColorList.createUsingStrategy(ColorTheoryRegistry.ANALOGOUS, cp);
-    colorlist = new ColorRange(colorlist).addBrightnessRange(0, 1).getColors(null, 50, 1);
-    colorlist.sortByDistance(false);
-  }
-
   void createMarble() {
     marbleVbo = createGraphics(palWidth, palHeight, P2D);
     marbleVbo.beginDraw();
     marbleVbo.background(255);
-    colorMode(HSB, 1);
-    float hue = hue(c);
+    colorMode(HSB, 1);        // FIX ME!!! THIS SHOULD NOT BE HERE!!!!
+    //color tempColor;
     for (int x=0; x<palWidth; x++) {
       for (int y=0; y<palHeight; y++) {
         float xyValue = x * xPeriod / palWidth + y * yPeriod / palHeight + turbPower * noise(x/turbSize, y/turbSize);
         float sineValue = abs(sin(xyValue * 3.14159));
-        c = color(0, 1-sineValue, map(sineValue, 0, 1, .5, 1));
-        marbleVbo.stroke(c);
+        color tempColor = color(0, 1-sineValue, map(sineValue, 0, 1, .5, 1));
+        marbleVbo.stroke(tempColor);
         marbleVbo.point(x, y);
       }
     }

@@ -62,7 +62,7 @@ void setup() {
   data = new Data();
   data.load();
   emotionReceiver = new Emotions();
-  
+
   colorMixer = new ColorMixer();
 
   bg = createGraphics(sizeX, sizeY, P2D);
@@ -126,13 +126,6 @@ void keyReleased() {
   if (key=='f' || key=='F') {
     background(255);
     image(bg, 0, 0);
-  }
-
-  if (key=='P' || key=='p') {
-    colorMixer.palettes[0].marbleVbo.save("marble01.png");
-    colorMixer.palettes[1].marbleVbo.save("marble02.png");
-    colorMixer.palettes[0].huesVbo.save("hues01.png");
-    colorMixer.palettes[1].huesVbo.save("hues02.png");
   }
 
   if (key == 't' || key == 't') {
