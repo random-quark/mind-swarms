@@ -13,8 +13,8 @@ class ColorMixer {
 
   ColorMixer() {
     palettes = new Palette[2];
-    palettes[0] = new Palette(sizeX, sizeY, anger);
-    palettes[1] = new Palette(sizeX, sizeY, surprise);
+    palettes[0] = new Palette(sizeX/scalingFactor, sizeY/scalingFactor, anger);
+    palettes[1] = new Palette(sizeX/scalingFactor, sizeY/scalingFactor, surprise);
 
     palettes[0].marbleVbo.save("marble01.png");
     palettes[1].marbleVbo.save("marble02.png");
@@ -23,9 +23,8 @@ class ColorMixer {
   }
 
   color getColor(int x, int y) {
-    color c2 = palettes[0].getColor(x, y);
-    color c1 = palettes[1].getColor(x, y);
-    color c = blendColor(c1, c2, DARKEST);
+    color c2 = palettes[0].getColor(x/scalingFactor, y/scalingFactor);   color c1 = palettes[1].getColor(x/scalingFactor, y/scalingFactor);
+  color c = blendColor(c1, c2, DARKEST);
     return c;
   }
 }

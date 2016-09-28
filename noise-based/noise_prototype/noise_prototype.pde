@@ -24,8 +24,9 @@ int numCircles = 1;
 boolean usePalette = true, showPalette = true;
 
 PGraphics bg;
-int sizeX = 1300;
-int sizeY = 800;
+int scalingFactor = 1;
+int sizeX = 1300*scalingFactor;
+int sizeY = 800*scalingFactor;
 boolean showLive;
 
 Agent[] agents;
@@ -88,7 +89,7 @@ void draw() {
 
   drawGUI();
 
-  if (showLive) image(bg, 0, 0);
+  if (showLive && frameCount%30==0) image(bg, 0, 0, width, height);
   if (showPalette) {
     pushMatrix();
     translate(sizeX, 0);
