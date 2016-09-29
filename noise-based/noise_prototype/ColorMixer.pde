@@ -8,7 +8,7 @@ class ColorMixer {
   color surprise = #824f93;
   color love = #e8686b;
   color[] colorList = {anger, joy, calm, disgust, sadness, fear, surprise, love};
-
+  PGraphics mixedVbo;
   Palette[] palettes;
 
   ColorMixer(LinkedList<String> emotionslist) {
@@ -22,44 +22,52 @@ class ColorMixer {
     emotionscolors.put("surprise", #824f93);
     emotionscolors.put("love", #e8686b);
 
+    mixedVbo = createGraphics(sizeX, sizeY, P2D);
+
     color c1 = color((int)emotionscolors.get(emotionslist.get(0)));
     color c2 = color((int)emotionscolors.get(emotionslist.get(1)));
-    
+
     println(emotionslist.get(0), emotionslist.get(1));
-    
+
     palettes = new Palette[2];
     palettes[0] = new Palette(sizeX/scalingFactor, sizeY/scalingFactor, c1);
     palettes[1] = new Palette(sizeX/scalingFactor, sizeY/scalingFactor, c2);
+
+    createMixedPalette();
+
+    mixedVbo.loadPixels();
 
     palettes[0].marbleVbo.save("marble01.png");
     palettes[1].marbleVbo.save("marble02.png");
     palettes[0].huesVbo.save("hues01.png");
     palettes[1].huesVbo.save("hues02.png");
-
-    saveMixedPalette();
+    mixedVbo.save("mixedVbo.png");
   }
 
   color getColor(int x, int y) {
-    color c1 = palettes[1].getColor(x/scalingFactor, y/scalingFactor);
-    color c2 = palettes[0].getColor(x/scalingFactor, y/scalingFactor); 
-    color c = blendColor(c1, c2, DARKEST); //MULTIPLY
+    color c = mixedVbo.pixels[y * mixedVbo.width + x];
     return c;
   }
 
-  void saveMixedPalette() {
-    PGraphics mixedVbo = createGraphics(sizeX, sizeY, P2D);
+  void createMixedPalette() {
     color c1, c2, c;
     mixedVbo.beginDraw();
     for (int x=0; x<sizeX; x++) {
       for (int y=0; y<sizeY; y++) {
         c1 = palettes[0].getColor(x, y);
         c2 = palettes[1].getColor(x, y);
-        c = blendColor(c1, c2, DARKEST);
+        c = mixColors(c1, c2);
+        //c = blendColor(c1, c2, DARKEST);
         mixedVbo.stroke(c);
         mixedVbo.point(x, y);
       }
     }
     mixedVbo.endDraw();
-    mixedVbo.save("mixedVbo.png");
+  }
+
+  color mixColors(color c1, color c2) {
+    //if (brightness(c1)<brightness(c2)) return c1;
+    //return c2;
+    return blendColor(c1, c2, DARKEST);
   }
 }
