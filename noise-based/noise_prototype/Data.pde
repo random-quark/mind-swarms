@@ -12,4 +12,8 @@ class Data {
     println(activationAverage);
     println(emotionslist);
   }
+  
+  void setNoiseScale() {
+    noiseScale = map(activationAverage, 0, 1, noiseScaleMin, noiseScaleMax);
+  }
 }
