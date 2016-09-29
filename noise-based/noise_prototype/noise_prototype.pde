@@ -56,6 +56,8 @@ boolean showGUI;
 Slider[] sliders;
 
 void setup() {
+  randomSeed(0);
+  noiseSeed(0);
   data = new Data();
   data.load();
   emotionReceiver = new Emotions();
@@ -89,7 +91,8 @@ void draw() {
 
   drawGUI();
 
-  if (showLive && frameCount%30==0) image(bg, 0, 0, width, height);
+  //if (showLive && frameCount%30==0) image(bg, 0, 0, width, height);
+  image(bg, 0, 0, width, height);
   if (showPalette) {
     pushMatrix();
     translate(sizeX, 0);
