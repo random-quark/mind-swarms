@@ -14,6 +14,6 @@ class Data {
   }
   
   void setNoiseScale() {
-    noiseScale = map(activationAverage, 0, 1, noiseScaleMin, noiseScaleMax);
+    noiseScale = map(activationAverage, 0, 1, noiseScaleMax, noiseScaleMin);
   }
 }
