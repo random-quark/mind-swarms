@@ -14,9 +14,7 @@ import controlP5.*;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Map;
-import oscP5.*;
-
+import java.util.*;
 
 ColorMixer colorMixer;
 PImage imagePalette;
@@ -43,13 +41,22 @@ boolean resetWithError;
 boolean diminishingAlpha;
 float alphaDecrement = 0.01;
 float randomInitialDirection = 0;//random(0);
-
-HashMap<String, Float> emotions = new HashMap<String, Float>();
-Emotions emotionReceiver; 
+float noiseScaleMin = 150, noiseScaleMax = 250;
 
 Data data;
 LinkedList<String> emotionslist = new LinkedList<String>();
 float activationAverage;
+
+color anger = #F5956E;
+color joy = #fdec61;
+color calm = #ffffff;
+color disgust = #b8d183;
+color sadness = #78c7d6;
+color fear = #3e78ae;
+color surprise = #824f93;
+color love = #e8686b;
+
+Map emotionscolors;
 
 ControlP5 controlP5;
 boolean showGUI;
@@ -60,9 +67,9 @@ void setup() {
   noiseSeed(0);
   data = new Data();
   data.load();
-  emotionReceiver = new Emotions();
-
-  colorMixer = new ColorMixer();
+  data.setNoiseScale();
+  
+  colorMixer = new ColorMixer(emotionslist);
 
   bg = createGraphics(sizeX, sizeY, P2D);
   bg.beginDraw();
