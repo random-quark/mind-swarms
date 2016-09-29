@@ -1,5 +1,7 @@
 class Palette {
   int palWidth, palHeight;
+  
+  int scaleFactor = 4;
 
   float xPeriod=1.;     // how many lines on the X axis
   float yPeriod = 1.;   // how many lins on the Y axis
@@ -8,25 +10,29 @@ class Palette {
   color c;
   PGraphics marbleVbo, huesVbo;
   float hueOffset = random(10000);
-  float hueRange = 0.1;
+  float hueRange = 0.1s;
   float noiseStep = 0.005;
 
   Palette(int _width, int _height, color _c) {
     noiseSeed((int)random(1000));
+    noiseDetail(10);
     pushStyle();
     c = _c;
     println("color hue: " + hue(c));
-    palWidth= _width;
-    palHeight = _height;
+    palWidth= _width / scaleFactor;
+    palHeight = _height / scaleFactor;
     createMarble();
     //createToxiHues();
     createHues();
   }
 
-  color getColor(int x, int y) {
+  color getColor(int _x, int _y) {
     colorMode(HSB, 1);
+    int x = _x / scaleFactor;
+    int y = _y / scaleFactor;
     color hue = huesVbo.pixels[y * huesVbo.width + x];
     color marble = marbleVbo.pixels[y * huesVbo.width + x];
+
     return color(hue(hue), saturation(marble), brightness(marble));
     //color c = color(hue(huesVbo.get(x,y)), saturation(marbleVbo.get(x,y)), brightness(marbleVbo.get(x,y)));
     //return c;

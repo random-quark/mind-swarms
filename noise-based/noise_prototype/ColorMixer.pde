@@ -68,6 +68,8 @@ class ColorMixer {
   color mixColors(color c1, color c2) {
     //if (brightness(c1)<brightness(c2)) return c1;
     //return c2;
-    return blendColor(c1, c2, DARKEST);
+    if (saturation(c1)<saturation(c2)*8) return c2;
+    else return c1;
+    //return blendColor(c1, c2, DARKEST);
   }
 }
