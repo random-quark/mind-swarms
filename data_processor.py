@@ -14,12 +14,14 @@ ranges = {
 }
 
 emotions = []
+emotions_len = 0
 activations = []
 
-with open("data_raw/data.csv", 'r') as data_file:
+with open("data_raw/data.csv", "r") as data_file:
     reader = csv.reader(data_file)
     next(reader, None)
     for line in reader:
+        emotions_len += 1
         valence = float(line[1])
         activation = float(line[2])
         activations.append(activation)
@@ -31,12 +33,14 @@ with open("data_raw/data.csv", 'r') as data_file:
 
 activation_avg = reduce(lambda x, y: x + y, activations) / len(activations)
 
+
 emotion_frequency = Counter(emotions)
 emotions_frequency_list = [(k,v) for k,v in emotion_frequency.iteritems()]
 emotions_list_sorted = sorted(emotions_frequency_list, key=itemgetter(1), reverse=True)
 print emotions_list_sorted
 
-writer = csv.writer(open("data_processed/data.csv", 'w'))
+writer = csv.writer(open("data_processed/data.csv", "w"))
 for e in emotions_list_sorted:
-    writer.writerow([e[0]])
+    percent = float(e[1])/emotions_len
+    writer.writerow([e[0], percent])
 writer.writerow([activation_avg])
