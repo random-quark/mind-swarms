@@ -10,7 +10,7 @@ class Palette {
   color c;
   PGraphics marbleVbo, huesVbo;
   float hueOffset = random(10000);
-  float hueRange = 0.1s;
+  float hueRange = 0.1;
   float noiseStep = 0.005;
 
   Palette(int _width, int _height, color _c) {
