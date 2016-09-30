@@ -52,7 +52,7 @@ class Agent {
       if (tempAlpha<1) {
         resetAgent();
       } else {
-        colorMode(RGB);
+        colorMode(RGB, 255);
         agentColor = color(red(agentColor), green(agentColor), blue(agentColor), tempAlpha);
       }
     }

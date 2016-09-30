@@ -58,7 +58,6 @@ class Palette {
     marbleVbo.beginDraw();
     marbleVbo.background(255);
     colorMode(HSB, 1);        // FIX ME!!! THIS SHOULD NOT BE HERE!!!!
-    //color tempColor;
     for (int x=0; x<palWidth; x++) {
       for (int y=0; y<palHeight; y++) {
         float xyValue = x * xPeriod / palWidth + y * yPeriod / palHeight + turbPower * noise(x/turbSize, y/turbSize);
@@ -70,7 +69,6 @@ class Palette {
     }
     marbleVbo.endDraw();
     marbleVbo.loadPixels();
-    colorMode(RGB, 255);
     popStyle();
   }
 }

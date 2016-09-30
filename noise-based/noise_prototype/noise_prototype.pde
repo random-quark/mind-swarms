@@ -96,10 +96,11 @@ void draw() {
   noiseDetail(noiseDet);
   bg.endDraw();
 
+  background(255);
   drawGUI();
 
-  if (showLive && frameCount%300==0) image(bg, 0, 0, width, height);
-  //image(bg, 0, 0, width, height);
+  //if (showLive && frameCount%300==0) image(bg, 0, 0, width, height);
+  image(bg, 0, 0, width, height);
   if (showPalette) {
     pushMatrix();
     translate(sizeX, 0);
