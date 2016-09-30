@@ -30,8 +30,8 @@ class ColorMixer {
     println(emotionslist.get(0), emotionslist.get(1));
 
     palettes = new Palette[2];
-    palettes[0] = new Palette(sizeX/scalingFactor, sizeY/scalingFactor, c1);
-    palettes[1] = new Palette(sizeX/scalingFactor, sizeY/scalingFactor, c2);
+    palettes[0] = new Palette(sizeX, sizeY, c1);
+    palettes[1] = new Palette(sizeX, sizeY, c2);
 
     createMixedPalette();
 
