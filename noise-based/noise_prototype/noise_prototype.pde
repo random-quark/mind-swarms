@@ -6,11 +6,10 @@ import java.util.*;
 
 ColorMixer colorMixer;
 PImage imagePalette;
-int numCircles = 1;
 boolean usePalette = true, showPalette = true;
 
 PGraphics bg;
-int sizeX = 1200;
+int sizeX = 1300;
 int sizeY = 800;
 boolean showLive;
 
@@ -20,15 +19,18 @@ int maxAgents = 100000;
 float noiseScale = 150, interAgentNoiseZRange = 0.0, noiseZStep = 0.001;
 int noiseDet = 4;
 float overlayAlpha = 0, agentsAlpha = 20, strokeWidth = 1, maxAngleSpan = 220, noiseStrength = 1;
-float resetStep = 15;
 float randomSeed;
 int agentTTL=0;
 float minSpeed = 3, maxSpeed = 3;
 boolean resetWithError;
+float resetStep = 15;
 boolean diminishingAlpha;
 float alphaDecrement = 0.01;
 float randomInitialDirection = random(360);
 float noiseScaleMin = 150, noiseScaleMax = 250;
+float blendFactor = 8;
+int paletteScaleFactor = 4;
+String save_destination = "/home/theodoros/Desktop/samples_directory_mindSwarms";
 
 Data data;
 LinkedList<String> emotionslist = new LinkedList<String>();
@@ -56,7 +58,7 @@ void setup() {
   data = new Data();
   data.load();
   data.setNoiseScale();
-  
+
   colorMixer = new ColorMixer(emotionslist);
 
   bg = createGraphics(sizeX, sizeY, P2D);
@@ -71,6 +73,8 @@ void setup() {
 
   initSwarm();
   setupGUI();
+  
+  save_destination+="_"+timestamp()+"/";
 }
 
 void draw() {
@@ -131,11 +135,31 @@ void keyReleased() {
   else controlP5.getGroup("menu").close();
 
   if (key=='s' || key=='S') {
-    bg.save(timestamp()+".png");
-    saveFrame(timestamp()+"-settings.png");
+    bg.save(save_destination + timestamp()+".png");
+    saveParameters();
+    colorMixer.savePalettes();
   }
 }
 
 String timestamp() {
-  return String.format("%1$ty%1$tm%1$td_%1$tH%1$tM%1$tS", Calendar.getInstance());
+  return String.format("%1$ty%1$tm%1$td_%1$tH%1$tM%1$tS ", Calendar.getInstance());
+}
+
+void saveParameters() {
+  Table table;
+  table = new Table();
+  table.addColumn("name"); 
+  table.addColumn("value");
+
+  String[] parameters={"usePalette " + usePalette, "sizeX " + sizeX, "sizeY " + sizeY, "agentsCount "+agentsCount, "maxAgents "+maxAgents, "noiseScale "+maxAgents, "interAgentNoiseZRange "+interAgentNoiseZRange, 
+    "noiseZStep "+noiseZStep, "noiseDet "+noiseDet, "overlayAlpha "+ overlayAlpha, "agentsAlpha "+agentsAlpha, "strokeWidth "+strokeWidth, "maxAngleSpan "+ maxAngleSpan, "noiseStrength "+ noiseStrength, 
+    "resetStep "+ resetStep, "randomSeed "+randomSeed, "agentTTL " + agentTTL, "minSpeed "+ minSpeed, "maxSpeed "+maxSpeed, "resetWithError "+resetWithError, "diminishingAlpha "+ diminishingAlpha, 
+    "alphaDecrement "+ alphaDecrement, "randomInitialDirection "+ randomInitialDirection, "noiseScaleMin "+noiseScaleMin, "noiseScaleMax "+noiseScaleMax, "blendFactor "+ blendFactor, 
+    "paletteScaleFactor "+ paletteScaleFactor, "emotionslist.get(0) "+ emotionslist.get(0), "emotionslist.get(1)"+emotionslist.get(1), "millis to form: " + millis(), "frameCount to form: " + frameCount};
+  //createOutput("./test/parameters.txt");
+  
+
+  File theDir = new File(save_destination);
+  theDir.mkdir();
+  saveStrings(save_destination+"parameters.txt", parameters);
 }

@@ -1,8 +1,6 @@
 class Palette {
   int palWidth, palHeight;
   
-  int scaleFactor = 4;
-
   float xPeriod=1.;     // how many lines on the X axis
   float yPeriod = 1.;   // how many lins on the Y axis
   float turbPower = 2.0; // how much turbulence
@@ -18,8 +16,8 @@ class Palette {
     noiseDetail(10);
     pushStyle();
     c = _c;
-    palWidth= _width / scaleFactor;
-    palHeight = _height / scaleFactor;
+    palWidth= _width / paletteScaleFactor;
+    palHeight = _height / paletteScaleFactor;
     createMarble();
     createHues();
   }
@@ -27,8 +25,8 @@ class Palette {
   color getColor(int _x, int _y) {
     pushStyle();
     colorMode(HSB, 1);
-    int x = _x / scaleFactor;
-    int y = _y / scaleFactor;
+    int x = _x / paletteScaleFactor;
+    int y = _y / paletteScaleFactor;
     color hue = huesVbo.pixels[y * huesVbo.width + x];
     color marble = marbleVbo.pixels[y * huesVbo.width + x];
     popStyle();

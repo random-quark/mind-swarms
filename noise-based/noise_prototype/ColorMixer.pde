@@ -26,7 +26,7 @@ class ColorMixer {
 
     color c1 = color((int)emotionscolors.get(emotionslist.get(0)));
     color c2 = color((int)emotionscolors.get(emotionslist.get(1)));
-    
+
     println(emotionslist.get(0), emotionslist.get(1));
 
     palettes = new Palette[2];
@@ -36,12 +36,6 @@ class ColorMixer {
     createMixedPalette();
 
     mixedVbo.loadPixels();
-
-    palettes[0].marbleVbo.save("marble01.png");
-    palettes[1].marbleVbo.save("marble02.png");
-    palettes[0].huesVbo.save("hues01.png");
-    palettes[1].huesVbo.save("hues02.png");
-    mixedVbo.save("mixedVbo.png");
   }
 
   color getColor(int x, int y) {
@@ -68,9 +62,19 @@ class ColorMixer {
   }
 
   color mixColors(color c1, color c2) {
-    float weightedC1Sat = saturation(c1)*emotionspercents.get(0);
-    float weightedC2Sat = saturation(c2)*emotionspercents.get(1);
-    if (weightedC1Sat < weightedC2Sat) return c2;
+    //float weightedC1Sat = saturation(c1)*emotionspercents.get(0);
+    //float weightedC2Sat = saturation(c2)*emotionspercents.get(1);
+    //if (weightedC1Sat < weightedC2Sat) return c2;
+    //else return c1;
+    if (saturation(c1)<saturation(c2)*blendFactor) return c2;
     else return c1;
+  }
+
+  void savePalettes() {
+    palettes[0].marbleVbo.save(save_destination+"marble01.png");
+    palettes[1].marbleVbo.save(save_destination+"marble02.png");
+    palettes[0].huesVbo.save(save_destination+"hues01.png");
+    palettes[1].huesVbo.save(save_destination+"hues02.png");
+    mixedVbo.save(save_destination+"mixedVbo.png");
   }
 }

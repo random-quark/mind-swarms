@@ -1,4 +1,4 @@
-float xPeriod=1;     // how many lines on the X axis
+float xPeriod= 1;     // how many lines on the X axis
 float yPeriod = 1;   // how many lins on the Y axis
 float turbPower = 1.5; // how much turbulence
 float turbSize = 150;  // noise zoom in factor

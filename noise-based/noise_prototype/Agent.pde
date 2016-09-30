@@ -3,7 +3,7 @@
 
 class Agent {
   PVector p, pOld, pOriginal;
-  float noiseZ = 0.01;
+  float noiseZ = 0;
   float stepSize, angle;
   float alpha;
   color agentColor;
