@@ -39,11 +39,12 @@ float minSpeed = 3, maxSpeed = 3;
 boolean resetWithError;
 boolean diminishingAlpha;
 float alphaDecrement = 0.01;
-float randomInitialDirection = 0;//random(0);
+float randomInitialDirection = random(360);
 float noiseScaleMin = 150, noiseScaleMax = 250;
 
 Data data;
 LinkedList<String> emotionslist = new LinkedList<String>();
+LinkedList<Float> emotionspercents = new LinkedList<Float>();
 float activationAverage;
 
 color anger = #F5956E;
@@ -97,8 +98,8 @@ void draw() {
 
   drawGUI();
 
-  //if (showLive && frameCount%30==0) image(bg, 0, 0, width, height);
-  image(bg, 0, 0, width, height);
+  if (showLive && frameCount%300==0) image(bg, 0, 0, width, height);
+  //image(bg, 0, 0, width, height);
   if (showPalette) {
     pushMatrix();
     translate(sizeX, 0);

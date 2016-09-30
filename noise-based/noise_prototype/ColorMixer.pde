@@ -26,7 +26,7 @@ class ColorMixer {
 
     color c1 = color((int)emotionscolors.get(emotionslist.get(0)));
     color c2 = color((int)emotionscolors.get(emotionslist.get(1)));
-
+    
     println(emotionslist.get(0), emotionslist.get(1));
 
     palettes = new Palette[2];

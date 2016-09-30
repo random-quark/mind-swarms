@@ -6,11 +6,15 @@ class Data {
   void load() {
     data = loadTable("data.csv", "csv");
     for (TableRow row : data.rows()) {
+      println(row);
       emotionslist.add(row.getString(0));
+      String percentCol = row.getString(1);
+      if (percentCol != null && !percentCol.isEmpty()) {
+        float percent = Float.valueOf(percentCol);
+        emotionspercents.add(percent);
+      }
     }
     activationAverage = Float.valueOf(emotionslist.pollLast());
-    println(activationAverage);
-    println(emotionslist);
   }
   
   void setNoiseScale() {
