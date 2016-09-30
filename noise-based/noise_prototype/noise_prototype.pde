@@ -22,8 +22,8 @@ int numCircles = 1;
 boolean usePalette = true, showPalette = true;
 
 PGraphics bg;
-int sizeX = 4000;
-int sizeY = 4000;
+int sizeX = 1200;
+int sizeY = 800;
 boolean showLive;
 
 Agent[] agents;
