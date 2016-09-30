@@ -8,8 +8,8 @@ float randomXoffset, randomYoffset;
 void setup() {
   noiseSeed(0);
   //size(433, 266);
-  //size(1300, 800);
-  size(500,500);
+  size(1300, 800);
+  //size(500,500);
   noiseSeed(0);
 }
 

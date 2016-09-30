@@ -28,8 +28,9 @@ boolean diminishingAlpha;
 float alphaDecrement = 0.01;
 float randomInitialDirection = random(360);
 float noiseScaleMin = 150, noiseScaleMax = 250;
-float blendFactor = 8;
+float blendFactor = 3;
 int paletteScaleFactor = 4;
+//float minMarbleBrightness = 0.7;
 String save_destination = "/home/theodoros/Desktop/samples_directory_mindSwarms";
 
 Data data;
@@ -46,15 +47,13 @@ color fear = #3e78ae;
 color surprise = #824f93;
 color love = #e8686b;
 
-Map emotionscolors;
-
 ControlP5 controlP5;
 boolean showGUI;
 Slider[] sliders;
 
 void setup() {
-  randomSeed(0);
-  noiseSeed(0);
+  //randomSeed(0);
+  //noiseSeed(0);
   data = new Data();
   data.load();
   data.setNoiseScale();
@@ -154,8 +153,8 @@ void saveParameters() {
   String[] parameters={"usePalette " + usePalette, "sizeX " + sizeX, "sizeY " + sizeY, "agentsCount "+agentsCount, "maxAgents "+maxAgents, "noiseScale "+maxAgents, "interAgentNoiseZRange "+interAgentNoiseZRange, 
     "noiseZStep "+noiseZStep, "noiseDet "+noiseDet, "overlayAlpha "+ overlayAlpha, "agentsAlpha "+agentsAlpha, "strokeWidth "+strokeWidth, "maxAngleSpan "+ maxAngleSpan, "noiseStrength "+ noiseStrength, 
     "resetStep "+ resetStep, "randomSeed "+randomSeed, "agentTTL " + agentTTL, "minSpeed "+ minSpeed, "maxSpeed "+maxSpeed, "resetWithError "+resetWithError, "diminishingAlpha "+ diminishingAlpha, 
-    "alphaDecrement "+ alphaDecrement, "randomInitialDirection "+ randomInitialDirection, "noiseScaleMin "+noiseScaleMin, "noiseScaleMax "+noiseScaleMax, "blendFactor "+ blendFactor, 
-    "paletteScaleFactor "+ paletteScaleFactor, "emotionslist.get(0) "+ emotionslist.get(0), "emotionslist.get(1)"+emotionslist.get(1), "millis to form: " + millis(), "frameCount to form: " + frameCount};
+    "alphaDecrement "+ alphaDecrement, "randomInitialDirection "+ randomInitialDirection, "noiseScaleMin "+noiseScaleMin, "noiseScaleMax "+noiseScaleMax, "blendFactor "+ blendFactor,
+    "paletteScaleFactor "+ paletteScaleFactor, "emotionslist.get(0) "+ emotionslist.get(0), "emotionslist.get(1)"+emotionslist.get(1), "seconds to form: " + millis()/1000, "frameCount to form: " + frameCount};
   //createOutput("./test/parameters.txt");
   
 
