@@ -50,6 +50,8 @@ class ColorMixer {
   }
 
   void createMixedPalette() {
+    pushStyle();
+    colorMode(HSB, 1);
     color c1, c2, c;
     mixedVbo.beginDraw();
     for (int x=0; x<sizeX; x++) {
@@ -57,21 +59,18 @@ class ColorMixer {
         c1 = palettes[0].getColor(x, y);
         c2 = palettes[1].getColor(x, y);
         c = mixColors(c1, c2);
-        //c = blendColor(c1, c2, DARKEST);
         mixedVbo.stroke(c);
         mixedVbo.point(x, y);
       }
     }
     mixedVbo.endDraw();
+    popStyle();
   }
 
   color mixColors(color c1, color c2) {
-    //if (brightness(c1)<brightness(c2)) return c1;
-    //return c2;
     float weightedC1Sat = saturation(c1)*emotionspercents.get(0);
     float weightedC2Sat = saturation(c2)*emotionspercents.get(1);
     if (weightedC1Sat < weightedC2Sat) return c2;
     else return c1;
-    //return blendColor(c1, c2, DARKEST);
   }
 }

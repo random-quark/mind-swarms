@@ -18,24 +18,22 @@ class Palette {
     noiseDetail(10);
     pushStyle();
     c = _c;
-    println("color hue: " + hue(c));
     palWidth= _width / scaleFactor;
     palHeight = _height / scaleFactor;
     createMarble();
-    //createToxiHues();
     createHues();
   }
 
   color getColor(int _x, int _y) {
+    pushStyle();
     colorMode(HSB, 1);
     int x = _x / scaleFactor;
     int y = _y / scaleFactor;
     color hue = huesVbo.pixels[y * huesVbo.width + x];
     color marble = marbleVbo.pixels[y * huesVbo.width + x];
-
+    popStyle();
     return color(hue(hue), saturation(marble), brightness(marble));
-    //color c = color(hue(huesVbo.get(x,y)), saturation(marbleVbo.get(x,y)), brightness(marbleVbo.get(x,y)));
-    //return c;
+    
   }
 
   void createHues() {

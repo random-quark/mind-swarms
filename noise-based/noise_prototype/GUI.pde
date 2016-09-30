@@ -118,13 +118,3 @@ void drawGUI() {
   controlP5.show();
   controlP5.draw();
 }
-
-// called on every change of the gui
-void controlEvent(ControlEvent theEvent) {
-  //println("got a control event from controller with id "+theEvent.getController().getId());
-  // noiseSticking changed -> set new values
-  if (theEvent.isController()) {
-    if (theEvent.getController().getId() == 3) {
-    }
-  }
-}

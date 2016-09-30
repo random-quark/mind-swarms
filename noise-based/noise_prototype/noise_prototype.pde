@@ -1,15 +1,3 @@
-// M_1_5_03_TOOL.pde, Agent.pde, GUI.pde
-/**
- * noise values (noise 3d) are used to animate a bunch of agents.
- *
- * KEYS
- * m                   : toogle menu open/close
- * 1-2                 : switch noise mode
- * space               : new noise seed
- * backspace           : clear screen
- * s                   : save png
- */
-
 import controlP5.*;
 import java.util.Calendar;
 import java.util.Iterator;
@@ -146,7 +134,6 @@ void keyReleased() {
     bg.save(timestamp()+".png");
     saveFrame(timestamp()+"-settings.png");
   }
-  if (key == DELETE || key == BACKSPACE) background(255);
 }
 
 String timestamp() {
