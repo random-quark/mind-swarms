@@ -1,12 +1,12 @@
 class ColorMixer {
-  float[] angerData = new float[] {19, 0.1, 0.8};
+  float[] angerData = new float[] {19, 0.1, 0.8}; // ORANGE
   float[] joyData = new float[] {55, 0.04, 0.9};  //YELLOW
   float[] calmData = new float[] {0, 0.1, 0.8};
   float[] disgustData = new float[] {162, 0.1, 0.8};
   float[] sadnessData = new float[] {190, 0.1, 0.8};
-  float[] fearData = new float[] {210, 0.1, 0.8};
-  float[] surpriseData = new float[] {285, 0.1, 0.65};
-  float[] loveData = new float[] {0, 0.1, 0.8};
+  float[] fearData = new float[] {210, 0.1, 0.8}; // 
+  float[] surpriseData = new float[] {285, 0.1, 0.65}; // PURPLE
+  float[] loveData = new float[] {0, 0.1, 0.8}; // RED
 
   color anger = #F5956E;
   color joy = #fdec61;
@@ -36,32 +36,14 @@ class ColorMixer {
     emotionsData.put("surprise", surpriseData);
     emotionsData.put("love", loveData);
 
-
-    Map<String, float[]> map = new HashMap<String, float[]>();
-    float[] arrayToPut = new float[] {0, 1, 2};
-    map.put("myKey", arrayToPut);
-    float[] what = map.get("myKey");
-    System.out.println(what[0]);
-
-    //emotionscolors = new HashMap<String, Integer>();
-    //emotionscolors.put("anger", #F5956E);
-    //emotionscolors.put("joy", #fdec61);
-    //emotionscolors.put("calm", #ffffff);
-    //emotionscolors.put("disgust", color(147./360., 1, 1));
-    //emotionscolors.put("sadness", #78c7d6);
-    //emotionscolors.put("fear", #3e78ae);
-    //emotionscolors.put("surprise", #824f93);
-    //emotionscolors.put("love", #e8686b);
-    //popStyle();
-
-
-
     mixedVbo = createGraphics(sizeX, sizeY, P2D);
 
     //color c1 = color((int)emotionscolors.get(emotionslist.get(0)));
     //color c2 = color((int)emotionscolors.get(emotionslist.get(1)));
     float[] colorData1 =  emotionsData.get(emotionslist.get(0));
     float[] colorData2 =  emotionsData.get(emotionslist.get(1));
+    globalColorData1 = colorData1;
+    globalColorData2 = colorData2;
 
     println(emotionslist.get(0), emotionslist.get(1));
 
@@ -99,10 +81,6 @@ class ColorMixer {
   }
 
   color mixColors(color c1, color c2) {
-    //float weightedC1Sat = saturation(c1)*emotionspercents.get(0);
-    //float weightedC2Sat = saturation(c2)*emotionspercents.get(1);
-    //if (weightedC1Sat < weightedC2Sat) return c2;
-    //else return c1;
     if (saturation(c1)<saturation(c2)*blendFactor) return c2;
     else return c1;
     //return blendColor(c1,c2,DARKEST);

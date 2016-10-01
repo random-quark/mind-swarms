@@ -26,12 +26,14 @@ boolean resetWithError;
 float resetStep = 15;
 boolean diminishingAlpha;
 float alphaDecrement = 0.01;
-float randomInitialDirection = random(360);
+float randomInitialDirection = 0;//random(360);
 float noiseScaleMin = 150, noiseScaleMax = 250;
-float blendFactor = 3;
+float blendFactor = 9;
 int paletteScaleFactor = 4;
 //float minMarbleBrightness = 0.7;
 String save_destination = "/home/theodoros/Desktop/samples_directory_mindSwarms";
+float[] globalColorData1 = new float[3];
+float[] globalColorData2 = new float[3];
 
 Data data;
 LinkedList<String> emotionslist = new LinkedList<String>();
@@ -154,7 +156,8 @@ void saveParameters() {
     "noiseZStep "+noiseZStep, "noiseDet "+noiseDet, "overlayAlpha "+ overlayAlpha, "agentsAlpha "+agentsAlpha, "strokeWidth "+strokeWidth, "maxAngleSpan "+ maxAngleSpan, "noiseStrength "+ noiseStrength, 
     "resetStep "+ resetStep, "randomSeed "+randomSeed, "agentTTL " + agentTTL, "minSpeed "+ minSpeed, "maxSpeed "+maxSpeed, "resetWithError "+resetWithError, "diminishingAlpha "+ diminishingAlpha, 
     "alphaDecrement "+ alphaDecrement, "randomInitialDirection "+ randomInitialDirection, "noiseScaleMin "+noiseScaleMin, "noiseScaleMax "+noiseScaleMax, "blendFactor "+ blendFactor,
-    "paletteScaleFactor "+ paletteScaleFactor, "emotionslist.get(0) "+ emotionslist.get(0), "emotionslist.get(1)"+emotionslist.get(1), "seconds to form: " + millis()/1000, "frameCount to form: " + frameCount};
+    "paletteScaleFactor "+ paletteScaleFactor, "emotionslist.get(0) "+ emotionslist.get(0), "emotionslist.get(1)"+emotionslist.get(1), "seconds to form: " + millis()/1000, "frameCount to form: " + frameCount,
+    "globalColorData1: " + globalColorData1[0] + ", " + globalColorData1[1] + ", " + globalColorData1[2], "globalColorData2: " + globalColorData2[0] + ", " + globalColorData2[1] + ", " + globalColorData2[2]};
   //createOutput("./test/parameters.txt");
   
 
