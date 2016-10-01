@@ -28,13 +28,14 @@ boolean diminishingAlpha;
 float alphaDecrement = 0.01;
 float randomInitialDirection = 0;//random(360);
 float noiseScaleMin = 150, noiseScaleMax = 250;
-float blendFactor = 9;
-int paletteScaleFactor = 4;
 String save_destination = "/Users/tomchambers/Desktop/samples_directory_mindSwarms";
+//String save_destination = "/home/theodoros/Desktop/samples_directory_mindSwarms";
+float blendFactor = 0.5;
+int paletteScaleFactor = 2;
 //float minMarbleBrightness = 0.7;
-String save_destination = "/home/theodoros/Desktop/samples_directory_mindSwarms";
 float[] globalColorData1 = new float[3];
 float[] globalColorData2 = new float[3];
+boolean customBlend=true;
 
 Data data;
 LinkedList<String> emotionslist = new LinkedList<String>();
@@ -53,6 +54,10 @@ color love = #e8686b;
 ControlP5 controlP5;
 boolean showGUI;
 Slider[] sliders;
+
+int autoSaveTimePoint = 120; // in seconds
+int autoSaveEndPoint = 180; // in seconds
+int autoSaveStep = 20; // in seconds
 
 void setup() {
   //randomSeed(0);
@@ -75,7 +80,7 @@ void setup() {
 
   initSwarm();
   setupGUI();
-  
+
   save_destination+="_"+timestamp()+"/";
 }
 
@@ -101,6 +106,8 @@ void draw() {
     //palette.draw();
     popMatrix();
   }
+
+  autoSave();
 }
 
 void initSwarm() {
@@ -156,13 +163,30 @@ void saveParameters() {
   String[] parameters={"usePalette " + usePalette, "sizeX " + sizeX, "sizeY " + sizeY, "agentsCount "+agentsCount, "maxAgents "+maxAgents, "noiseScale "+maxAgents, "interAgentNoiseZRange "+interAgentNoiseZRange, 
     "noiseZStep "+noiseZStep, "noiseDet "+noiseDet, "overlayAlpha "+ overlayAlpha, "agentsAlpha "+agentsAlpha, "strokeWidth "+strokeWidth, "maxAngleSpan "+ maxAngleSpan, "noiseStrength "+ noiseStrength, 
     "resetStep "+ resetStep, "randomSeed "+randomSeed, "agentTTL " + agentTTL, "minSpeed "+ minSpeed, "maxSpeed "+maxSpeed, "resetWithError "+resetWithError, "diminishingAlpha "+ diminishingAlpha, 
-    "alphaDecrement "+ alphaDecrement, "randomInitialDirection "+ randomInitialDirection, "noiseScaleMin "+noiseScaleMin, "noiseScaleMax "+noiseScaleMax, "blendFactor "+ blendFactor,
-    "paletteScaleFactor "+ paletteScaleFactor, "emotionslist.get(0) "+ emotionslist.get(0), "emotionslist.get(1)"+emotionslist.get(1), "seconds to form: " + millis()/1000, "frameCount to form: " + frameCount,
-    "globalColorData1: " + globalColorData1[0] + ", " + globalColorData1[1] + ", " + globalColorData1[2], "globalColorData2: " + globalColorData2[0] + ", " + globalColorData2[1] + ", " + globalColorData2[2]};
+    "alphaDecrement "+ alphaDecrement, "randomInitialDirection "+ randomInitialDirection, "noiseScaleMin "+noiseScaleMin, "noiseScaleMax "+noiseScaleMax, "blendFactor "+ blendFactor, 
+    "paletteScaleFactor "+ paletteScaleFactor, "emotionslist.get(0) "+ emotionslist.get(0), "emotionslist.get(1)"+emotionslist.get(1), "seconds to form: " + millis()/1000, "frameCount to form: " + frameCount, 
+    "globalColorData1: " + globalColorData1[0] + ", " + globalColorData1[1] + ", " + globalColorData1[2], "globalColorData2: " + globalColorData2[0] + ", " + globalColorData2[1] + ", " + globalColorData2[2],
+    "customBlend: " + customBlend};
+    
   //createOutput("./test/parameters.txt");
-  
+
 
   File theDir = new File(save_destination);
   theDir.mkdir();
   saveStrings(save_destination+"parameters.txt", parameters);
+}
+
+void autoSave()
+{
+  if ((millis()/1000)%autoSaveTimePoint==0)
+  {
+    println("saving at: " + millis()/1000);
+    bg.save(save_destination + timestamp()+".png");
+    saveParameters();
+    colorMixer.savePalettes();
+    autoSaveTimePoint+=autoSaveStep;
+  }
+  if (autoSaveTimePoint>autoSaveEndPoint) {
+    exit();
+  }
 }
