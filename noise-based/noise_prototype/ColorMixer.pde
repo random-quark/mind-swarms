@@ -1,6 +1,6 @@
 class ColorMixer {
   float[] angerData = new float[] {19, 0.1, 0.8}; // ORANGE
-  float[] joyData = new float[] {55, 0.04, 0.9};  //YELLOW
+  float[] joyData = new float[] {55, 0.02, 0.9};  //YELLOW
   float[] calmData = new float[] {0, 0.1, 0.8};
   float[] disgustData = new float[] {162, 0.1, 0.8};
   float[] sadnessData = new float[] {190, 0.1, 0.8};
@@ -8,18 +8,10 @@ class ColorMixer {
   float[] surpriseData = new float[] {285, 0.1, 0.65}; // PURPLE
   float[] loveData = new float[] {0, 0.1, 0.8}; // RED
 
-  color anger = #F5956E;
-  color joy = #fdec61;
-  color calm = #ffffff;
-  color disgust = #b8d183;
-  color sadness = #78c7d6;
-  color fear = #3e78ae;
-  color surprise = #824f93;
-  color love = #e8686b;
-  color[] colorList = {anger, joy, calm, disgust, sadness, fear, surprise, love};
+  //color[] colorList = {anger, joy, calm, disgust, sadness, fear, surprise, love};
   PGraphics mixedVbo;
   Palette[] palettes;
-  Map emotionscolors;
+  //Map emotionscolors;
   Map<String, float[]> emotionsData;
 
   ColorMixer(LinkedList<String> emotionslist) {
