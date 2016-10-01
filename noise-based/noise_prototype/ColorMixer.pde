@@ -66,8 +66,14 @@ class ColorMixer {
     //float weightedC2Sat = saturation(c2)*emotionspercents.get(1);
     //if (weightedC1Sat < weightedC2Sat) return c2;
     //else return c1;
-    if (saturation(c1)<saturation(c2)*blendFactor) return c2;
-    else return c1;
+    //if (saturation(c1)<saturation(c2)*blendFactor) return c2;
+    //else return c1;
+    
+    pushStyle();
+    colorMode(RGB, 255);
+    color c = color( min((float) red(c1), (float) red(c2)), min((float) green(c1), (float) green(c2)), min((float) blue(c1), (float) blue(c2)) );
+    popStyle();
+    return c;
   }
 
   void savePalettes() {

@@ -30,7 +30,7 @@ float randomInitialDirection = random(360);
 float noiseScaleMin = 150, noiseScaleMax = 250;
 float blendFactor = 8;
 int paletteScaleFactor = 4;
-String save_destination = "/home/theodoros/Desktop/samples_directory_mindSwarms";
+String save_destination = "/Users/tomchambers/Desktop/samples_directory_mindSwarms";
 
 Data data;
 LinkedList<String> emotionslist = new LinkedList<String>();
