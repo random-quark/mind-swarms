@@ -73,9 +73,11 @@ class ColorMixer {
   }
 
   color mixColors(color c1, color c2) {
+    if (customBlend){
     if (saturation(c1)<saturation(c2)*blendFactor) return c2;
     else return c1;
-    //return blendColor(c1,c2,DARKEST);
+    }
+    else return blendColor(c1,c2,DARKEST);
   }
 
   void savePalettes() {
