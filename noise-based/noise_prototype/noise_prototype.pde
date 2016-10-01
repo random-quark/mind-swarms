@@ -28,13 +28,13 @@ boolean diminishingAlpha;
 float alphaDecrement = 0.01;
 float randomInitialDirection = 0;//random(360);
 float noiseScaleMin = 150, noiseScaleMax = 250;
-float blendFactor = 3;
+float blendFactor = 0.5;
 int paletteScaleFactor = 2;
 //float minMarbleBrightness = 0.7;
 String save_destination = "/home/theodoros/Desktop/samples_directory_mindSwarms";
 float[] globalColorData1 = new float[3];
 float[] globalColorData2 = new float[3];
-boolean customBlend=false;
+boolean customBlend=true;
 
 Data data;
 LinkedList<String> emotionslist = new LinkedList<String>();
@@ -55,7 +55,8 @@ boolean showGUI;
 Slider[] sliders;
 
 int autoSaveTimePoint = 120; // in seconds
-int autoSaveTimeLimit = 180; // in seconds
+int autoSaveEndPoint = 180; // in seconds
+int autoSaveStep = 20; // in seconds
 
 void setup() {
   //randomSeed(0);
@@ -176,8 +177,6 @@ void saveParameters() {
 
 void autoSave()
 {
-  int autoSaveStep = 20; // in seconds
-
   if ((millis()/1000)%autoSaveTimePoint==0)
   {
     println("saving at: " + millis()/1000);
@@ -186,7 +185,7 @@ void autoSave()
     colorMixer.savePalettes();
     autoSaveTimePoint+=autoSaveStep;
   }
-  if (autoSaveTimePoint>autoSaveTimeLimit) {
+  if (autoSaveTimePoint>autoSaveEndPoint) {
     exit();
   }
 }

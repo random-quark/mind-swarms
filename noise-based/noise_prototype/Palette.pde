@@ -20,7 +20,6 @@ class Palette {
     pushStyle();
     colorMode(HSB, 360);
     c = color(colorData[0], 100, 100);
-    println("----------------> " + hue(c));
     hueRange = colorData[1];
     minMarbleBrightness = colorData[2];
     randomXoffset = (int)random(1000);
