@@ -34,7 +34,7 @@ int paletteScaleFactor = 2;
 String save_destination = "/home/theodoros/Desktop/samples_directory_mindSwarms";
 float[] globalColorData1 = new float[3];
 float[] globalColorData2 = new float[3];
-boolean customBlend=true;
+boolean customBlend=false;
 
 Data data;
 LinkedList<String> emotionslist = new LinkedList<String>();

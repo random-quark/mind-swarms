@@ -1,17 +1,15 @@
 class ColorMixer {
-  float[] angerData = new float[] {19, 0.1, 0.8}; // ORANGE
+  float[] angerData = new float[] {19, 0.05, 0.9}; // ORANGE
   float[] joyData = new float[] {55, 0.02, 0.9};  //YELLOW
-  float[] calmData = new float[] {0, 0.1, 0.8};
+  float[] calmData = new float[] {0, 0.1, 0.8}; // WHITE
   float[] disgustData = new float[] {162, 0.1, 0.8}; // DISGUST
   float[] sadnessData = new float[] {190, 0.1, 0.8}; // LIGHT BLUE
   float[] fearData = new float[] {210, 0.1, 0.8}; // BLUE
   float[] surpriseData = new float[] {285, 0.1, 0.65}; // PURPLE
   float[] loveData = new float[] {0, 0.1, 0.8}; // RED
 
-  //color[] colorList = {anger, joy, calm, disgust, sadness, fear, surprise, love};
   PGraphics mixedVbo;
   Palette[] palettes;
-  //Map emotionscolors;
   Map<String, float[]> emotionsData;
 
   ColorMixer(LinkedList<String> emotionslist) {
@@ -30,8 +28,6 @@ class ColorMixer {
 
     mixedVbo = createGraphics(sizeX, sizeY, P2D);
 
-    //color c1 = color((int)emotionscolors.get(emotionslist.get(0)));
-    //color c2 = color((int)emotionscolors.get(emotionslist.get(1)));
     float[] colorData1 =  emotionsData.get(emotionslist.get(0));
     float[] colorData2 =  emotionsData.get(emotionslist.get(1));
     globalColorData1 = colorData1;
@@ -72,11 +68,10 @@ class ColorMixer {
   }
 
   color mixColors(color c1, color c2) {
-    if (customBlend){
-    if (saturation(c1)<saturation(c2)*blendFactor) return c2;
-    else return c1;
-    }
-    else return blendColor(c1,c2,DARKEST);
+    if (customBlend) {
+      if (saturation(c1)<saturation(c2)*blendFactor) return c2;
+      else return c1;
+    } else return blendColor(c1, c2, DARKEST);
   }
 
   void savePalettes() {
