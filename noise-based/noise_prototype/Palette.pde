@@ -38,7 +38,7 @@ class Palette {
     int x = constrain(_x / paletteScaleFactor, 0, palWidth-1);
     int y = constrain(_y / paletteScaleFactor, 0, palHeight-1);
     color hue = huesVbo.pixels[y * huesVbo.width + x];
-    color marble = marbleVbo.pixels[y * huesVbo.width + x];
+    color marble = marbleVbo.pixels[y * marbleVbo.width + x];
     popStyle();
     return color(hue(hue), saturation(marble), brightness(marble));
   }
