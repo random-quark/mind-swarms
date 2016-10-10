@@ -18,6 +18,7 @@ float AL = 0;
 float AR = 0;
 float valence = 0;
 float activation = 0;
+float accX, accY, accZ;
 
 float[] electrodes = { 3.0, 3.0, 3.0, 3.0 };
 
@@ -100,6 +101,14 @@ void oscEvent(OscMessage theOscMessage) {
 
     activation = AL + AR;
   }
+  
+  if (theOscMessage.checkAddrPattern("/muse/acc")==true) {
+
+    accX = theOscMessage.get(0).floatValue();
+    accY = theOscMessage.get(1).floatValue();
+    accZ = theOscMessage.get(2).floatValue();
+    println(accX + " " + accY + " " + accZ);
+  }
 
   if (theOscMessage.checkAddrPattern("/muse/elements/gamma_absolute")==true) {
 
@@ -107,7 +116,7 @@ void oscEvent(OscMessage theOscMessage) {
     activation /=6;
     activation *=0.8;
 
-    println(AL + " " + AR + " " + valence + " " + activation);
+    //println(AL + " " + AR + " " + valence + " " + activation);
   }  
   
   if (theOscMessage.checkAddrPattern("/muse/elements/is_good")==true) {
