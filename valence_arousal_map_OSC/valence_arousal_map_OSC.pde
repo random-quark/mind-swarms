@@ -19,6 +19,16 @@ float AR = 0;
 float valence = 0;
 float activation = 0;
 float accX, accY, accZ;
+float[] alpha_relative = new float[4];
+float[] beta_relative = new float[4];
+float[] gamma_relative = new float[4];
+float[] delta_relative = new float[4];
+float[] theta_relative = new float[4];
+float[] alpha_absolute = new float[4];
+float[] beta_absolute = new float[4];
+float[] gamma_absolute = new float[4];
+float[] delta_absolute = new float[4];
+float[] theta_absolute = new float[4];
 
 float[] electrodes = { 3.0, 3.0, 3.0, 3.0 };
 
@@ -37,7 +47,6 @@ void setup() {
   bg = loadImage("map.jpg");
   recorder = new Recorder();
 }
-
 
 void draw() {
   image(bg, 0, 0, width, height);
@@ -78,64 +87,92 @@ void draw() {
   oscP5.send("/activation",new Object[] { activation }, remoteAddr);
 }
 
-void mousePressed() {
-}
+void oscEvent(OscMessage msg) {
+  if (msg.checkAddrPattern("/muse/elements/alpha_relative")) {
+    alpha_relative[0] = msg.get(0).floatValue();
+    alpha_relative[1] = msg.get(1).floatValue();
+    alpha_relative[2] = msg.get(2).floatValue();
+    alpha_relative[3] = msg.get(3).floatValue();
+  }
+  if (msg.checkAddrPattern("/muse/elements/beta_relative")) {
+    beta_relative[0] = msg.get(0).floatValue();
+    beta_relative[1] = msg.get(1).floatValue();
+    beta_relative[2] = msg.get(2).floatValue();
+    beta_relative[3] = msg.get(3).floatValue();
+  } 
+  if (msg.checkAddrPattern("/muse/elements/gamma_relative")) {
+    gamma_relative[0] = msg.get(0).floatValue();
+    gamma_relative[1] = msg.get(1).floatValue();
+    gamma_relative[2] = msg.get(2).floatValue();
+    gamma_relative[3] = msg.get(3).floatValue();
+  }
+  if (msg.checkAddrPattern("/muse/elements/delta_relative")) {
+    delta_relative[0] = msg.get(0).floatValue();
+    delta_relative[1] = msg.get(1).floatValue();
+    delta_relative[2] = msg.get(2).floatValue();
+    delta_relative[3] = msg.get(3).floatValue();
+  }  
+  if (msg.checkAddrPattern("/muse/elements/theta_relative")) {
+    theta_relative[0] = msg.get(0).floatValue();
+    theta_relative[1] = msg.get(1).floatValue();
+    theta_relative[2] = msg.get(2).floatValue();
+    theta_relative[3] = msg.get(3).floatValue();
+  }  
+  if (msg.checkAddrPattern("/muse/elements/alpha_absolute")) {
+    alpha_absolute[0] = msg.get(0).floatValue();
+    alpha_absolute[1] = msg.get(1).floatValue();
+    alpha_absolute[2] = msg.get(2).floatValue();
+    alpha_absolute[3] = msg.get(3).floatValue();
 
-
-/* incoming osc message are forwarded to the oscEvent method. */
-void oscEvent(OscMessage theOscMessage) {
-
-  if (theOscMessage.checkAddrPattern("/muse/elements/alpha_absolute")==true) {
-
-    AL = theOscMessage.get(0).floatValue();
-    AR = theOscMessage.get(3).floatValue();
-    
-    
-    valence = ((AL-AR) + 1) * 0.3;
-    //valence = (AL-AR) + 1;
-    
+    AL = msg.get(0).floatValue();
+    AR = msg.get(3).floatValue();
+    valence = ((AL-AR) + 1) * 0.3;    
     realValence = valence;
     if (adjustData) {
       valence = map(valence, minValence, maxValence, 0, 1);
     }
-
-    activation = AL + AR;
+    activation = AL + AR;    
   }
-  
-  if (theOscMessage.checkAddrPattern("/muse/acc")==true) {
+  if (msg.checkAddrPattern("/muse/elements/beta_absolute")) {
+    beta_absolute[0] = msg.get(0).floatValue();
+    beta_absolute[1] = msg.get(1).floatValue();
+    beta_absolute[2] = msg.get(2).floatValue();
+    beta_absolute[3] = msg.get(3).floatValue();
+  } 
+  if (msg.checkAddrPattern("/muse/elements/gamma_absolute")) {
+    gamma_absolute[0] = msg.get(0).floatValue();
+    gamma_absolute[1] = msg.get(1).floatValue();
+    gamma_absolute[2] = msg.get(2).floatValue();
+    gamma_absolute[3] = msg.get(3).floatValue();
 
-    accX = theOscMessage.get(0).floatValue();
-    accY = theOscMessage.get(1).floatValue();
-    accZ = theOscMessage.get(2).floatValue();
+    activation += msg.get(0).floatValue() + msg.get(1).floatValue() + msg.get(2).floatValue() + msg.get(3).floatValue();
+    activation /=6;
+    activation *=0.8;
+    //println(AL + " " + AR + " " + valence + " " + activation);    
+  }
+  if (msg.checkAddrPattern("/muse/elements/delta_absolute")) {
+    delta_absolute[0] = msg.get(0).floatValue();
+    delta_absolute[1] = msg.get(1).floatValue();
+    delta_absolute[2] = msg.get(2).floatValue();
+    delta_absolute[3] = msg.get(3).floatValue();
+  }  
+  if (msg.checkAddrPattern("/muse/elements/theta_absolute")) {
+    theta_absolute[0] = msg.get(0).floatValue();
+    theta_absolute[1] = msg.get(1).floatValue();
+    theta_absolute[2] = msg.get(2).floatValue();
+    theta_absolute[3] = msg.get(3).floatValue();
+  }   
+  
+  if (msg.checkAddrPattern("/muse/acc")) {
+    accX = msg.get(0).floatValue();
+    accY = msg.get(1).floatValue();
+    accZ = msg.get(2).floatValue();
     println(accX + " " + accY + " " + accZ);
   }
 
-  if (theOscMessage.checkAddrPattern("/muse/elements/gamma_absolute")==true) {
-
-    activation += theOscMessage.get(0).floatValue() + theOscMessage.get(1).floatValue() + theOscMessage.get(2).floatValue() + theOscMessage.get(3).floatValue();
-    activation /=6;
-    activation *=0.8;
-
-    //println(AL + " " + AR + " " + valence + " " + activation);
-  }  
-  
-  if (theOscMessage.checkAddrPattern("/muse/elements/is_good")==true) {
-   
-    // OK this turns out not to be a good measure
-    //println("Muse connection is good / bad (1 / 0) " + theOscMessage.get(0).intValue());
-    
-  }
-  
-    // this is useful though
-    if (theOscMessage.checkAddrPattern("/muse/elements/touching_forehead")==true) {
-   
-    //println("Muse is touching forehead yes / no (1 / 0) " + theOscMessage.get(1).intValue());
-    
-  }
-  
-  if (theOscMessage.checkAddrPattern("/muse/elements/horseshoe")) {
+  if (msg.checkAddrPattern("/muse/elements/horseshoe")) {
    for (int i=0; i<electrodes.length; i++) {
-     electrodes[i] = theOscMessage.get(i).floatValue();
+     electrodes[i] = msg.get(i).floatValue();
    }
   }
 }
