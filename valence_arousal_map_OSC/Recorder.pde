@@ -30,11 +30,7 @@ class Recorder {
     data.addColumn("delta_relative0");
     data.addColumn("delta_relative1");
     data.addColumn("delta_relative2");
-    data.addColumn("delta_relative3");    
-    data.addColumn("gamma_relative0");
-    data.addColumn("gamma_relative1");
-    data.addColumn("gamma_relative2");
-    data.addColumn("gamma_relative3");   
+    data.addColumn("delta_relative3");      
     data.addColumn("theta_relative0");
     data.addColumn("theta_relative1");
     data.addColumn("theta_relative2");
@@ -55,18 +51,14 @@ class Recorder {
     data.addColumn("delta_absolute0");
     data.addColumn("delta_absolute1");
     data.addColumn("delta_absolute2");
-    data.addColumn("delta_absolute3");    
-    data.addColumn("gamma_absolute0");
-    data.addColumn("gamma_absolute1");
-    data.addColumn("gamma_absolute2");
-    data.addColumn("gamma_absolute3");   
+    data.addColumn("delta_absolute3");
     data.addColumn("theta_absolute0");
     data.addColumn("theta_absolute1");
     data.addColumn("theta_absolute2");
     data.addColumn("theta_absolute3");    
   }
 
-  void addData(int time, float arousal, float valence) {
+  void addData(int time) {
     TableRow row = data.addRow();
     row.setInt("id", time);
     row.setFloat("valence", valence);

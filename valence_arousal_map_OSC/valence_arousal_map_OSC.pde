@@ -1,5 +1,3 @@
-import controlP5.*;
-
 String name = "Theo";
 
 /**
@@ -11,8 +9,7 @@ String name = "Theo";
 import oscP5.*;
 import netP5.*;
 
-ControlP5 controlP5;
-boolean showGUI, record, calibrate, saveData, adjustData;
+boolean collecting;
 Recorder recorder;
 float minValence = 1.0, maxValence = 0.0, realValence = 0.0;
 
@@ -40,51 +37,40 @@ OscP5 oscP5;
 NetAddress remoteAddr;
 
 void setup() {
-  setupGUI();
-  size(800, 650);
+  size(800, 300);
   frameRate(25);
   /* start oscP5, listening for incoming messages at port 12000 */
   oscP5 = new OscP5(this, 8000);
   remoteAddr = new NetAddress("127.0.0.1",7000);
   bg = loadImage("map.jpg");
   recorder = new Recorder();
+  background(255);
 }
 
 void draw() {
   image(bg, 0, 0, width, height);
   stroke(0);
   fill(0);
-  ellipse(valence * width, height - (activation * height), 10, 10);
+  ellipse(valence * width, height - (activation * height), 5, 5);
   
   for (int i=0; i<electrodes.length; i++) {
     drawIndicator(i, electrodes[i]);
   }
   
-  drawGUI();
-  
-  if (record) {
-    recorder.addData(frameCount, valence, activation);
+  if (collecting) {
+    recorder.addData(frameCount);
+    
+    pushStyle();
+    fill(255,0,0);
+    noStroke();
+    ellipse(width / 2, height / 2, 100, 100);
+    popStyle();
   }
-  if (calibrate) {
-    minValence = min(valence, minValence);
-    maxValence = max(valence, maxValence);
-  }  
-  if (saveData) {
-    recorder.saveData();
-    saveData = false;
-    record = false;
-  }
-  
-  int posY = 10;
-  int posX = 150;
-  text("minValence: " + minValence, width - posX, posY);
-  posY += 10;
-  text("maxValence: " + maxValence, width - posX, posY);
-  posY += 10;
-  text("realValence: " + realValence, width - posX, posY);  
-  posY += 10;
-  text("adjustedValence: " + valence, width - posX, posY);    
-  
+  pushStyle();
+  textSize(50);
+  text(name, 0, height - 50);
+  popStyle();
+ 
   oscP5.send("/valence",new Object[] { valence }, remoteAddr);
   oscP5.send("/activation",new Object[] { activation }, remoteAddr);
 }
@@ -129,10 +115,6 @@ void oscEvent(OscMessage msg) {
     AL = msg.get(0).floatValue();
     AR = msg.get(3).floatValue();
     valence = ((AL-AR) + 1) * 0.3;    
-    realValence = valence;
-    if (adjustData) {
-      valence = map(valence, minValence, maxValence, 0, 1);
-    }
     activation = AL + AR;    
   }
   if (msg.checkAddrPattern("/muse/elements/beta_absolute")) {
@@ -169,13 +151,26 @@ void oscEvent(OscMessage msg) {
     accX = msg.get(0).floatValue();
     accY = msg.get(1).floatValue();
     accZ = msg.get(2).floatValue();
-    println(accX + " " + accY + " " + accZ);
+    //println(accX + " " + accY + " " + accZ);
   }
 
   if (msg.checkAddrPattern("/muse/elements/horseshoe")) {
    for (int i=0; i<electrodes.length; i++) {
      electrodes[i] = msg.get(i).floatValue();
    }
+  }
+}
+
+void keyPressed() {
+  if (key == 'c' || key =='C') {
+    println("START collecting data");
+    recorder = new Recorder();
+    collecting = true;
+  }
+  if (key == 's' || key == 'S') {
+    println("STOP collecting data/save data");
+    collecting = false;
+    recorder.saveData();
   }
 }
 
