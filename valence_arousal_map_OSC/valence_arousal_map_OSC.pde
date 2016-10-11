@@ -1,5 +1,7 @@
 import controlP5.*;
 
+String name = "Theo"
+
 /**
  * Start muse-io with the following command :
  *   muse-io --osc osc.udp://localhost:8000

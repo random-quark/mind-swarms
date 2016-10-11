@@ -98,7 +98,7 @@ class Recorder {
   }
 
   void saveData() {
-    saveTable(data, "data/" + timestamp() + ".csv");
+    saveTable(data, "data/" + timestamp() + "_" + name + ".csv");
   }
 }
 
