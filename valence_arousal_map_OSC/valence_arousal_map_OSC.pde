@@ -1,6 +1,6 @@
 import controlP5.*;
 
-String name = "Theo"
+String name = "Theo";
 
 /**
  * Start muse-io with the following command :

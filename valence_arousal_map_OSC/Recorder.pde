@@ -39,6 +39,31 @@ class Recorder {
     data.addColumn("theta_relative1");
     data.addColumn("theta_relative2");
     data.addColumn("theta_relative3");
+
+    data.addColumn("alpha_absolute0");
+    data.addColumn("alpha_absolute1");
+    data.addColumn("alpha_absolute2");
+    data.addColumn("alpha_absolute3");
+    data.addColumn("beta_absolute0");
+    data.addColumn("beta_absolute1");
+    data.addColumn("beta_absolute2");
+    data.addColumn("beta_absolute3");    
+    data.addColumn("gamma_absolute0");
+    data.addColumn("gamma_absolute1");
+    data.addColumn("gamma_absolute2");
+    data.addColumn("gamma_absolute3");    
+    data.addColumn("delta_absolute0");
+    data.addColumn("delta_absolute1");
+    data.addColumn("delta_absolute2");
+    data.addColumn("delta_absolute3");    
+    data.addColumn("gamma_absolute0");
+    data.addColumn("gamma_absolute1");
+    data.addColumn("gamma_absolute2");
+    data.addColumn("gamma_absolute3");   
+    data.addColumn("theta_absolute0");
+    data.addColumn("theta_absolute1");
+    data.addColumn("theta_absolute2");
+    data.addColumn("theta_absolute3");    
   }
 
   void addData(int time, float arousal, float valence) {
