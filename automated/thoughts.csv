@@ -1,45 +1,49 @@
-Caroline Upfield,When I got engaged,love,fear
-Caroline Upfield,When I got the job at Saatchi,joy,sadness
-Stefanie Wilson,my mum got sick,fear,disgust
-Stefanie Wilson,the day my best friend was pregnant,joy,love
-Barbara Molnar,A successful audition,joy,surprise
-Erin O'Hare,Road trip in rural Ireland listening to music,surprise,anger
-Erin O'Hare,Volunteering in Romania,sadness,anger
-Erin O'Hare,White water rafting,anger,surprise
-India Hamblin,The day I lost my friend,sadness,anger
-Gareth Goh,My wedding day - dancing to brass band music,love,joy
-Gareth Goh,Suction-gate,surprise,fear
-Gareth Goh,The day my first pet died,sadness,anger
-Zoe Lee,The day I went shark cage diving in South Africa,fear,joy
-Zoe Lee,The day my dog died,sadness,fear
-Shaan Nariman,The first time a rode a wave,surprise,joy
-Shaan Nariman,Ten day meditation retreat,sadness,love
-Alex Critchley,The birth of my first child,joy,surprise
-Alex Critchley,The loss of my friend,anger,sadness
-Sorel Matthews,The time my son could hear again,surprise,joy
-Sorel Matthews,the day we stayed in the hobbit hole,surprise,fear
-Dale Hart,Sunrise trek in Bali,love,joy
-Dale Hart,My football team winning the cup at Wembley,joy,anger
-Naomi Urch,My favourite band playing my fabourite song for the first time ever,surprise,joy
-Naomi Urch,Uncle losing a bet - me graduating from University,surprise,anger
-Vibz Thaker,Hitchhiking in New Zealand,joy,love
-Vibz Thaker,Bungee jumping in Peru,surprise,fear
-Peter Marshall,Spending time with my niece and nephews,joy,love
-Peter Marshall,Spending time with my niece and nephews,love,joy
-Suzanne MacLaren,Play with my children,love,joy
-Suzanne MacLaren,Play with my children,joy,love
-Yasmin Lloyd,Lazy days with my housemates,love,sadness
-Yasmin Lloyd,Losing a family member,sadness,anger
-Jamie,Snowboarding in fresh powder,joy,fear
-Jamie,Jack rabbit slim twist contest,love,surprise
-Eduard Llena-Portell,Summer in Barcelona,surprise,joy
-Eduard Llena-Portell,Family moments - egine synaisthimatikos,sadness,joy
-Eduard Llena-Portell,Universe - vale kai ligo fovo,fear,surprise
-Kate Craggs,Holidaying in Cornwall,love,surprise
-Kate Craggs,When my dad was ill - scared,fear,anger
-Eithna,Spending time with family back in Ireland,joy,love
-Eithna,Losing a good friend,anger,fear
-Ed Colman,Birth of my child,joy,surprise
-Ed Colman,Absailing off table mountain,fear,surprise
-Shaun OHara,The day my team won the football cup with me saving the penalty,anger,fear
-Shaun OHara,My nan's funeral,fear,sadness
+Caroline Upfield,When I got engaged,love,fear,0.5,0.5,0.06033804967
+Caroline Upfield,When I got the job at Saatchi,joy,sadness,0.5,0.5,0.2395951326
+Caroline Upfield,When I got the job at Saatchi,joy,sadness,0.5,0.5,0.08010288931
+Stefanie Wilson,my mum got sick,fear,disgust,0.5,0.5,0.3804952018
+Stefanie Wilson,the day my best friend was pregnant,joy,love,0.5,0.5,0.3126296656
+Barbara Molnar,A successful audition,joy,surprise,0.7165605096,0.1799363057,0.5654357118
+Barbara Molnar,A successful audition,joy,surprise,0.7921146953,0.1164874552,0.5384421768
+Erin O'Hare,Road trip in rural Ireland listening to music,surprise,anger,0.5,0.5,0.0857962538
+Erin O'Hare,Volunteering in Romania,sadness,anger,0.5,0.5,0.00005906647353
+Erin O'Hare,White water rafting,anger,surprise,0.5,0.5,0.03263282821
+India Hamblin,The day I lost my friend,sadness,anger,0.5,0.5,0.1202025851
+Gareth Goh,My wedding day - dancing to brass band music,love,joy,0.6597938144,0.2388316151,0.1497808755
+Gareth Goh,Suction-gate,surprise,fear,0.6231343284,0.2835820896,0.1585446013
+Gareth Goh,The day my first pet died,sadness,anger,0.7485928705,0.2251407129,0.02446299546
+Gareth Goh,The day my first pet died,sadness,anger,0.8398791541,0.07099697885,0.1205595032
+Zoe Lee,The day I went shark cage diving in South Africa,fear,joy,0.5,0.5,0.1576337059
+Zoe Lee,The day my dog died,sadness,fear,0.5,0.5,0.08628102425
+Shaan Nariman,The first time a rode a wave,surprise,joy,0.7641752577,0.2113402062,0.4379861608
+Shaan Nariman,Ten day meditation retreat,sadness,love,0.6700143472,0.1764705882,0.4217602288
+Alex Critchley,The birth of my first child,joy,surprise,0.9889589905,0.01104100946,0.4472605526
+Alex Critchley,The loss of my friend,anger,sadness,0.869801085,0.130198915,0.4767156385
+Sorel Matthews,The time my son could hear again,surprise,joy,0.9221658206,0.07106598985,0.07501859344
+Sorel Matthews,the day we stayed in the hobbit hole,surprise,fear,0.5845070423,0.4154929577,0.4872803106
+Dale Hart,Sunrise trek in Bali,love,joy,0.5,0.5,0.1205289428
+Dale Hart,My football team winning the cup at Wembley,joy,anger,0.5,0.5,0.1522675867
+Naomi Urch,My favourite band playing my fabourite song for the first time ever,surprise,joy,0.4868585732,0.4555694618,0.1767672391
+Naomi Urch,Uncle losing a bet - me graduating from University,surprise,anger,0.4030534351,0.4015267176,0.2415344267
+Vibz Thaker,Hitchhiking in New Zealand,joy,love,0.5,0.5,0.2935900793
+Vibz Thaker,Bungee jumping in Peru,surprise,fear,0.5,0.5,0.1723157032
+Peter Marshall,Spending time with my niece and nephews,joy,love,0.5489795918,0.4510204082,0.2394770296
+Peter Marshall,Spending time with my niece and nephews,love,joy,0.9621212121,0.02462121212,0.3968989716
+Suzanne MacLaren,Play with my children,love,joy,0.5,0.5,0.5
+Suzanne MacLaren,Play with my children,joy,love,0.5,0.5,0.5
+Yasmin Lloyd,Lazy days with my housemates,love,sadness,0.5,0.5,0.5
+Yasmin Lloyd,Losing a family member,sadness,anger,0.5,0.5,0.5
+Eduard Llena-Portell,Summer in Barcelona,surprise,joy,0.9324758842,0.02893890675,0.042170184
+Eduard Llena-Portell,Family moments - egine synaisthimatikos,sadness,joy,0.3811881188,0.3069306931,0.2333020548
+Eduard Llena-Portell,Universe - vale kai ligo fovo,fear,surprise,0.4894837476,0.3556405354,0.2290035694
+Kate Craggs,Holidaying in Cornwall,love,surprise,0.5,0.5,0.1086553553
+Kate Craggs,When my dad was ill - scared,fear,anger,0.5,0.5,0.1055612582
+Eithne,Spending time with family back in Ireland,joy,love,0.9705882353,0.02941176471,0.3317738746
+Eithne,Losing a good friend,anger,fear,0.5,0.5,0.3512733117
+Jamie,Snowboarding in fresh powder,joy,fear,0.9725490196,0.02745098039,0.1529062374
+Jamie,Jack rabbit slim twist contest,love,surprise,0.7237354086,0.2762645914,0.1152963305
+Ed Colman,Birth of my child,joy,surprise,0.9671592775,0.0328407225,0.3138244997
+Ed Colman,Absailing off table mountain,fear,surprise,0.5357798165,0.2440366972,0.2892987294
+Shaun OHara,The day my team won the football cup with me saving the penalty,anger,fear,0.822265625,0.166015625,0.399786019
+Shaun OHara,My nan's funeral,fear,sadness,0.822265625,0.166015625,0.399786019
+Shaun OHara,My nan's funeral,fear,sadness,0.822265625,0.166015625,0.399786019
