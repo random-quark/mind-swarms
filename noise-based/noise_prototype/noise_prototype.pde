@@ -13,6 +13,9 @@ int sizeX = 1300;
 int sizeY = 800;
 boolean showLive;
 
+String participant_name = "null_name";
+String thought_name = "null_thought";
+
 Agent[] agents;
 int agentsCount = 30000;
 int maxAgents = 100000;
@@ -28,10 +31,9 @@ boolean diminishingAlpha;
 float alphaDecrement = 0.01;
 float randomInitialDirection = 0;//random(360);
 float noiseScaleMin = 150, noiseScaleMax = 250;
-String save_destination = "/Users/tomchambers/Desktop/samples_directory_mindSwarms";
-//String save_destination = "/home/theodoros/Desktop/samples_directory_mindSwarms";
+String save_destination = "./exports/";
 float blendFactor = 0.5;
-int paletteScaleFactor = 2;
+int paletteScaleFactor = 4;
 //float minMarbleBrightness = 0.7;
 float[] globalColorData1 = new float[3];
 float[] globalColorData2 = new float[3];
@@ -80,8 +82,8 @@ void setup() {
 
   initSwarm();
   setupGUI();
-
-  save_destination+="_"+timestamp()+"/";
+  
+  save_destination += participant_name + "/" + thought_name + "/";
 }
 
 void draw() {
@@ -145,8 +147,8 @@ void keyReleased() {
 
   if (key=='s' || key=='S') {
     bg.save(save_destination + timestamp()+".png");
-    saveParameters();
-    colorMixer.savePalettes();
+    //saveParameters();
+    //colorMixer.savePalettes();
   }
 }
 
@@ -155,11 +157,6 @@ String timestamp() {
 }
 
 void saveParameters() {
-  Table table;
-  table = new Table();
-  table.addColumn("name"); 
-  table.addColumn("value");
-
   String[] parameters={"usePalette " + usePalette, "sizeX " + sizeX, "sizeY " + sizeY, "agentsCount "+agentsCount, "maxAgents "+maxAgents, "noiseScale "+maxAgents, "interAgentNoiseZRange "+interAgentNoiseZRange, 
     "noiseZStep "+noiseZStep, "noiseDet "+noiseDet, "overlayAlpha "+ overlayAlpha, "agentsAlpha "+agentsAlpha, "strokeWidth "+strokeWidth, "maxAngleSpan "+ maxAngleSpan, "noiseStrength "+ noiseStrength, 
     "resetStep "+ resetStep, "randomSeed "+randomSeed, "agentTTL " + agentTTL, "minSpeed "+ minSpeed, "maxSpeed "+maxSpeed, "resetWithError "+resetWithError, "diminishingAlpha "+ diminishingAlpha, 
@@ -168,9 +165,6 @@ void saveParameters() {
     "globalColorData1: " + globalColorData1[0] + ", " + globalColorData1[1] + ", " + globalColorData1[2], "globalColorData2: " + globalColorData2[0] + ", " + globalColorData2[1] + ", " + globalColorData2[2],
     "customBlend: " + customBlend};
     
-  //createOutput("./test/parameters.txt");
-
-
   File theDir = new File(save_destination);
   theDir.mkdir();
   saveStrings(save_destination+"parameters.txt", parameters);
@@ -182,8 +176,8 @@ void autoSave()
   {
     println("saving at: " + millis()/1000);
     bg.save(save_destination + timestamp()+".png");
-    saveParameters();
-    colorMixer.savePalettes();
+    //saveParameters();
+    //colorMixer.savePalettes();
     autoSaveTimePoint+=autoSaveStep;
   }
   if (autoSaveTimePoint>autoSaveEndPoint) {

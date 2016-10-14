@@ -10,13 +10,17 @@ with open('thoughts.csv', "r") as data_file:
             people[line[0]] = []
         people[line[0]].append((line[1], line[2], line[3]))
 
-for k, v in people.iteritems():
-    for e in v:
+for person, thoughts in people.iteritems():
+    for thought in thoughts:
         dataFile = open("viz.app/Contents/Java/data/data.csv", "w")
         writer = csv.writer(dataFile)
-        writer.writerow([e[1], 0.5])
-        writer.writerow([e[2], 0.5])
+        thought_name = thought[0]
+        emotion1 = thought[1]
+        emotion2 = thought[2]
+        writer.writerow([emotion1, 0.5])
+        writer.writerow([emotion2, 0.5])
         writer.writerow(['0.5'])
+        writer.writerow([thought_name])
+        writer.writerow([person])
         dataFile.flush()
-        print "data", [e[1], 0.5], [e[2], 0.5]
         subprocess.call(["open", "-W", "viz.app"])
