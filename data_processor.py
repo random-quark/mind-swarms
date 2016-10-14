@@ -1,3 +1,4 @@
+import os
 import csv
 from collections import Counter
 from operator import itemgetter
@@ -13,34 +14,43 @@ ranges = {
     'calm': [[0.5, 1],[0.5, 1]],
 }
 
-emotions = []
-emotions_len = 0
-activations = []
+def walkDir():
+    for filename in os.listdir('data_raw'):
+        if (filename == '.DS_Store'): continue
+        print "Processing " + filename
+        process(filename)
 
-with open("data_raw/data.csv", "r") as data_file:
-    reader = csv.reader(data_file)
-    next(reader, None)
-    for line in reader:
-        emotions_len += 1
-        valence = float(line[1])
-        activation = float(line[2])
-        activations.append(activation)
-        found = False
-        for emotion, parts in ranges.iteritems():
-            if parts[0][0] <= valence <= parts[0][1] and parts[1][0] <= activation <= parts[1][1]:
-                emotions.append(emotion)
-                found = emotion
+def process(filename):
+    emotions = []
+    emotions_len = 0
+    activations = []
+    with open('data_raw/' + filename, "r") as data_file:
+        reader = csv.reader(data_file)
+        next(reader, None)
+        for line in reader:
+            emotions_len += 1
+            valence = float(line[1])
+            activation = float(line[2])
+            activations.append(activation)
+            found = False
+            for emotion, parts in ranges.iteritems():
+                if parts[0][0] <= abs(valence) <= parts[0][1] and parts[1][0] <= abs(activation) <= parts[1][1]:
+                    emotions.append(emotion)
+                    found = emotion
 
-activation_avg = reduce(lambda x, y: x + y, activations) / len(activations)
+    activation_avg = reduce(lambda x, y: x + y, activations) / len(activations)
 
+    print emotions
 
-emotion_frequency = Counter(emotions)
-emotions_frequency_list = [(k,v) for k,v in emotion_frequency.iteritems()]
-emotions_list_sorted = sorted(emotions_frequency_list, key=itemgetter(1), reverse=True)
-print emotions_list_sorted
+    emotion_frequency = Counter(emotions)
+    emotions_frequency_list = [(k,v) for k,v in emotion_frequency.iteritems()]
+    emotions_list_sorted = sorted(emotions_frequency_list, key=itemgetter(1), reverse=True)
+    print emotions_list_sorted
 
-writer = csv.writer(open("data_processed/data.csv", "w"))
-for e in emotions_list_sorted:
-    percent = float(e[1])/emotions_len
-    writer.writerow([e[0], percent])
-writer.writerow([activation_avg])
+    writer = csv.writer(open("data_processed/" + filename, "w"))
+    for e in emotions_list_sorted:
+        percent = float(e[1])/emotions_len
+        writer.writerow([e[0], percent])
+    writer.writerow([activation_avg])
+
+walkDir()

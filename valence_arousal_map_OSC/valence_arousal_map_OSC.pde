@@ -1,4 +1,4 @@
-String name = "Theo2";
+String name = "Peter Marshall";
 
 /**
  * Start muse-io with the following command :
@@ -69,7 +69,7 @@ void draw() {
   }
   pushStyle();
   textSize(50);
-  text("Participant: " + name, 0, height);
+  text("Participant: " + name, 0, height-10);
   popStyle();
  
   oscP5.send("/valence",new Object[] { valence }, remoteAddr);
