@@ -1,4 +1,4 @@
-String name = "Peter Marshall";
+String name = "none";
 
 /**
  * Start muse-io with the following command :
