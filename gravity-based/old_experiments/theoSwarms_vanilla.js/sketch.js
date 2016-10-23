@@ -12,7 +12,7 @@ function setup() {
   canvas.width  = window.innerWidth*0.985;
   canvas.height = window.innerHeight*0.983;
   // console.log(window.innerWidth)
-  createAgents(6000)
+  createAgents(5000)
 }
 
 function draw(){

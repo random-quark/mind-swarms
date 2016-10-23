@@ -2,6 +2,12 @@ import csv, subprocess
 
 people = {}
 
+dataFileLoc = "linuxapp/data/data.csv"
+executableLoc = "linuxapp/noise_prototype"
+# extraCommands = ["open", "-W"] # for MAC
+extraCommands = [] # for LINUX
+# subprocess.call(extraCommands + [executableLoc])
+
 with open('thoughts.csv', "r") as data_file:
     reader = csv.reader(data_file)
     counter = 0
@@ -17,7 +23,7 @@ with open('thoughts.csv', "r") as data_file:
 
 for person, thoughts in people.iteritems():
     for thought in thoughts:
-        dataFile = open("viz.app/Contents/Java/data/data.csv", "w")
+        dataFile = open(dataFileLoc, "w")
         writer = csv.writer(dataFile)
         writer.writerow([thought["emotion1"]["name"], thought["emotion1"]["proportion"]])
         writer.writerow([thought["emotion2"]["name"], thought["emotion2"]["proportion"]])
@@ -25,4 +31,5 @@ for person, thoughts in people.iteritems():
         writer.writerow([thought["title"]])
         writer.writerow([person])
         dataFile.flush()
-        subprocess.call(["open", "-W", "viz.app"])
+        subprocess.call(extraCommands + [executableLoc])
+#        subprocess.call(["open", "-W", executableLoc])
