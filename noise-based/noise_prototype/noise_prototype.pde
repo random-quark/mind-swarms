@@ -8,19 +8,24 @@ ColorMixer colorMixer;
 PImage imagePalette;
 boolean usePalette = true, showPalette = true;
 
+boolean EEGNoiseScale = true; //TURN TO TRUE IF USING REAL DATA
+int sizeX = 1920; // JUST ADJUST THIS. THE REST WILL FOLLOW
+int sizeY = int(float(sizeX)/1.7777);
+int margin = 50;
+float goldenRatio = float(sizeX)/1920. * 2.;
+boolean customBlend=true;
+
 PGraphics bg;
-int sizeX = 2020;
-int sizeY = 1180;
 boolean showLive;
 
 String participant_name = "null_name";
 String thought_name = "null_thought";
 
 Agent[] agents;
-int agentsCount = 50000;
-int maxAgents = 1000000;
-float noiseScale = 250, interAgentNoiseZRange = 0.0, noiseZStep = 0.001;
-float noiseScaleMin = 150, noiseScaleMax = 250;
+int agentsCount = int(50000*goldenRatio);
+int maxAgents = 1600000;
+float noiseScale = goldenRatio/2.*250., interAgentNoiseZRange = 0.0, noiseZStep = 0.001;
+float noiseScaleMin = 150, noiseScaleMax = 450;
 int noiseDet = 4;
 float overlayAlpha = 0, agentsAlpha = 20, strokeWidth = 1, maxAngleSpan = 220, noiseStrength = 1;
 float randomSeed;
@@ -37,7 +42,7 @@ int paletteScaleFactor = 4;
 //float minMarbleBrightness = 0.7;
 float[] globalColorData1 = new float[3];
 float[] globalColorData2 = new float[3];
-boolean customBlend=true;
+
 
 Data data;
 LinkedList<String> emotionslist = new LinkedList<String>();
@@ -62,11 +67,16 @@ int autoSaveEndPoint = 180; // in seconds
 int autoSaveStep = 20; // in seconds
 
 void setup() {
+  println(goldenRatio);
+  sizeX+=margin*2;
+  sizeY+=margin*2;
+  println(sizeX + "  " + sizeY);
   //randomSeed(0);
   //noiseSeed(0);
   data = new Data();
   data.load();
-  data.setNoiseScale();
+  if (EEGNoiseScale) data.setNoiseScale();
+  
 
   colorMixer = new ColorMixer(emotionslist);
 
@@ -76,7 +86,7 @@ void setup() {
   bg.endDraw();
   frameRate(20);
   //fullScreen(P2D);
-  size(1300, 800, P2D);
+  size(1300, 732, P2D);
   background(255);
   imagePalette = loadImage("xPeriod_1.0_yPeriod_1.0_turbPower_2.0_turbSize_133.0_w_500_h_500.png");
 

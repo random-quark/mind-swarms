@@ -22,4 +22,7 @@ class Data {
   void setNoiseScale() {
     noiseScale = map(activationAverage, 0, 1, noiseScaleMax, noiseScaleMin);
   }
+  //void setNoiseScale(float _noiseScale) {
+  //  noiseScale = _noiseScale;
+  //}
 }
