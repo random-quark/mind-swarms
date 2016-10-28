@@ -4,16 +4,19 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.*;
 
+// TO crop recursively to get rid of perimeter:
+// find . -name "*.png" -exec mogrify {} -crop +50+50 +repage -crop -50-50 {} \;
+
 ColorMixer colorMixer;
 PImage imagePalette;
 boolean usePalette = true, showPalette = true;
 
-boolean EEGNoiseScale = true; //TURN TO TRUE IF USING REAL DATA
+boolean EEGNoiseScale = true; //TURN TO TRUE IF USING REAL DATA - what the fuck do I mean, real data? (theo)
 int sizeX = 1920; // JUST ADJUST THIS. THE REST WILL FOLLOW
 int sizeY = int(float(sizeX)/1.7777);
 int margin = 50;
 float goldenRatio = float(sizeX)/1920. * 2.;
-boolean customBlend=true;
+boolean customBlend=true; //as opposed to DARK blend.
 
 PGraphics bg;
 boolean showLive;
@@ -63,8 +66,8 @@ boolean showGUI;
 Slider[] sliders;
 
 int autoSaveTimePoint = 120; // in seconds
-int autoSaveEndPoint = 180; // in seconds
-int autoSaveStep = 20; // in seconds
+int autoSaveEndPoint = 320; // in seconds
+int autoSaveStep = 40; // in seconds
 
 void setup() {
   println(goldenRatio);

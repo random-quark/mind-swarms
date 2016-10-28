@@ -1,14 +1,22 @@
 import csv, subprocess
+import sys
+
+if len(sys.argv)<2:
+    print
+    print "usage: python create.py NAME_OF_THOUGHT_FILE.csv"
+    print
+    exit(1)
+
+thoughts_file = sys.argv[1]
 
 people = {}
 
-dataFileLoc = "linuxapp/data/data.csv"
-executableLoc = "linuxapp/noise_prototype"
 # extraCommands = ["open", "-W"] # for MAC
 extraCommands = [] # for LINUX
-# subprocess.call(extraCommands + [executableLoc])
+dataFileLoc = "linuxapp/data/data.csv"
+executableLoc = "linuxapp/noise_prototype"
 
-with open('thoughts.csv', "r") as data_file:
+with open(thoughts_file, "r") as data_file:
     reader = csv.reader(data_file)
     counter = 0
     for line in reader:
