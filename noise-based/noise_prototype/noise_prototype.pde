@@ -41,7 +41,7 @@ float alphaDecrement = 0.01;
 float randomInitialDirection = 0;//random(360);
 String save_destination = "./exports/";
 float blendFactor = 0.5;
-int paletteScaleFactor = 4;
+int paletteScaleFactor = 1;
 //float minMarbleBrightness = 0.7;
 float[] globalColorData1 = new float[3];
 float[] globalColorData2 = new float[3];
@@ -161,7 +161,7 @@ void keyReleased() {
   if (key=='s' || key=='S') {
     bg.save(save_destination + timestamp()+".png");
     saveParameters();
-    //colorMixer.savePalettes();
+    colorMixer.savePalettes();
   }
 }
 

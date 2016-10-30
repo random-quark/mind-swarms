@@ -1,7 +1,7 @@
 class Palette {
   int palWidth, palHeight;
 
-  float xPeriod=1.;     // how many lines on the X axis
+  float xPeriod= 1.;     // how many lines on the X axis
   float yPeriod = 1.;   // how many lins on the Y axis
   float turbPower = 2.0; // how much turbulence
   float turbSize = 170;  // noise zoom in factor
