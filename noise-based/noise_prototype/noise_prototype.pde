@@ -30,9 +30,10 @@ float noiseScale = (sqrt(goldenRatio) * 300.); //divided by 2 because noisescale
 long Rseed = 0;
 long Nseed = 0;
 boolean allowRandomness=false;
+int agentsCount = int(75000*goldenRatio); // REMOVE DIVISION WHEN DEALING WITH SMALLER NUMBERS
+float strokeWidth = 1;
 
 Agent[] agents;
-int agentsCount = int(50000*goldenRatio); // REMOVE DIVISION WHEN DEALING WITH SMALLER NUMBERS
 int maxAgents = 1600000;
 
 PGraphics bg;
@@ -45,7 +46,7 @@ String thought_name = "null_thought";
 float interAgentNoiseZRange = 0.0, noiseZStep = 0.001;
 float noiseScaleMin = 150, noiseScaleMax = 450;
 int noiseDet = 4;
-float overlayAlpha = 0, agentsAlpha = 20, strokeWidth = 1, maxAngleSpan = 220, noiseStrength = 1;
+float overlayAlpha = 0, agentsAlpha = 20, maxAngleSpan = 220, noiseStrength = 1;
 float randomSeed;
 int agentTTL=0;
 float minSpeed = 3, maxSpeed = 3;
@@ -96,7 +97,7 @@ void setup() {
   if (EEGNoiseScale) data.setNoiseScale();
 
   print("generating colorMixer ");
-  colorMixer = new ColorMixer(emotionslist, sizeX, sizeY);
+  colorMixer = new ColorMixer(emotionslist, sizeX/paletteScaleFactor, sizeY/paletteScaleFactor);
   println("done");
 
   bg = createGraphics(sizeX, sizeY, P2D);
@@ -105,7 +106,7 @@ void setup() {
   bg.endDraw();
   frameRate(20);
   //fullScreen(P2D);
-  size(1300, 732, P2D);
+  size(1300, 921, P2D);
   background(255);
   imagePalette = loadImage("xPeriod_1.0_yPeriod_1.0_turbPower_2.0_turbSize_133.0_w_500_h_500.png");
 

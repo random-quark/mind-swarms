@@ -32,11 +32,11 @@ class Palette {
     popStyle();
   }
 
-  color getColor(int _x, int _y) {
+  color getColor(int x, int y) {
     pushStyle();
     colorMode(HSB, 1);
-    int x = int(map(_x, 0, sizeX, 0, huesVbo.width));
-    int y = int(map(_y, 0, sizeY, 0, huesVbo.height));
+    //int x = int(map(_x, 0, sizeX, 0, huesVbo.width));
+    //int y = int(map(_y, 0, sizeY, 0, huesVbo.height));
     //int x = constrain(_x / paletteScaleFactor, 0, palWidth-1);
     //int y = constrain(_y / paletteScaleFactor, 0, palHeight-1);
     color hue = huesVbo.pixels[y * huesVbo.width + x];
