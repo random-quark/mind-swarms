@@ -14,24 +14,24 @@ boolean usePalette = true, showPalette = true;
 //ideal: 7016, 4961
 float templateX = 1920.;
 float ratioY = 1.414285714;
-int sizeX = 1920;
+int sizeX = 1920*3;
 
-boolean EEGNoiseScale = false; //TURN TO TRUE IF USING EEG DATA - what the fuck do I mean, real data? (theo)
+boolean EEGNoiseScale = false; //TURN TO TRUE IF USING EEG DATA from FILE (I generated mine at FALSE setting)
 int sizeY = int(float(sizeX)/ratioY);
 int margin = 50;
 float goldenRatio = (float(sizeX)/templateX) * (float(sizeY)/(templateX/ratioY));
-boolean customBlend=true; //as opposed to DARK blend.
+boolean customBlend=false; //as opposed to DARK blend.
 int autoSaveTimePoint = int(120*goldenRatio); // in seconds
 int autoSaveEndPoint = int(320*goldenRatio); // in seconds
 int autoSaveStep = int(40*goldenRatio); // in seconds
-int paletteScaleFactor = 2;
+int paletteScaleFactor = 2*3;
 float blendFactor = 0.5;
 float noiseScale = (sqrt(goldenRatio) * 300.); //divided by 2 because noisescale is really in one dimension. It's not an WxH relationship.
-long Rseed = 0;
-long Nseed = 0;
+long Rseed = 1000;
+long Nseed = 20000;
 boolean allowRandomness=false;
-int agentsCount = int(75000*goldenRatio); // REMOVE DIVISION WHEN DEALING WITH SMALLER NUMBERS
-float strokeWidth = 1;
+int agentsCount = 200000;//int(75000*goldenRatio); // REMOVE DIVISION WHEN DEALING WITH SMALLER NUMBERS
+float strokeWidth = 2;
 
 Agent[] agents;
 int maxAgents = 1600000;
@@ -99,7 +99,7 @@ void setup() {
   print("generating colorMixer ");
   colorMixer = new ColorMixer(emotionslist, sizeX/paletteScaleFactor, sizeY/paletteScaleFactor);
   println("done");
-
+  
   bg = createGraphics(sizeX, sizeY, P2D);
   bg.beginDraw();
   bg.background(255);
@@ -114,6 +114,8 @@ void setup() {
   setupGUI();
 
   save_destination += participant_name + "/" + thought_name + "/";
+  //colorMixer.savePalettes();
+  //exit();
 }
 
 void draw() {
@@ -177,7 +179,7 @@ void keyReleased() {
 
   if (key=='s' || key=='S') {
     print("saving image...");
-    bg.save(save_destination + timestamp()+".png");
+    bg.save(save_destination + timestamp()+"_manual.png");
     saveParameters();
     colorMixer.savePalettes();
     println("DONE");
