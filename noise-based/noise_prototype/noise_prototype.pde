@@ -11,12 +11,29 @@ ColorMixer colorMixer;
 PImage imagePalette;
 boolean usePalette = true, showPalette = true;
 
-boolean EEGNoiseScale = true; //TURN TO TRUE IF USING REAL DATA - what the fuck do I mean, real data? (theo)
-int sizeX = 1920; // JUST ADJUST THIS. THE REST WILL FOLLOW
-int sizeY = int(float(sizeX)/1.7777);
+//ideal: 7016, 4961
+float templateX = 1920.;
+float ratioY = 1.414285714;
+int sizeX = 1920;
+
+boolean EEGNoiseScale = false; //TURN TO TRUE IF USING EEG DATA - what the fuck do I mean, real data? (theo)
+int sizeY = int(float(sizeX)/ratioY);
 int margin = 50;
-float goldenRatio = float(sizeX)/1920. * 2.;
+float goldenRatio = (float(sizeX)/templateX) * (float(sizeY)/(templateX/ratioY));
 boolean customBlend=true; //as opposed to DARK blend.
+int autoSaveTimePoint = int(120*goldenRatio); // in seconds
+int autoSaveEndPoint = int(320*goldenRatio); // in seconds
+int autoSaveStep = int(40*goldenRatio); // in seconds
+int paletteScaleFactor = 2;
+float blendFactor = 0.5;
+float noiseScale = (sqrt(goldenRatio) * 300.); //divided by 2 because noisescale is really in one dimension. It's not an WxH relationship.
+long Rseed = 0;
+long Nseed = 0;
+boolean allowRandomness=false;
+
+Agent[] agents;
+int agentsCount = int(50000*goldenRatio); // REMOVE DIVISION WHEN DEALING WITH SMALLER NUMBERS
+int maxAgents = 1600000;
 
 PGraphics bg;
 boolean showLive;
@@ -24,10 +41,8 @@ boolean showLive;
 String participant_name = "null_name";
 String thought_name = "null_thought";
 
-Agent[] agents;
-int agentsCount = int(50000*goldenRatio);
-int maxAgents = 1600000;
-float noiseScale = goldenRatio/2.*250., interAgentNoiseZRange = 0.0, noiseZStep = 0.001;
+
+float interAgentNoiseZRange = 0.0, noiseZStep = 0.001;
 float noiseScaleMin = 150, noiseScaleMax = 450;
 int noiseDet = 4;
 float overlayAlpha = 0, agentsAlpha = 20, strokeWidth = 1, maxAngleSpan = 220, noiseStrength = 1;
@@ -40,8 +55,6 @@ boolean diminishingAlpha;
 float alphaDecrement = 0.01;
 float randomInitialDirection = 0;//random(360);
 String save_destination = "./exports/";
-float blendFactor = 0.5;
-int paletteScaleFactor = 1;
 //float minMarbleBrightness = 0.7;
 float[] globalColorData1 = new float[3];
 float[] globalColorData2 = new float[3];
@@ -65,23 +78,26 @@ ControlP5 controlP5;
 boolean showGUI;
 Slider[] sliders;
 
-int autoSaveTimePoint = 120; // in seconds
-int autoSaveEndPoint = 320; // in seconds
-int autoSaveStep = 40; // in seconds
-
 void setup() {
-  println(goldenRatio);
+  println("Golden Ratio: " + goldenRatio);
+  println("noise scale: " + noiseScale);
+  println("agentsCount: " + agentsCount);
+
   sizeX+=margin*2;
   sizeY+=margin*2;
   println(sizeX + "  " + sizeY);
-  //randomSeed(0);
-  //noiseSeed(0);
+  if (allowRandomness==false) {
+    randomSeed(Rseed);
+    noiseSeed(Nseed);
+    println("WARNING: not using randomness");
+  }
   data = new Data();
   data.load();
   if (EEGNoiseScale) data.setNoiseScale();
-  
 
-  colorMixer = new ColorMixer(emotionslist);
+  print("generating colorMixer ");
+  colorMixer = new ColorMixer(emotionslist, sizeX, sizeY);
+  println("done");
 
   bg = createGraphics(sizeX, sizeY, P2D);
   bg.beginDraw();
@@ -95,7 +111,7 @@ void setup() {
 
   initSwarm();
   setupGUI();
-  
+
   save_destination += participant_name + "/" + thought_name + "/";
 }
 
@@ -159,9 +175,11 @@ void keyReleased() {
   else controlP5.getGroup("menu").close();
 
   if (key=='s' || key=='S') {
+    print("saving image...");
     bg.save(save_destination + timestamp()+".png");
     saveParameters();
     colorMixer.savePalettes();
+    println("DONE");
   }
 }
 
@@ -170,14 +188,14 @@ String timestamp() {
 }
 
 void saveParameters() {
-  String[] parameters={"usePalette " + usePalette, "sizeX " + sizeX, "sizeY " + sizeY, "agentsCount "+agentsCount, "maxAgents "+maxAgents, "noiseScale "+maxAgents, "interAgentNoiseZRange "+interAgentNoiseZRange, 
+  String[] parameters={"usePalette " + usePalette, "sizeX " + sizeX, "sizeY " + sizeY, "agentsCount "+agentsCount, "maxAgents "+maxAgents, "noiseScale "+noiseScale, "interAgentNoiseZRange "+interAgentNoiseZRange, 
     "noiseZStep "+noiseZStep, "noiseDet "+noiseDet, "overlayAlpha "+ overlayAlpha, "agentsAlpha "+agentsAlpha, "strokeWidth "+strokeWidth, "maxAngleSpan "+ maxAngleSpan, "noiseStrength "+ noiseStrength, 
     "resetStep "+ resetStep, "randomSeed "+randomSeed, "agentTTL " + agentTTL, "minSpeed "+ minSpeed, "maxSpeed "+maxSpeed, "resetWithError "+resetWithError, "diminishingAlpha "+ diminishingAlpha, 
     "alphaDecrement "+ alphaDecrement, "randomInitialDirection "+ randomInitialDirection, "noiseScaleMin "+noiseScaleMin, "noiseScaleMax "+noiseScaleMax, "blendFactor "+ blendFactor, 
     "paletteScaleFactor "+ paletteScaleFactor, "emotionslist.get(0) "+ emotionslist.get(0), "emotionslist.get(1)"+emotionslist.get(1), "seconds to form: " + millis()/1000, "frameCount to form: " + frameCount, 
-    "globalColorData1: " + globalColorData1[0] + ", " + globalColorData1[1] + ", " + globalColorData1[2], "globalColorData2: " + globalColorData2[0] + ", " + globalColorData2[1] + ", " + globalColorData2[2],
+    "globalColorData1: " + globalColorData1[0] + ", " + globalColorData1[1] + ", " + globalColorData1[2], "globalColorData2: " + globalColorData2[0] + ", " + globalColorData2[1] + ", " + globalColorData2[2], 
     "customBlend: " + customBlend};
-    
+
   File theDir = new File(save_destination);
   theDir.mkdir();
   saveStrings(save_destination+"parameters.txt", parameters);

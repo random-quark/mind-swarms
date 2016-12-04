@@ -25,8 +25,8 @@ class Palette {
     randomXoffset = (int)random(1000);
     randomYoffset = (int)random(1000);
 
-    palWidth= _width / paletteScaleFactor;
-    palHeight = _height / paletteScaleFactor;
+    palWidth= _width;
+    palHeight = _height;
     createMarble();
     createHues();
     popStyle();
@@ -35,8 +35,10 @@ class Palette {
   color getColor(int _x, int _y) {
     pushStyle();
     colorMode(HSB, 1);
-    int x = constrain(_x / paletteScaleFactor, 0, palWidth-1);
-    int y = constrain(_y / paletteScaleFactor, 0, palHeight-1);
+    int x = int(map(_x, 0, sizeX, 0, huesVbo.width));
+    int y = int(map(_y, 0, sizeY, 0, huesVbo.height));
+    //int x = constrain(_x / paletteScaleFactor, 0, palWidth-1);
+    //int y = constrain(_y / paletteScaleFactor, 0, palHeight-1);
     color hue = huesVbo.pixels[y * huesVbo.width + x];
     color marble = marbleVbo.pixels[y * marbleVbo.width + x];
     popStyle();

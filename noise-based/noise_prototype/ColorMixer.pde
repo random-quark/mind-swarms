@@ -11,11 +11,12 @@ class ColorMixer {
   PGraphics mixedVbo;
   Palette[] palettes;
   Map<String, float[]> emotionsData;
+  int mixerWidth, mixerHeight;
+  
+  ColorMixer(LinkedList<String> emotionslist, int _w, int _h) {
 
-  ColorMixer(LinkedList<String> emotionslist) {
-    //pushStyle();
-    //colorMode(HSB, 1);
-
+    mixerWidth = _w;
+    mixerHeight = _h;
     emotionsData = new HashMap<String, float[]>();
     emotionsData.put("anger", angerData);
     emotionsData.put("joy", joyData);
@@ -26,7 +27,7 @@ class ColorMixer {
     emotionsData.put("surprise", surpriseData);
     emotionsData.put("love", loveData);
 
-    mixedVbo = createGraphics(sizeX, sizeY, P2D);
+    mixedVbo = createGraphics(mixerWidth, mixerHeight, P2D);
 
     float[] colorData1 =  emotionsData.get(emotionslist.get(0));
     float[] colorData2 =  emotionsData.get(emotionslist.get(1));
@@ -36,15 +37,17 @@ class ColorMixer {
     println(emotionslist.get(0), emotionslist.get(1));
 
     palettes = new Palette[2];
-    palettes[0] = new Palette(sizeX, sizeY, colorData1);
-    palettes[1] = new Palette(sizeX, sizeY, colorData2);
+    palettes[0] = new Palette(mixedVbo.width, mixedVbo.height, colorData1);
+    palettes[1] = new Palette(mixedVbo.width, mixedVbo.height, colorData2);
 
     createMixedPalette();
 
     mixedVbo.loadPixels();
   }
 
-  color getColor(int x, int y) {
+  color getColor(int _x, int _y) {
+    int x = int(map(_x, 0, sizeX, 0, mixedVbo.width));
+    int y = int(map(_y, 0, sizeY, 0, mixedVbo.height));
     color c = mixedVbo.pixels[y * mixedVbo.width + x];
     return c;
   }
@@ -54,8 +57,8 @@ class ColorMixer {
     colorMode(HSB, 1);
     color c1, c2, c;
     mixedVbo.beginDraw();
-    for (int x=0; x<sizeX; x++) {
-      for (int y=0; y<sizeY; y++) {
+    for (int x=0; x<mixedVbo.width; x++) {
+      for (int y=0; y<mixedVbo.height; y++) {
         c1 = palettes[0].getColor(x, y);
         c2 = palettes[1].getColor(x, y);
         c = mixColors(c1, c2);
