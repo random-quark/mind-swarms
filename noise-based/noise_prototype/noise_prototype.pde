@@ -4,6 +4,16 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.*;
 
+// STEPS
+// 1. Modify "IMPORTANT PARAMETERS" section below.
+// 2. Make sure it has 5GB of memory in settings.
+// 3. Export app
+// 4. Move to mind-swarms/automated/ folder
+// 5. Choose/create thoughts file (ends with csv)
+// 6. Edit batch_command.sh file to accept thought file from step 5
+// 7. Make money
+
+// this is now taken care of in the script, but just in case
 // TO crop recursively to get rid of perimeter:
 // find . -name "*.png" -exec mogrify {} -crop +50+50 +repage -crop -50-50 {} \;
 
@@ -11,27 +21,37 @@ ColorMixer colorMixer;
 PImage imagePalette;
 boolean usePalette = true, showPalette = true;
 
+//IMPORTANT PARAMETERS
+//(used for Edu's HD present)
 //ideal: 7016, 4961
 float templateX = 1920.;
 float ratioY = 1.414285714;
-int sizeX = 1920*3;
+int sizeX = int(1920*3.2);
+int paletteScaleFactor = 12;
+int agentsCount = int(100000);
+boolean customBlend=true; //false = DARK blend
+
+// biz cards? (confirm)
+//float templateX = 1920.;
+//float ratioY = 1.77777777777777;
+//int sizeX = 1920;
+//int paletteScaleFactor = 2;
+//int agentsCount = int(75000);
+
+int autoSaveTimePoint = int(60*5); // in seconds
+int autoSaveEndPoint = int(60*10); // in seconds
+int autoSaveStep = int(5*60); // in seconds
 
 boolean EEGNoiseScale = false; //TURN TO TRUE IF USING EEG DATA from FILE (I generated mine at FALSE setting)
 int sizeY = int(float(sizeX)/ratioY);
 int margin = 50;
 float goldenRatio = (float(sizeX)/templateX) * (float(sizeY)/(templateX/ratioY));
-boolean customBlend=false; //as opposed to DARK blend.
-int autoSaveTimePoint = int(120*goldenRatio); // in seconds
-int autoSaveEndPoint = int(320*goldenRatio); // in seconds
-int autoSaveStep = int(40*goldenRatio); // in seconds
-int paletteScaleFactor = 2*3;
 float blendFactor = 0.5;
 float noiseScale = (sqrt(goldenRatio) * 300.); //divided by 2 because noisescale is really in one dimension. It's not an WxH relationship.
 long Rseed = 1000;
 long Nseed = 20000;
-boolean allowRandomness=false;
-int agentsCount = 200000;//int(75000*goldenRatio); // REMOVE DIVISION WHEN DEALING WITH SMALLER NUMBERS
-float strokeWidth = 2;
+boolean allowRandomness=true;
+float strokeWidth = 1;
 
 Agent[] agents;
 int maxAgents = 1600000;
@@ -99,23 +119,30 @@ void setup() {
   print("generating colorMixer ");
   colorMixer = new ColorMixer(emotionslist, sizeX/paletteScaleFactor, sizeY/paletteScaleFactor);
   println("done");
-  
+
   bg = createGraphics(sizeX, sizeY, P2D);
+  println("created graphics");
   bg.beginDraw();
   bg.background(255);
   bg.endDraw();
-  frameRate(20);
+  //frameRate(20); // WHY IS THIS HERE?
   //fullScreen(P2D);
-  size(1300, 921, P2D);
+  size(1000, 709, P2D);
   background(255);
   imagePalette = loadImage("xPeriod_1.0_yPeriod_1.0_turbPower_2.0_turbSize_133.0_w_500_h_500.png");
 
   initSwarm();
+  println("initialised swarm");
   setupGUI();
+  println("prepared gui");
 
   save_destination += participant_name + "/" + thought_name + "/";
   //colorMixer.savePalettes();
   //exit();
+  println("exited setup function");
+
+  saveParameters();
+  colorMixer.savePalettes();
 }
 
 void draw() {
@@ -211,7 +238,7 @@ void autoSave()
     println("saving at: " + millis()/1000);
     bg.save(save_destination + timestamp()+".png");
     saveParameters();
-    //colorMixer.savePalettes();
+    colorMixer.savePalettes();
     autoSaveTimePoint+=autoSaveStep;
   }
   if (autoSaveTimePoint>autoSaveEndPoint) {
