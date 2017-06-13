@@ -16,6 +16,8 @@ import java.util.*;
 // this is now taken care of in the script, but just in case
 // TO crop recursively to get rid of perimeter:
 // find . -name "*.png" -exec mogrify {} -crop +50+50 +repage -crop -50-50 {} \;
+//probably better. starting number is left side.
+// find . -name "*.png" -exec mogrify {} -crop +200+200 +repage -crop -0-200 {} \; 
 
 ColorMixer colorMixer;
 PImage imagePalette;
