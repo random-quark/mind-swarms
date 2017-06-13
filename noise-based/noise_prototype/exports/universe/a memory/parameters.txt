@@ -1,0 +1,34 @@
+usePalette true
+sizeX 6244
+sizeY 4444
+agentsCount 100000
+maxAgents 1600000
+noiseScale 959.9732
+interAgentNoiseZRange 0.0
+noiseZStep 0.001
+noiseDet 4
+overlayAlpha 0.0
+agentsAlpha 20.0
+strokeWidth 1.0
+maxAngleSpan 220.0
+noiseStrength 1.0
+resetStep 15.0
+randomSeed 286.19553
+agentTTL 0
+minSpeed 3.0
+maxSpeed 3.0
+resetWithError false
+diminishingAlpha false
+alphaDecrement 0.01
+randomInitialDirection 0.0
+noiseScaleMin 150.0
+noiseScaleMax 450.0
+blendFactor 0.5
+paletteScaleFactor 12
+emotionslist.get(0) fear
+emotionslist.get(1)surprise
+seconds to form: 9
+frameCount to form: 0
+globalColorData1: 210.0, 0.1, 0.8
+globalColorData2: 285.0, 0.1, 0.65
+customBlend: true

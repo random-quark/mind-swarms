@@ -4,6 +4,9 @@ String name = "none";
  * Start muse-io with the following command :
  *   muse-io --osc osc.udp://localhost:8000
  *   you need to make sure you have oscP5 installed.
+ *
+ * PRESS 'C' to start recording data
+ * PRESS 'S' to stop recording data
  */
 
 import oscP5.*;
@@ -52,7 +55,7 @@ void draw() {
   //image(bg, 0, 0, width, height);
   stroke(0);
   fill(0);
-  ellipse(valence * width, height - (activation * height), 5, 5);
+  //ellipse(valence * width, height - (activation * height), 5, 5);
   
   for (int i=0; i<electrodes.length; i++) {
     drawIndicator(i, electrodes[i]);
@@ -61,10 +64,12 @@ void draw() {
   if (collecting) {
     recorder.addData(frameCount);
     
+    
+    
     pushStyle();
     fill(255,0,0);
     noStroke();
-    ellipse(width / 2, height / 2, 100, 100);
+    ellipse(width / 2, height / 2 + 200, 100, 100);
     popStyle();
   }
   pushStyle();
@@ -181,5 +186,11 @@ void drawIndicator(int position, float value) {
   pushStyle();
   fill(c);
   rect(position * (width/4), 0, width/4, 75);
+  fill(0);
+  textSize(50);  
+  text(String.valueOf(alpha_absolute[position]), position * (width/4) + 25.0, 150);
+  text(String.valueOf(beta_absolute[position]), position * (width/4) + 25.0, 200);
+  text(String.valueOf(delta_absolute[position]), position * (width/4) + 25.0, 250);
+  text(String.valueOf(theta_absolute[position]), position * (width/4) + 25.0, 300);
   popStyle();
 }
