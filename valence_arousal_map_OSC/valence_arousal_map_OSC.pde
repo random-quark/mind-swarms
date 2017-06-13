@@ -15,6 +15,8 @@ import netP5.*;
 boolean collecting;
 Recorder recorder;
 float minValence = 1.0, maxValence = 0.0, realValence = 0.0;
+int startTime = 0;
+int collectingTime = 1000 * 30;
 
 float AL = 0;
 float AR = 0;
@@ -62,10 +64,10 @@ void draw() {
   }
   
   if (collecting) {
+    if (millis() > (startTime + collectingTime)) {
+      stopCollecting();
+    }
     recorder.addData(frameCount);
-    
-    
-    
     pushStyle();
     fill(255,0,0);
     noStroke();
@@ -169,15 +171,20 @@ void oscEvent(OscMessage msg) {
 
 void keyPressed() {
   if (key == 'c' || key =='C') {
+    startTime = millis();
     println("START collecting data");
     recorder = new Recorder();
     collecting = true;
   }
   if (key == 's' || key == 'S') {
-    println("STOP collecting data/save data");
-    collecting = false;
-    recorder.saveData();
+    stopCollecting();
   }
+}
+
+void stopCollecting() {
+  println("STOP collecting data/save data");
+  collecting = false;
+  recorder.saveData();
 }
 
 void drawIndicator(int position, float value) {
