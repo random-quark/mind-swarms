@@ -27,10 +27,25 @@ boolean usePalette = true, showPalette = true;
 //(used for Edu's HD present)
 //ideal: 7016, 4961
 float templateX = 1920.;
-float ratioY = 1.414285714;
-int sizeX = int(1920*3.2);
-int paletteScaleFactor = 12;
-int agentsCount = int(100000);
+//float ratioY = 1.414285714;
+float ratioY = 1.777777;
+//int sizeX = int(1920*3.2);
+int sizeX = 1920;
+
+int autoSaveTimePoint = int(90); // in seconds
+int autoSaveEndPoint = int(150); // in seconds
+int autoSaveStep = int(30); // in seconds
+
+boolean state = true; // happy vs. sad
+String participant_name = "Pam Charalambous-TEST";
+String thought_name = "Swimming with whale sharks"; //also used to generate unique hash for emotion
+
+Patch patch;
+boolean patched = true;
+
+int paletteScaleFactor = 2;
+int margin = 50;
+int agentsCount = int(50000);
 boolean customBlend=true; //false = DARK blend
 
 // biz cards? (confirm)
@@ -40,13 +55,8 @@ boolean customBlend=true; //false = DARK blend
 //int paletteScaleFactor = 2;
 //int agentsCount = int(75000);
 
-int autoSaveTimePoint = int(60*5); // in seconds
-int autoSaveEndPoint = int(60*10); // in seconds
-int autoSaveStep = int(5*60); // in seconds
-
 boolean EEGNoiseScale = false; //TURN TO TRUE IF USING EEG DATA from FILE (I generated mine at FALSE setting)
 int sizeY = int(float(sizeX)/ratioY);
-int margin = 50;
 float goldenRatio = (float(sizeX)/templateX) * (float(sizeY)/(templateX/ratioY));
 float blendFactor = 0.5;
 float noiseScale = (sqrt(goldenRatio) * 300.); //divided by 2 because noisescale is really in one dimension. It's not an WxH relationship.
@@ -56,14 +66,10 @@ boolean allowRandomness=true;
 float strokeWidth = 1;
 
 Agent[] agents;
-int maxAgents = 1600000;
+int maxAgents = 50000;
 
 PGraphics bg;
 boolean showLive;
-
-String participant_name = "null_name";
-String thought_name = "null_thought";
-
 
 float interAgentNoiseZRange = 0.0, noiseZStep = 0.001;
 float noiseScaleMin = 150, noiseScaleMax = 450;
@@ -114,8 +120,13 @@ void setup() {
     noiseSeed(Nseed);
     println("WARNING: not using randomness");
   }
-  data = new Data();
-  data.load();
+  if (patched) {
+    patch = new Patch();
+    patch.load(state);
+  } else {
+    data = new Data();
+    data.load();
+  }
   if (EEGNoiseScale) data.setNoiseScale();
 
   print("generating colorMixer ");
@@ -129,7 +140,7 @@ void setup() {
   bg.endDraw();
   //frameRate(20); // WHY IS THIS HERE?
   //fullScreen(P2D);
-  size(1000, 709, P2D);
+  size(1200, 675, P2D);
   background(255);
   imagePalette = loadImage("xPeriod_1.0_yPeriod_1.0_turbPower_2.0_turbSize_133.0_w_500_h_500.png");
 
@@ -208,7 +219,8 @@ void keyReleased() {
 
   if (key=='s' || key=='S') {
     print("saving image...");
-    bg.save(save_destination + timestamp()+"_manual.png");
+    //bg.save(save_destination + timestamp()+"_manual.png");
+    bg.save(save_destination + timestamp()+emotionslist.get(0)+"_"+emotionslist.get(1)+"_manual.png");
     saveParameters();
     colorMixer.savePalettes();
     println("DONE");
@@ -238,7 +250,7 @@ void autoSave()
   if ((millis()/1000)%autoSaveTimePoint==0)
   {
     println("saving at: " + millis()/1000);
-    bg.save(save_destination + timestamp()+".png");
+    bg.save(save_destination + timestamp()+emotionslist.get(0)+"_"+emotionslist.get(1)+".png");
     saveParameters();
     colorMixer.savePalettes();
     autoSaveTimePoint+=autoSaveStep;

@@ -17,6 +17,7 @@ class Data {
     participant_name = emotionslist.pollLast();
     thought_name = emotionslist.pollLast();
     activationAverage = Float.valueOf(emotionslist.pollLast());
+    
   }
   
   void setNoiseScale() {
