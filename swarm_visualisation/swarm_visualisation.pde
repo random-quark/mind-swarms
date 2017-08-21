@@ -17,7 +17,7 @@ import java.util.*;
 // TO crop recursively to get rid of perimeter:
 // find . -name "*.png" -exec mogrify {} -crop +50+50 +repage -crop -50-50 {} \;
 //probably better. starting number is left side.
-// find . -name "*.png" -exec mogrify {} -crop +200+200 +repage -crop -0-200 {} \; 
+// find . -name "*.png" -exec mogrify {} -crop +100+50 +repage -crop -0-50 {} \; 
 
 ColorMixer colorMixer;
 PImage imagePalette;
@@ -36,9 +36,9 @@ int autoSaveTimePoint = int(90); // in seconds
 int autoSaveEndPoint = int(150); // in seconds
 int autoSaveStep = int(30); // in seconds
 
-boolean state = true; // happy vs. sad
-String participant_name = "Pam Charalambous-TEST";
-String thought_name = "Swimming with whale sharks"; //also used to generate unique hash for emotion
+boolean state = false; // happy vs. sad
+String participant_name = "Roberto Nakahara";
+String thought_name = "Mum passing away"; //also used to generate unique hash for emotion
 
 Patch patch;
 boolean patched = true;
