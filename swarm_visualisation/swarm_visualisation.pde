@@ -36,9 +36,9 @@ int autoSaveTimePoint = int(90); // in seconds
 int autoSaveEndPoint = int(150); // in seconds
 int autoSaveStep = int(30); // in seconds
 
-boolean state = false; // happy vs. sad
+boolean state = true; // happy vs. sad
 String participant_name = "Roberto Nakahara";
-String thought_name = "Mum passing away"; //also used to generate unique hash for emotion
+String thought_name = "New Years eve in Rio 2003"; //also used to generate unique hash for emotion
 
 Patch patch;
 boolean patched = true;
