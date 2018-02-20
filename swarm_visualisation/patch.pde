@@ -18,7 +18,7 @@ class Patch {
 
     //currently random emotions each time it's run. Code above does it with hash function.
     if (valence) emotion = positive[int(random(positive.length))];
-    else emotion = negative[int(random(positive.length))];    
+    else emotion = negative[int(random(negative.length))];    
 
     String [] emotions = split(emotion, '-');
     emotionslist.add(emotions[0]);

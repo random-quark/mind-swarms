@@ -36,9 +36,9 @@ int autoSaveTimePoint = int(90); // in seconds
 int autoSaveEndPoint = int(150); // in seconds
 int autoSaveStep = int(30); // in seconds
 
-boolean state = true; // happy vs. sad
-String participant_name = "Roberto Nakahara";
-String thought_name = "New Years eve in Rio 2003"; //also used to generate unique hash for emotion
+boolean state = true; // happy (true) vs. sad (false)
+String participant_name = "Georgia Tucker";
+String thought_name = "Doing hand stands on bolivia salt flats"; //also used to generate unique hash for emotion
 
 Patch patch;
 boolean patched = true;
@@ -160,6 +160,7 @@ void setup() {
 
 void draw() {
   bg.beginDraw();
+  //bg.background(255);
   bg.fill(255, overlayAlpha);
   bg.noStroke();
   bg.rect(0, 0, width, height);
