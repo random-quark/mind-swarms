@@ -4,6 +4,9 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.*;
 
+// Use Processing 3.4 (from July 2018 if possible)
+// it does not run properly with later versions. It produces black images
+
 // STEPS
 // 1. Modify "IMPORTANT PARAMETERS" section below.
 // 2. Make sure it has 5GB of memory in settings.
@@ -15,8 +18,6 @@ import java.util.*;
 
 // this is now taken care of in the script, but just in case
 // TO crop recursively to get rid of perimeter:
-// find . -name "*.png" -exec mogrify {} -crop +50+50 +repage -crop -50-50 {} \;
-//probably better. starting number is left side.
 // find . -name "*.png" -exec mogrify {} -crop +100+50 +repage -crop -0-50 {} \; 
 
 ColorMixer colorMixer;
@@ -24,19 +25,22 @@ PImage imagePalette;
 boolean usePalette = true, showPalette = true;
 
 //IMPORTANT PARAMETERS
-//(used for Edu's HD present)
-//ideal: 7016, 4961
 float templateX = 1920.;
 //float ratioY = 1.414285714;
 float ratioY = 1.777777;
 //int sizeX = int(1920*3.2);
 int sizeX = 1920;
 
-int autoSaveTimePoint = int(90); // in seconds
-int autoSaveEndPoint = int(150); // in seconds
+int autoSaveTimePoint = int(60); // in seconds
+int autoSaveEndPoint = int(121); // in seconds
 int autoSaveStep = int(30); // in seconds
 
-boolean state = true; // happy (true) vs. sad (false)
+boolean useHash = false; // true: uses hash - false: generates random each time
+int backgroundColor = 0;
+boolean hideGUI = true;
+
+// participant-related data
+boolean state = false; // happy (true) vs. sad (false)
 String participant_name = "Georgia Tucker";
 String thought_name = "Doing hand stands on bolivia salt flats"; //also used to generate unique hash for emotion
 
@@ -136,17 +140,16 @@ void setup() {
   bg = createGraphics(sizeX, sizeY, P2D);
   println("created graphics");
   bg.beginDraw();
-  bg.background(255);
+  bg.background(backgroundColor);
   bg.endDraw();
   //frameRate(20); // WHY IS THIS HERE?
   //fullScreen(P2D);
   size(1200, 675, P2D);
   background(255);
   imagePalette = loadImage("xPeriod_1.0_yPeriod_1.0_turbPower_2.0_turbSize_133.0_w_500_h_500.png");
-
   initSwarm();
   println("initialised swarm");
-  setupGUI();
+  if (!hideGUI) setupGUI();
   println("prepared gui");
 
   save_destination += participant_name + "/" + thought_name + "/";
@@ -171,7 +174,7 @@ void draw() {
   bg.endDraw();
 
   background(255);
-  drawGUI();
+  if (!hideGUI) drawGUI();
 
   //if (showLive && frameCount%300==0) image(bg, 0, 0, width, height);
   image(bg, 0, 0, width, height);
