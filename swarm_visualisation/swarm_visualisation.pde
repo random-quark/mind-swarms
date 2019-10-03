@@ -36,7 +36,7 @@ int autoSaveEndPoint = int(121); // in seconds
 int autoSaveStep = int(30); // in seconds
 
 boolean useHash = false; // true: uses hash - false: generates random each time
-int backgroundColor = 0;
+int backgroundColor = 255;
 boolean hideGUI = true;
 
 // participant-related data
