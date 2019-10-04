@@ -35,14 +35,31 @@ int autoSaveTimePoint = int(60); // in seconds
 int autoSaveEndPoint = int(121); // in seconds
 int autoSaveStep = int(30); // in seconds
 
-boolean useHash = false; // true: uses hash - false: generates random each time
+boolean useHash = true; // true: uses hash - false: generates random each time
 int backgroundColor = 255;
 boolean hideGUI = true;
 
+// c38d9650-fa54-4822-a24a-3ae93861d968
+// f50f4a59-e310-44d2-92ea-0e6af29e2d5a
+// 2d33ee53-55fc-4158-af6f-372ece6767a9
+// 6ce1d6b2-6fe5-42fe-8cf0-91079557e873
+// ba9b0ade-ce78-47e1-907e-2f6ca0ef280c
+// 47865d35-8073-402c-80f8-f578d7022354
+// 88c716d3-ea1e-454e-b01a-c77e57332a30
+// 1b579e19-0f84-4137-9580-908c91ba82bd
+// 292b4cc2-5fa0-496b-926f-e873288a7e21
+// 00e7550e-e166-4224-910d-e24139cba6d6
+// 72001458-b7b1-40c2-b3f0-1437b240688e
+// 8449df54-e5b7-4333-881b-7632dbd42c77
+// f0b6c6c6-3b4a-48df-95ad-685665fc2176
+// f7bf64f2-b93a-4cf1-9d41-1cef56b451be
+// 1f2d5293-34b4-4135-bcb8-1f523c379712
+// ba9ab76f-ce46-41cb-93d2-0c4f36e39aa7
+
 // participant-related data
 boolean state = false; // happy (true) vs. sad (false)
-String participant_name = "Georgia Tucker";
-String thought_name = "Doing hand stands on bolivia salt flats"; //also used to generate unique hash for emotion
+String participant_name = "participant";
+String thought_name = "0e1f1d97-548b-4b8e-826d-7da8c786212b"; //also used to generate unique hash for emotion
 
 Patch patch;
 boolean patched = true;
